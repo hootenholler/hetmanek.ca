@@ -1,0 +1,168 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Build-Log.dc.html": {
+      "expand": "fill",
+      "h": 1560,
+      "is_interactive": true,
+      "page": "build-log",
+      "title": "Build Log",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Case-Study.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "case-study",
+      "title": "Case study",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Home-v3.dc.html": {
+      "expand": "fill",
+      "h": 1400,
+      "is_interactive": true,
+      "page": "home-v3",
+      "title": "Home \u2014 v3",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Letters.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "letters",
+      "title": "Letter",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "h": 1040,
+      "page": "sitemap",
+      "title": "Sitemap",
+      "w": 1552,
+      "x": 0,
+      "y": 0
+    },
+    "Work.dc.html": {
+      "expand": "fill",
+      "h": 1400,
+      "is_interactive": true,
+      "page": "work",
+      "title": "Work entry",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Home-mobile.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "is_interactive": true,
+      "page": "mobile",
+      "title": "Home \u2014 mobile",
+      "w": 390,
+      "x": 0,
+      "y": 0
+    },
+    "Build-Log-mobile.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "is_interactive": true,
+      "page": "mobile",
+      "title": "Build Log \u2014 mobile",
+      "w": 390,
+      "x": 470,
+      "y": 0
+    },
+    "Work-mobile.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "is_interactive": true,
+      "page": "mobile",
+      "title": "Work \u2014 mobile",
+      "w": 390,
+      "x": 940,
+      "y": 0
+    },
+    "Case-Study-mobile.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "is_interactive": true,
+      "page": "mobile",
+      "title": "Case study \u2014 mobile",
+      "w": 390,
+      "x": 1410,
+      "y": 0
+    },
+    "Letters-mobile.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "is_interactive": true,
+      "page": "mobile",
+      "title": "Letters & Articles \u2014 mobile",
+      "w": 390,
+      "x": 1880,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-05T16:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "page": "sitemap",
+    "view": "canvas"
+  },
+  "notes": {},
+  "order": [
+    "Main.dc.html",
+    "Home-v3.dc.html",
+    "Build-Log.dc.html",
+    "Work.dc.html",
+    "Letters.dc.html",
+    "Case-Study.dc.html",
+    "Home-mobile.dc.html",
+    "Build-Log-mobile.dc.html",
+    "Work-mobile.dc.html",
+    "Case-Study-mobile.dc.html",
+    "Letters-mobile.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "sitemap",
+      "name": "Sitemap"
+    },
+    {
+      "id": "home-v3",
+      "name": "Home"
+    },
+    {
+      "id": "build-log",
+      "name": "Build Log"
+    },
+    {
+      "id": "work",
+      "name": "Work"
+    },
+    {
+      "id": "letters",
+      "name": "Letters / Articles"
+    },
+    {
+      "id": "case-study",
+      "name": "Case Study"
+    },
+    {
+      "id": "mobile",
+      "name": "Mobile"
+    }
+  ],
+  "title": "James Hetmanek \u2014 Personal Site"
+}

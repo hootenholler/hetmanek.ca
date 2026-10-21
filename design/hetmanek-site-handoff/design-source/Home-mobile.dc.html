@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home (mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;family=Barlow+Condensed:wght@400&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#15171C;text-decoration:none}a:hover{color:#2B4EFF}
+.noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}
+</style>
+</helmet>
+<div style="background:#F5F5F2;color:#15171C;font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.5;min-height:100vh">
+<div style="padding:0 20px;box-sizing:border-box">
+
+<section style="padding:28px 0 8px;display:flex;flex-direction:column;gap:28px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px; container-type: inline-size">
+<div style="width: 66.667%; height: 32px; align-self: center; display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 9cqw; line-height: 1.1; white-space: nowrap">James Hetmanek</div>
+<a href="#" aria-label="James Hetmanek on LinkedIn" style="display: block; flex: none; width: 6.5cqw; height: 6.5cqw; min-width: 18px; min-height: 18px; color: #15171C"><svg viewBox="0 0 24 24" width="100%" height="100%" aria-hidden="true"><rect width="24" height="24" rx="4" fill="currentColor"></rect><circle cx="7.2" cy="7.4" r="1.7" fill="#F5F5F2"></circle><rect x="5.7" y="10.2" width="3" height="8.3" fill="#F5F5F2"></rect><path d="M11 10.2h2.8v1.3c.5-.9 1.6-1.5 2.9-1.5 2.4 0 3.3 1.5 3.3 3.8v4.7h-3v-4.2c0-1.1-.3-1.9-1.4-1.9-1.1 0-1.6.8-1.6 1.9v4.2H11z" fill="#F5F5F2"></path></svg></a>
+</div>
+<img src="/_blob/390826933cc156b05eac52208585e685" alt="Portrait of James Hetmanek" style="display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; background: #DEDED8; border-radius: 4px">
+<figcaption style="width: 66.667%; align-self: center; display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 400; font-size: 4.5cqw; line-height: 1.2; letter-spacing: 0.06em; margin-right: -0.06em; white-space: nowrap; text-align: justify; text-align-last: justify; color: #2F5D45">LISTEN - LEARN - DESIGN - BUILD</div>
+</figcaption>
+</figure>
+<div style="display:flex;flex-direction:column;gap:28px">
+<article style="display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; position: relative; max-height: calc(1.6em * 3); overflow: hidden; font-size: 18px; line-height: 1.6; color: #3D4048"><b style="font-weight: 600; color: rgb(47, 93, 69); letter-spacing: 0.06em">PINNED</b> <b style="font-weight: 600; color: rgb(21, 23, 28)">— October 19, 2026</b> This site is in public beta build mode. If you're here, it's due to referral or chance. Welcome! I am working towards the following DoD:&nbsp;&nbsp;&nbsp;<a href="Build-Log-mobile.dc.html#2026-10-19" style="font-weight: 400; font-style: italic; color: rgb(47, 95, 232)">read more →</a></p>
+</article>
+<article style="display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; position: relative; max-height: calc(1.6em * 3); overflow: hidden; font-size: 18px; line-height: 1.6; color: #3D4048"><b style="font-weight: 600; color: rgb(21, 23, 28)">October 20, 2026</b> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. <a href="Build-Log-mobile.dc.html#2026-10-12" style="position: absolute; right: 0px; bottom: 0px; padding-left: 40px; background: linear-gradient(to right, rgba(245, 245, 242, 0), rgb(245, 245, 242) 32px); font-weight: 400; font-style: italic; color: rgb(47, 95, 232)">… read more →</a></p>
+</article>
+</div>
+</section>
+<section style="padding:16px 0 64px">
+<div style="border-bottom:1px solid #15171C"><div role="tablist" aria-label="Sections" class="noscroll" style="display:flex;gap:24px;overflow-x:auto;white-space:nowrap;margin:0 -20px;padding:0 20px">
+<sc-for list="{{tabs}}" as="tab" hint-placeholder-count="4">
+<sc-if value="{{tab.on}}" hint-placeholder-val="{{ false }}"><button type="button" role="tab" aria-selected="true" onClick="{{tab.pick}}" style="flex:none; min-height: 48px; padding: 0; margin-bottom: -1px; border: 0; border-bottom: 3px solid #15171C; background: none; font-family: inherit; font-size: 16px; font-weight: 600; color: #15171C; cursor: pointer">{{tab.label}}</button></sc-if>
+<sc-if value="{{tab.off}}" hint-placeholder-val="{{ true }}"><button type="button" role="tab" aria-selected="false" onClick="{{tab.pick}}" style="flex:none; min-height: 48px; padding: 0; margin-bottom: -1px; border: 0; border-bottom: 3px solid transparent; background: none; font-family: inherit; font-size: 16px; font-weight: 500; color: #5C6069; cursor: pointer">{{tab.label}}</button></sc-if>
+</sc-for></div></div>
+<div style="display:flex;align-items:center;gap:12px;padding:14px 0">
+<sc-if value="{{closed}}" hint-placeholder-val="{{ true }}"><button type="button" aria-label="Open filters" onClick="{{toggleOpen}}" aria-expanded="{{expanded}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px; border-radius: 999px; border: 1px solid #15171C; background: #15171C; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round"><path d="M2 4h12M4.5 8h7M7 12h2"></path></svg>{{filterLabel}}</button></sc-if><sc-if value="{{open}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{toggleOpen}}" aria-expanded="true" aria-label="Close filters" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px; border-radius: 999px; border: 2px solid #7B5233; background: #F3E9DF; color: #7B5233; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 0 0 3px rgba(123,82,51,0.18)"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round"><path d="M7 4h2M4.5 8h7M2 12h12"></path></svg>{{filterLabel}}</button></sc-if>
+<sc-if value="{{hasActive}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{clear}}" style="min-height: 44px; padding: 0 4px; border: 0; background: none; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: {{accent}}; cursor: pointer">Clear filters</button></sc-if>
+</div>
+<sc-if value="{{open}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:20px;padding:18px;margin-bottom:12px;background:#2F5D45;border:1px solid #2F5D45;border-radius:12px">
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#D6E5DB">SKILLS</div><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{skillOpts}}" as="opt" hint-placeholder-count="6">
+<sc-if value="{{opt.on}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{opt.pick}}" aria-pressed="true" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #15171C; background: #15171C; color: #FFFFFF; font-family: inherit; font-size: 14px; cursor: pointer">{{opt.label}}</button></sc-if>
+<sc-if value="{{opt.off}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{opt.pick}}" aria-pressed="false" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #C9C9C1; background: #FFFFFF; color: #15171C; font-family: inherit; font-size: 14px; cursor: pointer">{{opt.label}}</button></sc-if>
+</sc-for></div></div>
+<sc-if value="{{isWork}}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;gap:10px"><div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#D6E5DB">STATUS</div><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{statusOpts}}" as="opt" hint-placeholder-count="4">
+<sc-if value="{{opt.on}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{opt.pick}}" aria-pressed="true" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #15171C; background: #15171C; color: #FFFFFF; font-family: inherit; font-size: 14px; cursor: pointer">{{opt.label}}</button></sc-if>
+<sc-if value="{{opt.off}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{opt.pick}}" aria-pressed="false" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #C9C9C1; background: #FFFFFF; color: #15171C; font-family: inherit; font-size: 14px; cursor: pointer">{{opt.label}}</button></sc-if>
+</sc-for></div></div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{isWork}}" hint-placeholder-val="{{ true }}"><div>
+<sc-for list="{{workRows}}" as="row" hint-placeholder-count="6"><div style="display: flex; flex-direction: column; gap: 8px; padding: 18px 0; border-bottom: 1px solid #DADAD4">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><a href="Work-mobile.dc.html" style="font-size:19px;font-weight:500;line-height:1.3;padding:4px 0">{{row.thing}}</a><span style="font-family:'JetBrains Mono',monospace;font-size:12px;white-space:nowrap">{{row.status}}</span></div>
+<div style="font-size:15px;color:#3D4048">{{row.desc}}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{row.skills}}" as="sk" hint-placeholder-count="2"><span style="padding: 2px 10px; border: 1px solid #C9C9C1; border-radius: 999px; background: #FFFFFF; font-size: 13px; line-height: 1.6">{{sk.label}}</span></sc-for></div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5C6069">{{row.date}}</div></div></sc-for><sc-if value="{{emptyWork}}" hint-placeholder-val="{{ false }}"><div style="padding: 28px 0; color: #5C6069">Nothing matches these filters.</div></sc-if></div></sc-if>
+
+<sc-if value="{{isCases}}" hint-placeholder-val="{{ false }}"><div>
+<sc-for list="{{caseRows}}" as="row" hint-placeholder-count="4"><div style="display: flex; flex-direction: column; gap: 8px; padding: 18px 0; border-bottom: 1px solid #DADAD4">
+<a href="Case-Study-mobile.dc.html" style="font-size:19px;font-weight:500;line-height:1.3;padding:4px 0">{{row.opportunity}}</a>
+<div style="font-size:15px;color:#3D4048">{{row.engagement}}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{row.skills}}" as="sk" hint-placeholder-count="2"><span style="padding: 2px 10px; border: 1px solid #C9C9C1; border-radius: 999px; background: #FFFFFF; font-size: 13px; line-height: 1.6">{{sk.label}}</span></sc-for></div></div></sc-for><sc-if value="{{emptyCases}}" hint-placeholder-val="{{ false }}"><div style="padding: 28px 0; color: #5C6069">Nothing matches these filters.</div></sc-if></div></sc-if>
+
+<sc-if value="{{isLog}}" hint-placeholder-val="{{ false }}"><div>
+<sc-for list="{{logRows}}" as="row" hint-placeholder-count="2"><div style="display: flex; flex-direction: column; gap: 8px; padding: 18px 0; border-bottom: 1px solid #DADAD4">
+<a href="{{row.href}}" style="font-size:15px;font-weight:600;padding:4px 0">{{row.date}}</a>
+<div style="font-size:15px;color:#3D4048">{{row.excerpt}} <a href="{{row.href}}" style="font-weight:400;font-style:italic;color:#2F5FE8">read more →</a></div>
+<div style="font-size:14px;color:#5C6069">{{row.engagement}}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{row.skills}}" as="sk" hint-placeholder-count="2"><span style="padding: 2px 10px; border: 1px solid #C9C9C1; border-radius: 999px; background: #FFFFFF; font-size: 13px; line-height: 1.6">{{sk.label}}</span></sc-for></div></div></sc-for><sc-if value="{{emptyLog}}" hint-placeholder-val="{{ false }}"><div style="padding: 28px 0; color: #5C6069">Nothing matches these filters.</div></sc-if></div></sc-if>
+
+<sc-if value="{{isArticles}}" hint-placeholder-val="{{ false }}"><div>
+<sc-for list="{{letterRows}}" as="row" hint-placeholder-count="3"><div style="display: flex; flex-direction: column; gap: 8px; padding: 18px 0; border-bottom: 1px solid #DADAD4">
+<a href="Letters-mobile.dc.html" style="font-size:19px;font-weight:500;line-height:1.3;padding:4px 0">{{row.title}}</a>
+<div style="font-size:15px;color:#3D4048">{{row.summary}}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{row.skills}}" as="sk" hint-placeholder-count="2"><span style="padding: 2px 10px; border: 1px solid #C9C9C1; border-radius: 999px; background: #FFFFFF; font-size: 13px; line-height: 1.6">{{sk.label}}</span></sc-for></div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5C6069">{{row.date}}</div></div></sc-for><sc-if value="{{emptyLetters}}" hint-placeholder-val="{{ false }}"><div style="padding: 28px 0; color: #5C6069">Nothing matches these filters.</div></sc-if></div></sc-if>
+</section>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2B4EFF","options":["#2B4EFF","#C2410C","#15803D","#15171C"]},"$preview":{"width":390,"height":1500}}'>
+const ITEMS = [
+  { thing: 'Schema App', desc: 'Lead Product and Design for startup building AI performance-improving semantic data layers', skills: ['AI', 'Design', 'Build', 'People', 'Strategy', 'GTM', 'Product Marketing'], date: '5-Sep-2026', status: 'Done' },
+  { thing: 'hetmanek.ca', desc: 'This website to support my career', skills: ['Design', 'Build', 'Write'], date: '20-Oct-2026', status: 'In Design' },
+  { thing: 'Opportunity Assessment Engine', desc: 'Is opportunity x worth doing? How much? In which ways?', skills: ['AI', 'Design', 'Build', 'Learn'], date: '19-Oct-2026', status: 'In Dev' },
+  { thing: 'Pengi by Beatrix', desc: 'Next level lemonade stand. A fashion business for my kids.', skills: ['Design', 'Build', 'Strategy', 'GTM'], date: '19-Oct-2026', status: 'Alive' },
+  { thing: 'Senior Director @ GS1 Canada', desc: 'Lead Product and Design for global non-profit driving supply chain standards and data pools', skills: ['Design', 'Build', 'People', 'Strategy'], date: '10-Oct-2025', status: 'Done' },
+  { thing: 'At the Bedside Podcast', desc: 'Automate social media marketing', skills: ['Design', 'Build'], date: '7-Aug-2026', status: 'Active' },
+  { thing: 'Essence Of', desc: 'Social game', skills: ['Design', 'GTM'], date: '13-Jan-2026', status: 'In Design' },
+  { thing: 'Project Eggdrop', desc: 'App to teaching kids new media literacies', skills: ['Design', 'Design Research'], date: '2-Apr-2009', status: 'Done' },
+  { thing: 'My Story Island', desc: 'interactive animated theatre turned into educational content', skills: ['Design', 'Build', 'Strategy', 'Business', 'GTM'], date: '9-Jun-2008', status: 'Done' },
+  { thing: 'Tune Your Ride', desc: 'Stationary Bicycle Powered Event Services', skills: ['People', 'Listen', 'Learn', 'Design', 'Build'], date: '11-Sep-2017', status: 'Done' }
+];
+const CASES = [
+  { opportunity: 'Hidden Complexity', engagement: 'Example', skills: ['People', 'Strategy'] },
+  { opportunity: 'Positioning', engagement: '[Engagement]', skills: [] },
+  { opportunity: 'Customer Journey', engagement: '[Engagement]', skills: [] },
+  { opportunity: 'Demo Day', engagement: '[Engagement]', skills: [] }
+];
+const LOG = [
+  { id: '2026-10-19', date: 'Oct 19, 2026', excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', engagement: '[Engagement]', skills: [] },
+  { id: '2026-10-12', date: 'Oct 12, 2026', excerpt: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.', engagement: '[Engagement]', skills: [] }
+];
+const LETTERS = [
+  { title: 'Notes on building in public', summary: 'A placeholder summary: one line that appears under the title in the Letters list.', skills: ['Design', 'Strategy'], date: '19-Oct-2026' },
+  { title: 'Letter title placeholder', summary: 'Another placeholder summary for the list.', skills: ['AI'], date: '5-Oct-2026' },
+  { title: 'Another letter placeholder', summary: 'A third placeholder summary for the list.', skills: ['People'], date: '21-Sep-2026' }
+];
+const TABS = [
+  { id: 'work', label: 'Work' },
+  { id: 'cases', label: 'Case Studies' },
+  { id: 'log', label: 'Build Log' },
+  { id: 'articles', label: 'Letters & Articles' }
+];
+const uniq = (xs) => Array.from(new Set(xs.filter(Boolean))).sort();
+const SKILLS = uniq([].concat(...ITEMS.map((i) => i.skills), ...CASES.map((i) => i.skills), ...LOG.map((i) => i.skills), ...LETTERS.map((i) => i.skills)));
+const STATUSES = uniq(ITEMS.map((i) => i.status));
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: false, tab: 'work', skills: [], types: [], statuses: [] };
+  }
+  toggle(key, val) {
+    const cur = (this.state && this.state[key]) || [];
+    const next = cur.indexOf(val) >= 0 ? cur.filter((x) => x !== val) : cur.concat([val]);
+    this.setState({ [key]: next });
+  }
+  renderVals() {
+    const s = this.state || {};
+    const tab = s.tab || 'work';
+    const sk = s.skills || [], ty = s.types || [], st = s.statuses || [];
+    const opts = (key, vals, sel) => vals.map((v) => ({ label: v, on: sel.indexOf(v) >= 0, off: sel.indexOf(v) < 0, pick: () => this.toggle(key, v) }));
+    const skillMatch = (i) => sk.length === 0 || i.skills.some((x) => sk.indexOf(x) >= 0);
+    const chips = (xs) => xs.map((x) => ({ label: x }));
+    const workRows = ITEMS.filter((i) => skillMatch(i) && (st.length === 0 || st.indexOf(i.status) >= 0)).map((i) => ({
+      thing: i.thing, desc: i.desc || '—', skills: chips(i.skills), date: i.date || '—', status: i.status || '—'
+    }));
+    const caseRows = CASES.filter(skillMatch).map((i) => ({ opportunity: i.opportunity, engagement: i.engagement, skills: chips(i.skills) }));
+    const logRows = LOG.filter(skillMatch).map((i) => ({ date: i.date, href: 'Build-Log-mobile.dc.html#' + i.id, excerpt: i.excerpt, engagement: i.engagement, skills: chips(i.skills) }));
+    const letterRows = LETTERS.filter(skillMatch).map((i) => ({ title: i.title, summary: i.summary, skills: chips(i.skills), date: i.date }));
+    const isWork = tab === 'work';
+    const active = sk.length + (isWork ? st.length : 0);
+    return {
+      accent: this.props.accent ?? '#2B4EFF',
+      tabs: TABS.map((t) => ({ label: t.label, on: tab === t.id, off: tab !== t.id, pick: () => this.setState({ tab: t.id }) })),
+      isWork: isWork,
+      isCases: tab === 'cases',
+      isLog: tab === 'log',
+      isArticles: tab === 'articles',
+      open: !!s.open,
+      closed: !s.open,
+      expanded: s.open ? 'true' : 'false',
+      toggleOpen: () => this.setState({ open: !(this.state && this.state.open) }),
+      filterLabel: active ? 'Filter (' + active + ')' : 'Filter',
+      hasActive: active > 0,
+      clear: () => this.setState({ skills: [], types: [], statuses: [] }),
+      skillOpts: opts('skills', SKILLS, sk),
+      statusOpts: opts('statuses', STATUSES, st),
+      workRows: workRows,
+      letterRows: letterRows,
+      emptyLetters: letterRows.length === 0,
+      caseRows: caseRows,
+      logRows: logRows,
+      emptyWork: workRows.length === 0,
+      emptyCases: caseRows.length === 0,
+      emptyLog: logRows.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

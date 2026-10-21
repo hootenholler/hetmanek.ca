@@ -1,0 +1,20 @@
+:root{
+  /* color */
+  --bg:#F5F5F2; --ink:#15171C; --text:#3D4048; --muted:#5C6069; --faint:#8A8F98;
+  --border:#DADAD4; --border-strong:#C9C9C1; --surface:#FFFFFF; --placeholder-a:#E4E4DE; --placeholder-b:#DCDCD5;
+  --forest:#2F5D45;        /* tagline, hashtags, PINNED, filter panel bg */
+  --forest-label:#D6E5DB;  /* labels on forest */
+  --link-blue:#2F5FE8;     /* "read more" */
+  --accent:#2B4EFF;        /* link hover, Clear filters */
+  --earth:#7B5233;         /* Filter button */
+  --earth-tint:#F3E9DF;    /* Filter button when open */
+  /* type */
+  --font-serif:'Instrument Serif',Georgia,serif;          /* name, titles, section labels */
+  --font-sans:'Instrument Sans',system-ui,sans-serif;     /* body 17-18px / 1.6 */
+  --font-mono:'JetBrains Mono',monospace;                 /* labels, dates, status: 12-13px, +0.08em */
+  --font-tagline:'Barlow Condensed','Arial Narrow',sans-serif; /* LISTEN - LEARN - DESIGN - BUILD, weight 400, +0.06em */
+  /* layout */
+  --container:1200px; --gutter-desktop:32px; --gutter-mobile:20px; --bp-desktop:900px;
+  --radius-pill:999px; --radius-card:12px; --radius-img:4px;
+  --touch-min:44px; /* mobile; desktop buttons are 35px by request */
+}

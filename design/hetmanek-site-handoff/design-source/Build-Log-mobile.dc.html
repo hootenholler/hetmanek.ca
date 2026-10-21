@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build Log (mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;family=Barlow+Condensed:wght@400&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#15171C;text-decoration:none}a:hover{color:#2B4EFF}
+.noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}
+</style>
+</helmet>
+<div style="background:#F5F5F2;color:#15171C;font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.5;min-height:100vh">
+<div style="padding:0 20px;box-sizing:border-box">
+<header style="display:flex;flex-direction:column;gap:6px;padding:24px 0 16px;border-bottom:1px solid #DADAD4;margin-bottom:28px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><a href="Home-mobile.dc.html" style="font-family:'Instrument Serif',Georgia,serif;font-size:30px;line-height:1.1">James Hetmanek</a><a href="Home-mobile.dc.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid #15171C;font-size:14px;font-weight:500">← Home</a></div>
+<div style="font-family:'Barlow Condensed','Arial Narrow',sans-serif;letter-spacing:0.06em;color:#2F5D45;font-size:15px">LISTEN - LEARN - DESIGN - BUILD</div></header>
+<div style="display:flex;flex-direction:column;gap:12px;padding:0 0 24px;border-bottom:1px solid #DADAD4">
+<div style="display:flex;justify-content:flex-start;gap:8px"><sc-if value="{{closed}}" hint-placeholder-val="{{ true }}"><button type="button" aria-label="Open filters" onClick="{{toggleOpen}}" aria-expanded="{{expanded}}" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #7B5233; background: #7B5233; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer"><svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round"><path d="M2 4h12M4.5 8h7M7 12h2"></path></svg>{{filterLabel}}</button></sc-if><sc-if value="{{open}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{toggleOpen}}" aria-expanded="true" aria-label="Close filters" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 2px solid #7B5233; background: #F3E9DF; color: #7B5233; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 0 0 3px rgba(123,82,51,0.18)"><svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round"><path d="M7 4h2M4.5 8h7M2 12h12"></path></svg>{{filterLabel}}</button></sc-if></div>
+<sc-if value="{{showSelected}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{selected}}" as="sel" hint-placeholder-count="2">
+<button type="button" onClick="{{sel.remove}}" aria-label="{{sel.aria}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid #15171C; background: #15171C; color: #FFFFFF; font-family: inherit; font-size: 14px; cursor: pointer">{{sel.label}}<span aria-hidden="true">×</span></button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{open}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:20px;padding:18px;background:#2F5D45;border:1px solid #2F5D45;border-radius:12px">
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#D6E5DB">SKILLS</div><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{skillOpts}}" as="opt" hint-placeholder-count="5">
+<sc-if value="{{opt.on}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{opt.pick}}" aria-pressed="true" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #15171C; background: #15171C; color: #FFFFFF; font-family: inherit; font-size: 14px; cursor: pointer">{{opt.label}}</button></sc-if>
+<sc-if value="{{opt.off}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{opt.pick}}" aria-pressed="false" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #C9C9C1; background: #FFFFFF; color: #15171C; font-family: inherit; font-size: 14px; cursor: pointer">{{opt.label}}</button></sc-if>
+</sc-for></div></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#D6E5DB">ENGAGEMENTS</div><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{engOpts}}" as="opt" hint-placeholder-count="5">
+<sc-if value="{{opt.on}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{opt.pick}}" aria-pressed="true" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #15171C; background: #15171C; color: #FFFFFF; font-family: inherit; font-size: 14px; cursor: pointer">{{opt.label}}</button></sc-if>
+<sc-if value="{{opt.off}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{opt.pick}}" aria-pressed="false" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #C9C9C1; background: #FFFFFF; color: #15171C; font-family: inherit; font-size: 14px; cursor: pointer">{{opt.label}}</button></sc-if>
+</sc-for></div></div>
+</div></sc-if>
+</div>
+<div style="display:flex;flex-direction:column;gap:44px;padding:28px 0 64px">
+<sc-for list="{{posts}}" as="post" hint-placeholder-count="3">
+<article id="{{post.id}}" style="display:flex;flex-direction:column;gap:12px;scroll-margin-top:16px">
+<a href="{{post.href}}" title="{{post.url}}" style="align-self:flex-start;font-size:18px;line-height:1.6;font-weight:600;padding:4px 0">{{post.label}}</a>
+<sc-for list="{{post.paras}}" as="para" hint-placeholder-count="3"><p style="margin:0;font-size:17px;line-height:1.6;color:#3D4048">{{para.text}}</p></sc-for>
+<div style="display:flex;flex-wrap:wrap;gap:4px 12px;font-size:15px;line-height:1.6;color:#2F5D45"><sc-for list="{{post.tags}}" as="tag" hint-placeholder-count="3"><span>{{tag.text}}</span></sc-for></div>
+</article></sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><div style="font-size:17px;line-height:1.6;color:#5C6069">No posts match these filters.</div></sc-if>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1700}}'>
+const STEP = 3;
+const L1 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+const L2 = 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.';
+const L3 = 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.';
+const L4 = 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?';
+const L5 = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.';
+const L6 = 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.';
+const L7 = 'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.';
+
+// Newest first. id = publishing date, YYYY-MM-DD, used as the anchor: hetmanek.ca/buildlog#<id>
+const POSTS = [
+  { id: '2026-10-19', label: 'October 19th, 2026', paras: [L1], engs: ['Pengi by Beatrix'], skills: ['Design', 'Strategy'] },
+  { id: '2026-10-12', label: 'October 12th, 2026', paras: [L2, L4, L5, L6, L3, L7], engs: ['Opportunity Assessment Engine'], skills: ['AI', 'Design'] },
+  { id: '2026-10-11', label: 'October 11th, 2026', paras: [L2], engs: ['My Story Island'], skills: ['Design', 'Business'] },
+  { id: '2026-10-09', label: 'October 9th, 2026', paras: [L1, L4, L5, L7], engs: ['Project Eggdrop'], skills: ['Design', 'Design Research'] },
+  { id: '2026-10-07', label: 'October 7th, 2026', paras: [L4, L6], engs: ['Tune Your Ride'], skills: ['People', 'GTM'] }
+];
+const uniq = (xs) => Array.from(new Set(xs)).sort();
+const ALL_SKILLS = uniq([].concat(...POSTS.map((p) => p.skills)));
+const ALL_ENGS = uniq([].concat(...POSTS.map((p) => p.engs)));
+const hashtag = (n) => '#' + n.split(' ').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { visible: STEP, open: false, skills: [], engs: [] };
+  }
+  componentDidMount() {
+    this._onScroll = () => this.maybeLoad();
+    this._onHash = () => this.goToHash();
+    window.addEventListener('scroll', this._onScroll, true);
+    window.addEventListener('hashchange', this._onHash);
+    this.goToHash();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll, true);
+    window.removeEventListener('hashchange', this._onHash);
+  }
+  list(sk, en) {
+    return POSTS.filter((p) =>
+      (sk.length === 0 || p.skills.some((x) => sk.indexOf(x) >= 0)) &&
+      (en.length === 0 || p.engs.some((x) => en.indexOf(x) >= 0)));
+  }
+  toggle(key, val) {
+    const cur = (this.state && this.state[key]) || [];
+    const next = cur.indexOf(val) >= 0 ? cur.filter((x) => x !== val) : cur.concat([val]);
+    this.setState({ [key]: next, visible: STEP });
+  }
+  // Loads the next three posts, but only in response to the reader scrolling near the end.
+  maybeLoad() {
+    const s = this.state;
+    const total = this.list(s.skills, s.engs).length;
+    if (s.visible >= total) return;
+    const el = document.scrollingElement || document.documentElement;
+    if (el.scrollTop + window.innerHeight >= el.scrollHeight - 240) {
+      this.setState({ visible: Math.min(total, s.visible + STEP) });
+    }
+  }
+  // An incoming link like /buildlog#2026-10-07 loads far enough to include that post, then jumps to it.
+  // If the active filters hide that post, they are cleared so the link always lands.
+  goToHash() {
+    let id = '';
+    try { id = decodeURIComponent((window.location.hash || '').replace('#', '')); } catch (e) { return; }
+    const idx = POSTS.findIndex((p) => p.id === id);
+    if (idx < 0) return;
+    const s = this.state;
+    let pos = this.list(s.skills, s.engs).findIndex((p) => p.id === id);
+    const patch = {};
+    if (pos < 0) { patch.skills = []; patch.engs = []; pos = idx; }
+    const need = Math.ceil((pos + 1) / STEP) * STEP;
+    if (need > s.visible) patch.visible = need;
+    if (Object.keys(patch).length) this.setState(patch);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView();
+    }, 60);
+  }
+  renderVals() {
+    const s = this.state || {};
+    const sk = s.skills || [], en = s.engs || [];
+    const n = s.visible || STEP;
+    const shown = this.list(sk, en);
+    const opts = (key, vals, sel) => vals.map((v) => ({ label: v, on: sel.indexOf(v) >= 0, off: sel.indexOf(v) < 0, pick: () => this.toggle(key, v) }));
+    const selected = en.map((v) => ({ label: v, aria: 'Remove filter ' + v, remove: () => this.toggle('engs', v) }))
+      .concat(sk.map((v) => ({ label: v, aria: 'Remove filter ' + v, remove: () => this.toggle('skills', v) })));
+    const count = sk.length + en.length;
+    // Only offer options that exist in the posts left by the other group's selections (selected ones always stay).
+    const skillAvail = ALL_SKILLS;
+    const engAvail = ALL_ENGS;
+    return {
+      posts: shown.slice(0, n).map((p) => ({
+        id: p.id,
+        label: p.label,
+        href: '#' + p.id,
+        url: 'www.hetmanek.ca/buildlog#' + p.id,
+        paras: p.paras.map((t) => ({ text: t })),
+        tags: p.engs.concat(p.skills).map((t) => ({ text: hashtag(t) }))
+      })),
+      empty: shown.length === 0,
+      open: !!s.open,
+      closed: !s.open,
+      expanded: s.open ? 'true' : 'false',
+      toggleOpen: () => this.setState({ open: !(this.state && this.state.open) }),
+      filterLabel: count ? 'Filter (' + count + ')' : 'Filter',
+      skillOpts: opts('skills', skillAvail, sk),
+      engOpts: opts('engs', engAvail, en),
+      selected: selected,
+      showSelected: selected.length > 0 && !s.open
+    };
+  }
+}
+</script>
+</body>
+</html>
