@@ -1,7 +1,7 @@
 # Project rules for Claude
 
 ## Project
-PROJECT-NAME website. Design reference lives in /design.
+hetmanek.ca website (personal portfolio for James Hetmanek). Design reference lives in /design; read design/hetmanek-site-handoff/README.md first.
 
 ## Stack
 Static site: plain HTML, CSS and vanilla JS. No build step.
