@@ -71,6 +71,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .btn-outline { min-height: 35px; padding: 0 16px; font-size: 12px; }
 }
 
+/* draft label (visible only when running the local CMS, since drafts aren't published) */
+.draft-tag {
+  display: inline-block; vertical-align: middle; margin-left: 8px; padding: 1px 8px;
+  border: 1px solid var(--earth); border-radius: var(--radius-pill); background: var(--earth-tint);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; line-height: 1.6; color: var(--earth);
+  text-transform: uppercase;
+}
+.page-title .draft-tag { font-size: 13px; }
+
 /* ---------- image placeholder ---------- */
 .ph {
   display: flex; align-items: center; justify-content: center;
@@ -293,10 +302,18 @@ button { font: inherit; color: inherit; cursor: pointer; }
   font-family: var(--font-serif); font-size: 26px; line-height: 1.25; font-style: italic;
 }
 .prose a { text-decoration: underline; text-underline-offset: 3px; }
+.prose h3 { font-family: var(--font-sans); font-weight: 600; font-size: 19px; line-height: 1.3; margin: 24px 0 8px; }
+.prose ul, .prose ol { margin: 0 0 16px; padding-left: 1.3em; font-size: 17px; line-height: 1.6; color: var(--text); }
+.prose li + li { margin-top: 4px; }
+.embed { position: relative; aspect-ratio: 16 / 9; margin: 0 0 16px; border-radius: var(--radius-img); overflow: hidden; background: var(--placeholder-a); }
+.embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.post__body p { margin-bottom: 12px; }
 .prose img { border-radius: var(--radius-img); margin: 0 0 16px; }
 .prose > :last-child { margin-bottom: 0; }
 @media (min-width: 900px) {
   .prose p { margin-bottom: 18px; font-size: 18px; }
+  .prose ul, .prose ol { margin-bottom: 18px; font-size: 18px; }
+  .post__body p { margin-bottom: 14px; }
   .prose h2 { font-size: 32px; margin: 36px 0 14px; }
   .prose blockquote { margin: 36px 0; padding-left: 24px; font-size: 32px; }
 }

@@ -5,7 +5,8 @@ window.H = (function () {
 
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const uniq = (xs) => Array.from(new Set(xs.filter(Boolean))).sort((a, b) => a.localeCompare(b));
-  const live = (xs) => xs.filter((x) => !x.draft);
+  // Drafts are hidden on the public site and shown when running the local CMS.
+  const live = (xs) => xs.filter((x) => !x.draft || window.CMS_MODE);
 
   // ---- dates (stored as YYYY-MM-DD; parsed without time zones so the day never shifts)
   const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -49,8 +50,7 @@ window.H = (function () {
     const cut = text.slice(0, n);
     return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:.]$/, '') + '…';
   };
-  const plain = (html) => String(html || '').replace(/<[^>]*>/g, '');
-  const excerptOf = (post, n) => post.excerpt || truncate(plain(post.paras[0]), n || 120);
+  const excerptOf = (post, n) => post.excerpt || truncate(MD.firstParagraph(post.body), n || 120);
 
   const hashtag = (name) => '#' + name.split(/[^A-Za-z0-9]+/).filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('');
 
@@ -74,10 +74,11 @@ window.H = (function () {
     : '');
 
   const placeholder = (label, cls) => '<div class="ph' + (cls ? ' ' + cls : '') + '" role="img" aria-label="Image placeholder">' + esc(label || 'IMAGE') + '</div>';
-  const image = (img, label, cls) => (img && img.src
+  // An image entry with no src yet shows the striped placeholder; no entry shows nothing.
+  const image = (img, label, cls) => (!img ? '' : img.src
     ? '<img class="' + (cls || '') + '" src="' + esc(img.src) + '" alt="' + esc(img.alt || '') + '" loading="lazy">'
     : placeholder(label, cls));
-
+  const draftTag = (item) => (item.draft ? ' <span class="draft-tag">Draft</span>' : '');
 
   const FILTER_ICON = {
     closed: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M4.5 8h7M7 12h2"/></svg>',
@@ -128,5 +129,5 @@ window.H = (function () {
     }
   };
 
-  return { esc, uniq, date, work, workById, posts, casestudies, letters, excerptOf, plain, truncate, hashtag, routeId, url, pills, image, placeholder, filterButton, filterPanel, toggleIn, rerender, notFound, LINKEDIN_URL: S.LINKEDIN_URL };
+  return { esc, uniq, date, work, workById, posts, casestudies, letters, excerptOf, truncate, hashtag, routeId, url, pills, image, placeholder, draftTag, filterButton, filterPanel, toggleIn, rerender, notFound, LINKEDIN_URL: S.linkedin };
 })();

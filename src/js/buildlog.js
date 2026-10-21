@@ -44,8 +44,8 @@
     postsEl.innerHTML = shown.length
       ? shown.slice(0, state.visible).map((p) =>
           '<article class="post" id="' + esc(p.id) + '">' +
-            '<a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/buildlog#' + esc(p.id) + '">' + date.long(p.date) + '</a>' +
-            p.paras.map((t) => '<p>' + t + '</p>').join('') +
+            '<div><a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/buildlog#' + esc(p.id) + '">' + date.long(p.date) + '</a>' + H.draftTag(p) + '</div>' +
+            '<div class="prose post__body">' + MD.render(p.body) + '</div>' +
             '<ul class="post__tags" aria-label="Tags">' + p.engagementTitles.concat(p.skills || []).map((t) => '<li>' + esc(hashtag(t)) + '</li>').join('') + '</ul>' +
           '</article>'
         ).join('')

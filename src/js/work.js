@@ -1,7 +1,7 @@
 // Work entry: /work/<id>
 
 (function () {
-  const { esc, date, workById, posts, casestudies, url, pills, image, truncate, plain } = window.H;
+  const { esc, date, workById, posts, casestudies, url, pills, image, excerptOf } = window.H;
   const main = document.getElementById('main');
   const w = workById[H.routeId()];
   if (!w) return H.notFound(main, 'Work entry');
@@ -25,7 +25,7 @@
         logPosts.map((p) =>
           '<li><a class="related__item" href="' + url.post(p.id) + '">' +
             '<div class="related__item-date">' + date.long(p.date) + '</div>' +
-            '<div class="related__item-text">' + esc(truncate(p.excerpt || plain(p.paras[0]), 140)) + '</div>' +
+            '<div class="related__item-text">' + esc(excerptOf(p, 140)) + '</div>' +
           '</a></li>').join('') +
       '</ul></section>'
     : '';
@@ -38,9 +38,9 @@
   main.innerHTML =
     '<article class="work">' +
       '<div class="work__main">' +
-        '<div><h1 class="page-title">' + esc(w.title) + '</h1><div class="work__desc">' + esc(w.desc || '') + '</div></div>' +
+        '<div><h1 class="page-title">' + esc(w.title) + H.draftTag(w) + '</h1><div class="work__desc">' + esc(w.desc || '') + '</div></div>' +
         '<div class="only-mobile">' + meta + '</div>' +
-        (w.body ? '<div class="prose">' + w.body + '</div>' : '') +
+        (w.body ? '<div class="prose">' + MD.render(w.body) + '</div>' : '') +
         (w.gallery && w.gallery.length
           ? '<div class="gallery">' + w.gallery.map((img, i) => image(img, 'IMAGE ' + (i + 1))).join('') + '</div>'
           : '') +

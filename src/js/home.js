@@ -23,7 +23,7 @@
   if (newest) {
     excerptsHtml +=
       '<article class="excerpt"><p>' +
-        '<b class="excerpt__date">' + date.full(newest.date) + '</b> ' + esc(H.plain(newest.paras.join(' '))) + ' ' +
+        '<b class="excerpt__date">' + date.full(newest.date) + '</b> ' + esc(MD.toText(newest.body)) + ' ' +
         '<a class="read-more read-more--fade" href="' + url.post(newest.id) + '" aria-label="' + readMoreLabel(newest) + '">… read more →</a>' +
       '</p></article>';
   }
@@ -75,7 +75,7 @@
       const rows = work.filter((i) => skillMatch(i) && (state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0));
       return table('table--work', 'Work', ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS', 'LAST UPDATE', 'STATUS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a></div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.desc || '—') + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
           '<div role="cell" class="cell-mono cell-mono--muted">' + (i.lastUpdate ? date.table(i.lastUpdate) : '—') + '</div>' +
@@ -83,7 +83,7 @@
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<div class="card__top"><a class="card__title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
+          '<div class="card__top"><span><a class="card__title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</span><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
           '<div class="card__text">' + esc(i.desc || '—') + '</div>' +
           pills(i.skills) +
           '<div class="card__mono card__mono--muted">' + (i.lastUpdate ? date.table(i.lastUpdate) : '—') + '</div>' +
@@ -93,13 +93,13 @@
       const rows = casestudies.filter(skillMatch);
       return table('table--cases table--narrow', 'Case Studies', ['OPPORTUNITY', 'ENGAGEMENT', 'SKILLS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a></div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(engagementNames(i.engagement ? [i.engagement] : [])) + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<a class="card__title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' +
+          '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</span>' +
           '<div class="card__text">' + esc(engagementNames(i.engagement ? [i.engagement] : [])) + '</div>' +
           pills(i.skills) +
         '</div>'));
@@ -109,14 +109,14 @@
       const more = (p) => ' <a class="read-more" href="' + url.post(p.id) + '" aria-label="Read the Build Log post from ' + date.full(p.date) + '">read more →</a>';
       return table('table--log', 'Build Log', ['DATE', 'EXCERPT', 'ENGAGEMENT', 'SKILLS'], rows.map((p) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell" class="cell-date"><a href="' + url.post(p.id) + '">' + date.short(p.date) + '</a></div>' +
+          '<div role="cell" class="cell-date"><a href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + H.draftTag(p) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(excerptOf(p)) + more(p) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(engagementNames(p.engagements)) + '</div>' +
           '<div role="cell">' + pills(p.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((p) =>
         '<div class="card">' +
-          '<a class="card__date-link" href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' +
+          '<span><a class="card__date-link" href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + H.draftTag(p) + '</span>' +
           '<div class="card__text">' + esc(excerptOf(p)) + more(p) + '</div>' +
           '<div class="card__sub">' + esc(engagementNames(p.engagements)) + '</div>' +
           pills(p.skills) +
@@ -126,14 +126,14 @@
       const rows = letters.filter(skillMatch);
       return table('table--letters table--narrow', 'Letters & Articles', ['TITLE', 'SUMMARY', 'SKILLS', 'DATE'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a></div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.summary) + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
           '<div role="cell" class="cell-mono cell-mono--muted">' + date.table(i.date) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<a class="card__title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' +
+          '<span><a class="card__title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</span>' +
           '<div class="card__text">' + esc(i.summary) + '</div>' +
           pills(i.skills) +
           '<div class="card__mono card__mono--muted">' + date.table(i.date) + '</div>' +

@@ -12,7 +12,7 @@
   main.innerHTML =
     '<article class="case">' +
       '<div>' +
-        '<h1 class="page-title">' + esc(c.title) + '</h1>' +
+        '<h1 class="page-title">' + esc(c.title) + H.draftTag(c) + '</h1>' +
         '<div class="case__from">' + (eng ? 'Case Study from <a href="' + url.work(eng.id) + '">' + esc(eng.title) + '</a>' : 'Case Study') + '</div>' +
       '</div>' +
       pills(c.skills, true) +
@@ -20,8 +20,8 @@
         '<section class="case__section">' +
           '<h2 class="case__label">' + esc(s.label) + '</h2>' +
           '<div class="case__body">' +
-            '<div class="prose">' + s.html + '</div>' +
-            (s.image ? '<div class="case__figure">' + image(s.image === true ? null : s.image) + '</div>' : '') +
+            '<div class="prose">' + MD.render(s.body) + '</div>' +
+            (s.image ? '<div class="case__figure">' + image(s.image) + '</div>' : '') +
           '</div>' +
         '</section>').join('') +
     '</article>';
