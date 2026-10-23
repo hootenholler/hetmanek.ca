@@ -200,7 +200,7 @@ window.SITE = {
         "Write"
       ],
       "excerpt": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD:",
-      "body": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD:\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "body": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD (definition of done):\n\n- no placeholder content\n- Work pages for all roles in my resume\n- 4 case studies\n- 5 build logs\n- 1 Article or Letter re: this build"
     },
     {
       "id": "2026-10-12",
