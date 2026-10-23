@@ -10,12 +10,16 @@
   const pinned = posts.find((p) => p.pinned);
   const newest = posts.find((p) => !p.pinned);
   const readMoreLabel = (post) => 'Read the Build Log post from ' + date.full(post.date);
+  const PIN_ICON =
+    '<svg class="excerpt__pin" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>' +
+    '</svg>';
 
   let excerptsHtml = '';
   if (pinned) {
     excerptsHtml +=
       '<article class="excerpt"><p>' +
-        '<b class="excerpt__pinned">PINNED</b> <b class="excerpt__date">— ' + date.full(pinned.date) + '</b> ' +
+        PIN_ICON + '<span class="visually-hidden">Pinned: </span><b class="excerpt__date">' + date.full(pinned.date) + '</b> ' +
         esc(excerptOf(pinned, 400)) + '&nbsp;&nbsp;&nbsp;' +
         '<a class="read-more" href="' + url.post(pinned.id) + '" aria-label="' + readMoreLabel(pinned) + '">read more →</a>' +
       '</p></article>';
@@ -56,7 +60,8 @@
   const SKILLS = uniq([].concat(...work.map((i) => i.skills), ...casestudies.map((i) => i.skills), ...posts.map((i) => i.skills), ...letters.map((i) => i.skills)));
   const STATUSES = uniq(work.map((i) => i.status));
 
-  const state = { tab: 'work', open: false, skills: [], statuses: [] };
+  // No tab is selected until the visitor picks one; the table appears then.
+  const state = { tab: null, open: false, skills: [], statuses: [] };
   const root = document.getElementById('browse');
 
   const skillMatch = (item) => state.skills.length === 0 || (item.skills || []).some((s) => state.skills.indexOf(s) >= 0);
@@ -141,7 +146,38 @@
     }
   };
 
+  // ---------- panel motion ----------
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const EASE = 'cubic-bezier(0.65, 0, 0.35, 1)';
+  const tabIndex = (id) => TABS.findIndex((t) => t.id === id);
+  let shownTab = null;
+
+  // First pick: the table wipes in top to bottom over 1s. Later picks: the old and new
+  // tables slide the way the tabs run (a tab to the right brings its table in from the right),
+  // clipped to the panel frame so no horizontal scrollbar appears.
+  function animatePanels(prevTab, oldPanel) {
+    const panel = root.querySelector('.tabpanel');
+    if (!panel || reduceMotion.matches) return;
+    if (!prevTab) {
+      panel.animate({ clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0 0)'] }, { duration: 1000, easing: EASE });
+      return;
+    }
+    const dir = tabIndex(state.tab) > tabIndex(prevTab) ? 1 : -1;
+    const timing = { duration: 600, easing: EASE };
+    oldPanel.getAnimations().forEach((a) => a.cancel());
+    oldPanel.removeAttribute('id');
+    oldPanel.removeAttribute('role');
+    oldPanel.setAttribute('aria-hidden', 'true');
+    oldPanel.inert = true;
+    oldPanel.classList.add('tabpanel--leaving');
+    panel.parentNode.appendChild(oldPanel);
+    oldPanel.animate({ transform: ['translateX(0)', 'translateX(' + (-dir * 100) + '%)'] }, timing).onfinish = () => oldPanel.remove();
+    panel.animate({ transform: ['translateX(' + (dir * 100) + '%)', 'translateX(0)'] }, timing);
+  }
+
   function render() {
+    const prevTab = shownTab;
+    const oldPanel = root.querySelector('.tabpanel:not(.tabpanel--leaving)');
     const isWork = state.tab === 'work';
     const active = state.skills.length + (isWork ? state.statuses.length : 0);
     const groups = [{ key: 'skills', label: 'SKILLS', options: SKILLS, selected: state.skills }];
@@ -150,9 +186,10 @@
     H.rerender(root,
       '<div class="tabbar">' +
         '<div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="Sections">' +
-          TABS.map((t) => {
+          TABS.map((t, i) => {
             const on = t.id === state.tab;
-            return '<button type="button" class="tab" role="tab" id="tab-' + t.id + '" data-action="tab" data-tab="' + t.id + '" aria-selected="' + on + '" aria-controls="tabpanel" tabindex="' + (on ? 0 : -1) + '">' + esc(t.label) + '</button>';
+            const focusable = on || (!state.tab && i === 0);
+            return '<button type="button" class="tab" role="tab" id="tab-' + t.id + '" data-action="tab" data-tab="' + t.id + '" aria-selected="' + on + '"' + (on ? ' aria-controls="tabpanel"' : '') + ' tabindex="' + (focusable ? 0 : -1) + '">' + esc(t.label) + '</button>';
           }).join('') +
         '</div></div>' +
         '<div class="filter-controls">' +
@@ -161,8 +198,12 @@
         '</div>' +
       '</div>' +
       (state.open ? H.filterPanel(groups, 'home-filters') : '') +
-      '<div role="tabpanel" id="tabpanel" aria-labelledby="tab-' + state.tab + '">' + views[state.tab]() + '</div>'
+      '<div class="panels">' +
+        (state.tab ? '<div class="tabpanel" role="tabpanel" id="tabpanel" aria-labelledby="tab-' + state.tab + '">' + views[state.tab]() + '</div>' : '') +
+      '</div>'
     );
+    shownTab = state.tab;
+    if (state.tab !== prevTab) animatePanels(prevTab, oldPanel);
   }
 
   root.addEventListener('click', (e) => {
@@ -181,7 +222,7 @@
   // Arrow keys move between tabs (WAI-ARIA tabs pattern, automatic activation).
   root.addEventListener('keydown', (e) => {
     if (!e.target.matches('[role="tab"]')) return;
-    const i = TABS.findIndex((t) => t.id === state.tab);
+    const i = tabIndex(e.target.dataset.tab);
     const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: TABS.length - 1 }[e.key];
     if (next === undefined) return;
     e.preventDefault();

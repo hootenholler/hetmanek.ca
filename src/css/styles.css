@@ -4,7 +4,7 @@
   /* color */
   --bg: #F5F5F2; --ink: #15171C; --text: #3D4048; --muted: #5C6069; --faint: #8A8F98;
   --border: #DADAD4; --border-strong: #C9C9C1; --surface: #FFFFFF; --placeholder-a: #E4E4DE; --placeholder-b: #DCDCD5;
-  --forest: #2F5D45;        /* tagline, hashtags, PINNED, filter panel bg */
+  --forest: #2F5D45;        /* tagline, hashtags, pin icon, filter panel bg */
   --forest-label: #D6E5DB;  /* labels on forest */
   --link-blue: #2F5FE8;     /* "read more" */
   --accent: #2B4EFF;        /* link hover, Clear filters */
@@ -181,7 +181,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
   margin: 0; position: relative; max-height: calc(1.6em * 3); overflow: hidden;
   font-size: 18px; line-height: 1.6; color: var(--text);
 }
-.excerpt__pinned { font-weight: 600; color: var(--forest); letter-spacing: 0.06em; }
+.excerpt__pin {
+  display: inline-block; vertical-align: -1px; margin-right: 6px;
+  fill: none; stroke: var(--forest); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+}
 .excerpt__date { font-weight: 600; color: var(--ink); }
 .read-more { font-weight: 400; font-style: italic; color: var(--link-blue); white-space: nowrap; }
 .read-more--fade {
@@ -213,6 +216,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .tab:focus-visible { outline-offset: -2px; }
 .filter-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 0; }
 .browse .filter-panel { margin-bottom: 12px; }
+/* Tables slide within this frame; only the x-axis is clipped so a taller outgoing table isn't cut off. */
+.panels { position: relative; overflow: hidden; }
+@supports (overflow-x: clip) { .panels { overflow: visible; overflow-x: clip; } }
+.tabpanel--leaving { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; }
 @media (min-width: 900px) {
   .browse { padding: 0 0 96px; }
   .tabbar { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; border-bottom: 1px solid var(--ink); }
