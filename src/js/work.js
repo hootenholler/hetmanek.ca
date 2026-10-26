@@ -1,7 +1,7 @@
 // Work entry: /work/<id>
 
 (function () {
-  const { esc, date, workById, posts, casestudies, url, pills, image, excerptOf } = window.H;
+  const { esc, date, workById, posts, url, pills, image, excerptOf } = window.H;
   const main = document.getElementById('main');
   const w = workById[H.routeId()];
   if (!w) return H.notFound(main, 'Work entry');
@@ -18,7 +18,6 @@
     '</dl>';
 
   const logPosts = posts.filter((p) => (p.engagements || []).indexOf(w.id) >= 0);
-  const cases = casestudies.filter((c) => c.engagement === w.id);
 
   const logSection = logPosts.length
     ? '<section class="related" aria-labelledby="related-log"><h2 class="mono-label" id="related-log">BUILD LOG</h2><ul class="related__list">' +
@@ -27,11 +26,6 @@
             '<div class="related__item-date">' + date.long(p.date) + '</div>' +
             '<div class="related__item-text">' + esc(excerptOf(p, 140)) + '</div>' +
           '</a></li>').join('') +
-      '</ul></section>'
-    : '';
-  const caseSection = cases.length
-    ? '<section class="related" aria-labelledby="related-cases"><h2 class="mono-label" id="related-cases">CASE STUDIES</h2><ul class="related__list">' +
-        cases.map((c) => '<li><a class="related__item related__item--case" href="' + url.caseStudy(c.id) + '">' + esc(c.title) + '&nbsp;<span aria-hidden="true">→</span></a></li>').join('') +
       '</ul></section>'
     : '';
 
@@ -46,7 +40,7 @@
           : '') +
       '</div>' +
       '<aside class="work__aside" aria-label="Details">' +
-        '<div class="only-desktop">' + meta + '</div>' + logSection + caseSection +
+        '<div class="only-desktop">' + meta + '</div>' + logSection +
       '</aside>' +
     '</article>';
 })();

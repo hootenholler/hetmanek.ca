@@ -95,7 +95,8 @@ textarea.f__input { line-height: 1.55; resize: vertical; }
 .md-help summary { font-size: 14px; color: var(--link-blue); cursor: pointer; }
 .md-help table { margin-top: 8px; border-collapse: collapse; font-size: 14px; }
 .md-help td { padding: 4px 16px 4px 0; vertical-align: top; color: var(--text); }
-.md-help code { font-family: var(--font-mono); font-size: 13px; background: var(--placeholder-a); padding: 1px 6px; border-radius: 4px; }
+.md-help code { white-space: pre; font-family: var(--font-mono); font-size: 13px; background: var(--placeholder-a); padding: 1px 6px; border-radius: 4px; }
+.md-help kbd { font-family: var(--font-mono); font-size: 12px; color: var(--muted); border: 1px solid var(--border); padding: 0 5px; border-radius: 4px; white-space: nowrap; }
 
 .img-field { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: flex-start; }
 .img-field__thumb { width: 180px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-img); background: var(--placeholder-a); }

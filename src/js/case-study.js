@@ -1,19 +1,18 @@
 // Case Study: /casestudies/<id>
 
 (function () {
-  const { esc, workById, casestudies, url, pills, image } = window.H;
+  const { esc, casestudies, pills, image } = window.H;
   const main = document.getElementById('main');
   const c = casestudies.find((x) => x.id === H.routeId());
   if (!c) return H.notFound(main, 'Case study');
 
   document.title = c.title + ' · James Hetmanek';
-  const eng = workById[c.engagement];
 
   main.innerHTML =
     '<article class="case">' +
       '<div>' +
+        '<div class="case__eyebrow">Case Study</div>' +
         '<h1 class="page-title">' + esc(c.title) + H.draftTag(c) + '</h1>' +
-        '<div class="case__from">' + (eng ? 'Case Study from <a href="' + url.work(eng.id) + '">' + esc(eng.title) + '</a>' : 'Case Study') + '</div>' +
       '</div>' +
       pills(c.skills, true) +
       (c.sections || []).map((s) =>

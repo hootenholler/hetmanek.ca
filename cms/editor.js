@@ -6,11 +6,13 @@
   const params = new URLSearchParams(location.search);
   const mode = location.pathname === '/__cms/edit' ? 'edit' : 'new';
   const type = params.get('type');
+  const IS_MAC = /Mac|iPhone|iPad/.test(navigator.platform);
+  const MOD = IS_MAC ? '⌘' : 'Ctrl+';
 
   const TYPES = {
     work: { label: 'Work', noun: 'Work entry', blurb: 'A project, role or engagement. Gets its own page and a row in the Work table.' },
     buildlog: { label: 'Build Log post', noun: 'Build Log post', blurb: 'A dated note. Appears on the Build Log, on Home, and on related Work pages.' },
-    casestudies: { label: 'Case Study', noun: 'Case Study', blurb: 'Opportunity, Solution, Wins and Learning. Can link to a Work entry.' },
+    casestudies: { label: 'Case Study', noun: 'Case Study', blurb: 'Opportunity, Solution, Wins and Learning, with a one-line description.' },
     letters: { label: 'Letter or Article', noun: 'Letter', blurb: 'Long-form writing with a date, summary and cover image.' }
   };
   const SECTIONS = ['Opportunity', 'Solution', 'Wins', 'Learning'];
@@ -47,7 +49,7 @@
   const blank = () => ({
     work: { id: '', title: '', type: '', status: '', desc: '', skills: [], updated: today(), body: '', gallery: [] },
     buildlog: { id: '', date: today(), engagements: [], skills: [], body: '' },
-    casestudies: { id: '', title: '', engagement: '', skills: [], order: Math.max(0, ...content.casestudies.map((c) => c.order || 0)) + 1, sections: SECTIONS.map((label) => ({ label, body: '', image: null })) },
+    casestudies: { id: '', title: '', description: '', skills: [], order: Math.max(0, ...content.casestudies.map((c) => c.order || 0)) + 1, sections: SECTIONS.map((label) => ({ label, body: '', image: null })) },
     letters: { id: '', title: '', date: today(), summary: '', skills: [], image: null, body: '' }
   })[type];
 
@@ -122,9 +124,10 @@
         '<div class="md__preview" aria-label="Preview"><span class="md__preview-label">PREVIEW</span><div class="prose" id="' + id + '-pv">' + MD.render(getPath(entry, key)) + '</div></div>' +
       '</div>' +
       '<details class="md-help"><summary>Formatting help</summary><table>' +
-        [['## Heading', 'Section heading'], ['**bold**  *italic*', 'Bold, italic'], ['[link text](https://…)', 'Link'], ['> Quote', 'Pull quote'],
-         ['- item', 'Bulleted list (1. for numbered)'], ['![description](/assets/…)', 'Image (use Insert image)'], ['https://youtu.be/…', 'YouTube video, on its own line'],
-         ['A blank line', 'Starts a new paragraph']].map((r) => '<tr><td><code>' + esc(r[0]) + '</code></td><td>' + r[1] + '</td></tr>').join('') +
+        [['## Heading', 'Section heading', 'Alt+2'], ['**bold**  *italic*', 'Bold, italic', 'B, I'], ['[link text](https://…)', 'Link', 'K'], ['> Quote', 'Pull quote', 'Shift+9'],
+         ['- item', 'Bulleted list (1. for numbered)', 'Shift+8, Shift+7'], ['![description](/assets/…)', 'Image (use Insert image)'], ['https://youtu.be/…', 'YouTube video, on its own line'],
+         ['| A | B |\n|---|---|\n| 1 | 2 |', 'Table (a header row, a --- divider row, then rows)'], ['A blank line', 'Starts a new paragraph']].map((r) =>
+          '<tr><td><code>' + esc(r[0]) + '</code></td><td>' + r[1] + '</td><td class="md-help__keys">' + (r[2] ? r[2].split(', ').map((k) => '<kbd>' + MOD + k + '</kbd>').join(' ') : '') + '</td></tr>').join('') +
       '</table></details>' + help(o.help) + '</div>';
   }
 
@@ -178,10 +181,8 @@
     ];
     if (type === 'casestudies') return [
       text('title', 'Title', { required: true }), slugField(),
-      '<div class="f-row">' +
-        select('engagement', 'From Work entry', [{ value: '', label: 'None' }].concat(workOptions), 'Shows “Case Study from …” and lists it on that Work page.') +
-        text('order', 'Order', { type: 'number', help: 'Lower numbers come first in the Case Studies table.' }) +
-      '</div>',
+      text('description', 'Description', { required: true, help: 'One line, shown in the Case Studies table on Home.' }),
+      text('order', 'Order', { type: 'number', help: 'Lower numbers come first in the Case Studies table.' }),
       skills
     ].concat(entry.sections.map((s, i) =>
       '<fieldset class="section-fs"><legend>' + esc(s.label) + '</legend>' +
@@ -250,6 +251,77 @@
     if (el.dataset.preview) document.getElementById(el.dataset.preview).innerHTML = MD.render(val);
     markDirty();
   });
+  // ---------- formatting shortcuts in Markdown fields ----------
+  // Replaces start..end with text through execCommand so ⌘Z still works; it also fires 'input', which updates the preview.
+  function replaceRange(ta, start, end, text, selStart, selEnd) {
+    ta.focus();
+    ta.setSelectionRange(start, end);
+    if (!document.execCommand('insertText', false, text)) {
+      ta.setRangeText(text, start, end);
+      ta.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    ta.setSelectionRange(start + selStart, start + selEnd);
+  }
+
+  // Bold (**) and italic (*) toggle on the selection. Stars around it: 1 = italic, 2 = bold, 3 = both.
+  function toggleWrap(ta, mark) {
+    const v = ta.value;
+    let s = ta.selectionStart, e = ta.selectionEnd;
+    while (s < e && /\s/.test(v[s])) s++;
+    while (e > s && /\s/.test(v[e - 1])) e--;
+    const run = (i, dir) => { let n = 0; while (v[i + dir * n + (dir < 0 ? -1 : 0)] === '*') n++; return n; };
+    const has = (n) => (mark.length === 2 ? n >= 2 : n % 2 === 1);
+    const inner = v.slice(s, e);
+    if (inner.length > 2 * mark.length && has(run(s, 1)) && has(run(e, -1))) {
+      return replaceRange(ta, s, e, inner.slice(mark.length, -mark.length), 0, inner.length - 2 * mark.length);
+    }
+    if (has(run(s, -1)) && has(run(e, 1))) {
+      return replaceRange(ta, s - mark.length, e + mark.length, inner, 0, inner.length);
+    }
+    replaceRange(ta, s, e, mark + inner + mark, mark.length, mark.length + inner.length);
+  }
+
+  // Link: wraps the selection as [text](url) and selects "url" to type over.
+  function insertLink(ta) {
+    const text = ta.value.slice(ta.selectionStart, ta.selectionEnd) || 'link text';
+    replaceRange(ta, ta.selectionStart, ta.selectionEnd, '[' + text + '](url)', text.length + 3, text.length + 6);
+  }
+
+  // Line formats toggle on every selected line; a new one replaces any other line format.
+  const LINE_FORMATS = { heading: /^## /, bullet: /^- /, number: /^\d+\. /, quote: /^> / };
+  const LINE_PREFIX = { heading: () => '## ', bullet: () => '- ', number: (i) => (i + 1) + '. ', quote: () => '> ' };
+  function toggleLines(ta, kind) {
+    const v = ta.value;
+    const start = v.lastIndexOf('\n', ta.selectionStart - 1) + 1;
+    let end = v.indexOf('\n', Math.max(ta.selectionEnd - (ta.selectionEnd > ta.selectionStart && v[ta.selectionEnd - 1] === '\n' ? 1 : 0), start));
+    if (end < 0) end = v.length;
+    const lines = v.slice(start, end).split('\n');
+    const on = lines.every((l) => !l.trim() || LINE_FORMATS[kind].test(l));
+    const strip = (l) => Object.keys(LINE_FORMATS).reduce((acc, k) => acc.replace(LINE_FORMATS[k], ''), l);
+    let n = 0;
+    const out = lines.map((l) => (!l.trim() ? l : on ? strip(l) : LINE_PREFIX[kind](n++) + strip(l))).join('\n');
+    replaceRange(ta, start, end, out, 0, out.length);
+  }
+
+  // ⌘ on a Mac, Ctrl elsewhere. Shifted digits are read from e.code, since Shift changes e.key.
+  const SHORTCUTS = {
+    'KeyB': (ta) => toggleWrap(ta, '**'),
+    'KeyI': (ta) => toggleWrap(ta, '*'),
+    'KeyK': insertLink,
+    'Shift+Digit7': (ta) => toggleLines(ta, 'number'),
+    'Shift+Digit8': (ta) => toggleLines(ta, 'bullet'),
+    'Shift+Digit9': (ta) => toggleLines(ta, 'quote'),
+    'Alt+Digit2': (ta) => toggleLines(ta, 'heading')
+  };
+  root.addEventListener('keydown', (e) => {
+    const ta = e.target.closest('.md__input');
+    if (!ta || !(IS_MAC ? e.metaKey && !e.ctrlKey : e.ctrlKey && !e.metaKey)) return;
+    const run = SHORTCUTS[(e.shiftKey ? 'Shift+' : '') + (e.altKey ? 'Alt+' : '') + e.code];
+    if (!run) return;
+    e.preventDefault();
+    run(ta);
+  });
+
   root.addEventListener('change', (e) => { if (e.target.matches('select[data-key], input[type=checkbox][data-key]')) e.target.dispatchEvent(new Event('input', { bubbles: true })); });
 
   function refreshTags(key, focusValue) {
@@ -374,10 +446,9 @@
       }
       if (type === 'casestudies' && e.order === '') delete e.order;
 
-      // Renaming a Work entry: keep Build Log posts and Case Studies pointing at it.
+      // Renaming a Work entry: keep Build Log posts pointing at it.
       if (type === 'work' && mode === 'edit' && e.id !== originalId) {
         fresh.buildlog.forEach((p) => { p.engagements = (p.engagements || []).map((x) => (x === originalId ? e.id : x)); });
-        fresh.casestudies.forEach((c) => { if (c.engagement === originalId) c.engagement = e.id; });
       }
 
       // The working copy started as a full copy of the entry, so it replaces it outright.
@@ -407,7 +478,6 @@
       fresh[type] = fresh[type].filter((x) => x.id !== originalId);
       if (type === 'work') {
         fresh.buildlog.forEach((p) => { p.engagements = (p.engagements || []).filter((x) => x !== originalId); });
-        fresh.casestudies.forEach((c) => { if (c.engagement === originalId) c.engagement = ''; });
       }
       await putContent(fresh);
       dirty = false;

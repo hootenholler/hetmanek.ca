@@ -1,6 +1,6 @@
 // Small Markdown renderer for page bodies, shared by the site and the local CMS editor.
 // Supports: ## / ### headings, paragraphs, **bold**, *italic*, [links](url), ![images](src),
-// > quotes, - and 1. lists, and a YouTube link on its own line (embedded). Raw HTML is escaped.
+// > quotes, - and 1. lists, | tables |, and a YouTube link on its own line (embedded). Raw HTML is escaped.
 
 window.MD = (function () {
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -32,12 +32,25 @@ window.MD = (function () {
 
   const every = (lines, rx) => lines.every((l) => rx.test(l));
 
+  // Tables: a header row, a |---|:---:|---:| divider (colons set alignment), then body rows. \| is a literal pipe.
+  const DIVIDER = /^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?$/;
+  const isTable = (lines) => lines.length >= 2 && /\|/.test(lines[0]) && DIVIDER.test(lines[1]);
+  const cells = (line) => line.trim().replace(/^\|/, '').replace(/(^|[^\\])\|$/, '$1').split(/(?<!\\)\|/).map((c) => c.trim().replace(/\\\|/g, '|'));
+  const table = (lines) => {
+    const align = cells(lines[1]).map((c) => (/^:-+:$/.test(c) ? 'center' : /-:$/.test(c) ? 'right' : ''));
+    const row = (line, tag) => '<tr>' + align.map((a, i) =>
+      '<' + tag + (a ? ' style="text-align:' + a + '"' : '') + '>' + inline(cells(line)[i] || '') + '</' + tag + '>').join('') + '</tr>';
+    return '<div class="md-table"><table><thead>' + row(lines[0], 'th') + '</thead>' +
+      (lines.length > 2 ? '<tbody>' + lines.slice(2).map((l) => row(l, 'td')).join('') + '</tbody>' : '') + '</table></div>';
+  };
+
   const render = (md) => blocks(md).map((b) => {
     const lines = b.split('\n');
     let m;
     if ((m = b.match(/^(#{1,3}) (.*)$/))) return m[1].length === 3 ? '<h3>' + inline(m[2]) + '</h3>' : '<h2>' + inline(m[2]) + '</h2>';
     if (every(lines, /^>/)) return '<blockquote>' + inline(lines.map((l) => l.replace(/^>\s?/, '')).join('\n')) + '</blockquote>';
     if (every(lines, /^[-*] /)) return '<ul>' + lines.map((l) => '<li>' + inline(l.slice(2)) + '</li>').join('') + '</ul>';
+    if (isTable(lines)) return table(lines);
     if (every(lines, /^\d+[.)] /)) return '<ol>' + lines.map((l) => '<li>' + inline(l.replace(/^\d+[.)] /, '')) + '</li>').join('') + '</ol>';
     const yt = lines.length === 1 && youtubeId(b);
     if (yt) return '<div class="embed"><iframe src="https://www.youtube-nocookie.com/embed/' + yt + '" title="YouTube video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
@@ -52,11 +65,13 @@ window.MD = (function () {
     .replace(/\*\*|__/g, '')
     .replace(/(^|\s)[*_](\S)/g, '$1$2').replace(/(\S)[*_](?=\s|$|[.,;:!?])/g, '$1')
     .replace(/^(#{1,3}|>|[-*]|\d+[.)]) ?/gm, '')
+    .replace(/^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?$/gm, '')
+    .replace(/\s*(?<!\\)\|\s*/g, ' ').replace(/\\\|/g, '|')
     .replace(/\s+/g, ' ')
     .trim();
 
   const firstParagraph = (md) => {
-    const b = blocks(md).find((x) => !/^(#{1,3} |!\[)/.test(x) && !youtubeId(x));
+    const b = blocks(md).find((x) => !/^(#{1,3} |!\[)/.test(x) && !youtubeId(x) && !isTable(x.split('\n')));
     return b ? toText(b) : '';
   };
 

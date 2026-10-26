@@ -1,7 +1,7 @@
 // Home: Build Log excerpts, then tabs (Work, Case Studies, Build Log, Letters & Articles) with filters.
 
 (function () {
-  const { esc, uniq, date, work, workById, posts, casestudies, letters, excerptOf, url, pills } = window.H;
+  const { esc, uniq, date, work, workById, posts, casestudies, letters, excerptOf, url, pills, PIN_ICON } = window.H;
 
   document.getElementById('linkedin').href = H.LINKEDIN_URL;
 
@@ -10,10 +10,6 @@
   const pinned = posts.find((p) => p.pinned);
   const newest = posts.find((p) => !p.pinned);
   const readMoreLabel = (post) => 'Read the Build Log post from ' + date.full(post.date);
-  const PIN_ICON =
-    '<svg class="excerpt__pin" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">' +
-      '<path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>' +
-    '</svg>';
 
   let excerptsHtml = '';
   if (pinned) {
@@ -60,8 +56,17 @@
   const SKILLS = uniq([].concat(...work.map((i) => i.skills), ...casestudies.map((i) => i.skills), ...posts.map((i) => i.skills), ...letters.map((i) => i.skills)));
   const STATUSES = uniq(work.map((i) => i.status));
 
-  // No tab is selected until the visitor picks one; the table appears then.
-  const state = { tab: null, open: false, skills: [], statuses: [] };
+  // Returning from a content page opens that page's tab; Back restores the tab saved in history.
+  // Otherwise no tab is selected until the visitor picks one; the table appears then.
+  const FROM = [['/work/', 'work'], ['/casestudies/', 'cases'], ['/buildlog', 'log'], ['/letters/', 'articles']];
+  const tabFromReferrer = () => {
+    let ref;
+    try { ref = new URL(document.referrer); } catch (e) { return null; }
+    if (ref.origin !== location.origin) return null;
+    const hit = FROM.find((f) => ref.pathname.indexOf(f[0]) === 0);
+    return hit ? hit[1] : null;
+  };
+  const state = { tab: (history.state && history.state.tab) || tabFromReferrer(), open: false, skills: [], statuses: [] };
   const root = document.getElementById('browse');
 
   const skillMatch = (item) => state.skills.length === 0 || (item.skills || []).some((s) => state.skills.indexOf(s) >= 0);
@@ -96,16 +101,16 @@
     },
     cases() {
       const rows = casestudies.filter(skillMatch);
-      return table('table--cases table--narrow', 'Case Studies', ['OPPORTUNITY', 'ENGAGEMENT', 'SKILLS'], rows.map((i) =>
+      return table('table--cases table--narrow', 'Case Studies', ['TITLE', 'DESCRIPTION', 'SKILLS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
           '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</div>' +
-          '<div role="cell" class="cell-text">' + esc(engagementNames(i.engagement ? [i.engagement] : [])) + '</div>' +
+          '<div role="cell" class="cell-text">' + esc(i.description || '—') + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
           '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</span>' +
-          '<div class="card__text">' + esc(engagementNames(i.engagement ? [i.engagement] : [])) + '</div>' +
+          '<div class="card__text">' + esc(i.description || '—') + '</div>' +
           pills(i.skills) +
         '</div>'));
     },
@@ -203,7 +208,10 @@
       '</div>'
     );
     shownTab = state.tab;
-    if (state.tab !== prevTab) animatePanels(prevTab, oldPanel);
+    if (state.tab !== prevTab) {
+      animatePanels(prevTab, oldPanel);
+      history.replaceState(Object.assign({}, history.state, { tab: state.tab }), '');
+    }
   }
 
   root.addEventListener('click', (e) => {

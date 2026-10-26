@@ -178,8 +178,8 @@ window.SITE = {
   ],
   "buildlog": [
     {
-      "id": "2026-10-20",
-      "date": "2026-10-20",
+      "id": "2026-10-26",
+      "date": "2026-10-26",
       "engagements": [
         "hetmanek-ca"
       ],
@@ -187,7 +187,8 @@ window.SITE = {
         "Design",
         "Build"
       ],
-      "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n\nUt enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\n![Describe the image](/assets/buildlog/2026-10-20/screenshot-2025-08-02-at-6.53.31-pm.png)"
+      "body": "Created a case study creation skill. \n\n1. **Start:** “Case Study - [name]”\n2. **Input:** I type via stream of consciousness.\n3. **Turns:** Claude reviews against my personal positioning doc and asks questions to refine and articulate the stream within “Opportunity” ”Solution”,”Wins” and “Lessons” buckets\n4. **Once satisfied**, I have Claude append the resulting bullet points to my master Case Study doc. \n5. **Finally** - I humanify the text and paste into my local hetmanek.ca CMS\n\n\n**Updates**\n- Added Keyboard shortcut handling in the CMS\n- Replace “Engagement” with “Description” row in the Case Studies home page tab. \n- Add Description to the Case Study post creation form in the CMS.\n- *Bug fix* - main section on home page shifted right when tab selected with overflow rows. Fixed by adding to element css - scrollbar-gutter: stable;",
+      "excerpt": "Created a case study creation skill. \n- Start: “Case Study - [name]”\n- Input: I type via stream of consciousness."
     },
     {
       "id": "2026-10-19",
@@ -197,65 +198,31 @@ window.SITE = {
         "hetmanek-ca"
       ],
       "skills": [
-        "Write"
+        "Build",
+        "GTM"
       ],
       "excerpt": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD:",
-      "body": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD (definition of done):\n\n- no placeholder content\n- Work pages for all roles in my resume\n- 4 case studies\n- 5 build logs\n- 1 Article or Letter re: this build"
+      "body": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD (definition of done):\n\n**- No placeholder content\n- Work pages for all roles in my resume\n- 4 case studies\n- 5 build logs\n- 1 Article or Letter re: this build**"
     },
     {
-      "id": "2026-10-12",
-      "date": "2026-10-12",
+      "id": "2026-10-23",
+      "date": "2026-10-23",
       "engagements": [
-        "opportunity-assessment-engine"
+        "hetmanek-ca"
       ],
       "skills": [
+        "Build",
         "AI",
         "Design"
       ],
-      "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n\nUt enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.\n\nEt harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.\n\nNeque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-    },
-    {
-      "id": "2026-10-11",
-      "date": "2026-10-11",
-      "engagements": [
-        "pengi-by-beatrix"
-      ],
-      "skills": [
-        "Design",
-        "Strategy"
-      ],
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    },
-    {
-      "id": "2026-10-09",
-      "date": "2026-10-09",
-      "engagements": [
-        "opportunity-assessment-engine"
-      ],
-      "skills": [
-        "Design",
-        "Design Research"
-      ],
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nUt enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident."
-    },
-    {
-      "id": "2026-10-07",
-      "date": "2026-10-07",
-      "engagements": [
-        "pengi-by-beatrix"
-      ],
-      "skills": [
-        "People",
-        "GTM"
-      ],
-      "body": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\nEt harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus."
+      "body": "I will be using [Dev0](https://github.com/tforster/dev0) as acceptance criteria henceforth.\n\nIf the code is not able to meet this standard, I expect a compelling argument with Claude Code.\n\n>The default question flips from \"Why not use this library?\" to \"Does this earn its keep?\"\n\n*To earn that right, an addition must pass all six tests. A strong pass in one never excuses a failure in another:*\n\n| Name | What it tests |\n| -------- | -------- |\n|Less |\tDoes it actually reduce complexity, or just hide it? When you add a dependency, you own its entire transitive tree, its configuration, and its infrastructure.|\n|Separate|\tDoes each part do exactly one thing, in its own place, behind a clean interface?|\n|Legibility|\tCan you predict exactly what the code does just by reading it, without having to run it?|\n|Native\t|Does the platform already do this? Favour native APIs and standard JavaScript before reaching for a third-party wrapper.|\n|Beneficiary\t|Who does this actually serve the end user, or just the developer? When developer convenience and user performance conflict, the user wins| \n|Control\t|Do you control where it runs? Push the newest features to the serverless edge or cloud infrastructure where you own the runtime, but be conservative in the browser where you don't.|"
     }
   ],
   "casestudies": [
     {
       "id": "hidden-complexity",
       "title": "Hidden Complexity",
-      "engagement": "opportunity-assessment-engine",
+      "description": "Why a simple-looking request turned out to hide the real problem.",
       "skills": [
         "AI",
         "Design",
@@ -292,28 +259,33 @@ window.SITE = {
       ]
     },
     {
-      "id": "positioning",
-      "title": "Positioning",
-      "engagement": "",
-      "skills": [],
+      "id": "positioning-engine",
+      "title": "Agentic Positioning Engine",
+      "description": "Measured, reinforced, and research-validated positioning/messaging for all teams",
+      "skills": [
+        "AI",
+        "Design",
+        "GTM",
+        "Learn",
+        "Listen",
+        "Product Marketing",
+        "Build"
+      ],
       "order": 2,
       "sections": [
         {
           "label": "Opportunity",
-          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          "image": {
-            "src": "",
-            "alt": ""
-          }
+          "body": "A research validated \"Why\" is foundational for building and marketing any product, and consistent compelling messaging improves outcomes across every team. We had neither.\n\nLike many mid-stage B2B SaaS companies, we had not articulated and validated our position through research. The product just worked!\n\nThen the market shifted fast, and we found ourselves competing in a newly forming category. \"It just works\" no longer explained why a buyer should choose us.\n\nThe raw material was already there: every sales and customer service call was recorded. No one had turned it into positioning.\n",
+          "image": null
         },
         {
           "label": "Solution",
-          "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+          "body": "**An agentic research-to-strategy pipeline, architected and built hands-on, with cross-functional review at every stage.**\n\n1. **Personas.** An LLM skill read the call transcripts and co-authored buyer personas with me. Each persona listed problems and pain points ranked by urgency and willingness to pay.\n2. **Problem-capability matrix.** I mapped those pain points against what the business actually offers.\n3. **Competitive differentiation.** I worked with an LLM to scan the market and identify where we were differentiated.\n4. **Master Positioning Document.** Six core differentiators, each grounded in the research above.\n5. **Messaging Library.** Co-authored with an LLM, using the brand voice guide.\n6. **AI Brand Coach.** User submits collateral (emails, sales decks, website and content copy). The GPT returns a rubric-based grade, feedback tied to the positioning and messaging docs, and suggestions for improvement. \n",
           "image": null
         },
         {
           "label": "Wins",
-          "body": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+          "body": "The company's first positioning research capability enabling us to articulate our value in terms that resonate with the market in a newly forming category.\n\nAdopted by every team, including executive leadership.\n\n**Efficiency:** delivered at 60%+ lower cost than a comparable agency repositioning, in 3 months at 0.5 FTE.\n\n**Customer outcomes:** CSAT improved in Business Reviews, which we attributed to improved messaging.\n\n**Sales outcomes:** win rate increased.\n\n**Workflow:** the Brand Coach became an essential tool throughout the sales cycle.\n\n**Cultural and systemic:** positioning became shared work. Department leaders co-owned the docs, customer-facing teams discussed it in their regular meetings, and collateral review became self-serve.\n",
           "image": {
             "src": "",
             "alt": ""
@@ -321,7 +293,7 @@ window.SITE = {
         },
         {
           "label": "Learning",
-          "body": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+          "body": "**Positioning drifts.** The market moved while our positioning stayed static. Next time, I'd re-run the whole engine, including win/loss analysis, quarterly to detect and fix drift.\n\n**Evaluate the evaluator continuously.** I validated the Brand Coach against known-good and known-bad collateral. Next time, I'd extend that into an ongoing eval: a human-scored golden set, tracked grader agreement, and a check on whether Brand Coach scores correlate with win rate, re-run each quarter alongside the positioning refresh.\n\n**Positioning drives more than marketing.** Strong positioning and messaging also drives prioritization and design decisions, and earns engineering buy-in.\n",
           "image": null
         }
       ]
@@ -329,7 +301,7 @@ window.SITE = {
     {
       "id": "customer-journey",
       "title": "Customer Journey",
-      "engagement": "",
+      "description": "Short description of the case study.",
       "skills": [],
       "order": 3,
       "sections": [
@@ -364,34 +336,28 @@ window.SITE = {
     {
       "id": "demo-day",
       "title": "Demo Day",
-      "engagement": "",
+      "description": "Short description of the case study.",
       "skills": [],
       "order": 4,
       "sections": [
         {
           "label": "Opportunity",
-          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          "image": {
-            "src": "",
-            "alt": ""
-          }
+          "body": "No one could see the whole product picture.\n\nCommunication was costly and misunderstandings were common.\n\nGS1 Canada is a complex organization serving grocery, foodservice, cannabis, general merchandise, healthcare and pharmaceutical, each with its own use cases, problem spaces, and working groups.\n\nWithin product and engineering, multiple siloed products integrated poorly through abstraction layers, both in the stacks and in the organization \n\n**The result:** it was hard for the whole organization to understand what we were building, what was on the roadmap, and why. \n",
+          "image": null
         },
         {
           "label": "Solution",
-          "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+          "body": "**A monthly all-hands Demo Day, built to be accessible and to grow presenters.**\n\n- I created a monthly 1.5-hour all-hands session on what we were building, why we were building it, what had been released and what was on the roadmap.\n\n- Product Managers led the presenting. Business Analysts and Engineers were coached to present their own sections.\n\n- **Asynchronous access.** Recordings and documents were available to everyone, so people across sectors and functions could catch up when it suited them.\n\n- **Live Q&A.** Cross-functional colleagues asked questions and gave feedback in the session.\n\n- **Built-in measurement.** Participants were surveyed after every Demo Day.\n",
           "image": null
         },
         {
           "label": "Wins",
-          "body": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
-          "image": {
-            "src": "",
-            "alt": ""
-          }
+          "body": "- **Reach:** 90% of employees watched live or via the recording.\n- **Clarity:** colleagues across the organization, including customer success teams, could see what was being built, what was shipping and why.\n- **Feedback loop:** questions and feedback from cross-functional colleagues improved outcomes.\n- **Quality, measured:** post-session satisfaction (internal CSAT) rose from 85 to 95 over a year.\n- **Efficiency:** fewer stakeholder engagement touchpoints, with greater clarity and alignment.\n- **Culture:** one of the practices behind growing the team from 5 to 10 and reducing turnover by 67%.\n- **Capability building:** BAs and Engineers developed presentation skills through coaching.\n",
+          "image": null
         },
         {
           "label": "Learning",
-          "body": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+          "body": "**Presenting is professional development.** Cross-functional team members greatly valued the chance to present and build that skill. Anecdotally, it raised their engagement and buy-in.\n\n**Everyone wants their story told.** Other groups wanted their work represented, so we expanded the agenda to include progress demos from departments beyond Product and Design.\n",
           "image": null
         }
       ]
@@ -399,7 +365,7 @@ window.SITE = {
     {
       "id": "does-my-local-cms-work",
       "title": "Does My Local CMS Work?",
-      "engagement": "",
+      "description": "Short description of the case study.",
       "skills": [
         "Design",
         "Build",

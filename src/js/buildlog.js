@@ -1,4 +1,4 @@
-// Build Log: posts newest first, 3 at a time (more load as the reader nears the bottom),
+// Build Log: the pinned post, then posts newest first, 3 at a time (more load as the reader nears the bottom),
 // Skills + Engagements filters, and /buildlog#<id> deep links.
 
 (function () {
@@ -13,7 +13,8 @@
   const controls = document.getElementById('log-controls');
   const postsEl = document.getElementById('posts');
 
-  const list = () => posts.filter((p) =>
+  const ordered = posts.filter((p) => p.pinned).concat(posts.filter((p) => !p.pinned));
+  const list = () => ordered.filter((p) =>
     (state.skills.length === 0 || (p.skills || []).some((s) => state.skills.indexOf(s) >= 0)) &&
     (state.engs.length === 0 || p.engagementTitles.some((e) => state.engs.indexOf(e) >= 0)));
 
@@ -44,7 +45,7 @@
     postsEl.innerHTML = shown.length
       ? shown.slice(0, state.visible).map((p) =>
           '<article class="post" id="' + esc(p.id) + '">' +
-            '<div><a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/buildlog#' + esc(p.id) + '">' + date.long(p.date) + '</a>' + H.draftTag(p) + '</div>' +
+            '<div>' + (p.pinned ? H.PIN_ICON + '<span class="visually-hidden">Pinned: </span>' : '') + '<a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/buildlog#' + esc(p.id) + '">' + date.long(p.date) + '</a>' + H.draftTag(p) + '</div>' +
             '<div class="prose post__body">' + MD.render(p.body) + '</div>' +
             '<ul class="post__tags" aria-label="Tags">' + p.engagementTitles.concat(p.skills || []).map((t) => '<li>' + esc(hashtag(t)) + '</li>').join('') + '</ul>' +
           '</article>'
@@ -77,12 +78,11 @@
     let id = '';
     try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
     if (!posts.some((p) => p.id === id)) return;
-    let pos = list().findIndex((p) => p.id === id);
-    if (pos < 0) {
+    if (!list().some((p) => p.id === id)) {
       state.skills = []; state.engs = [];
-      pos = posts.findIndex((p) => p.id === id);
       renderControls();
     }
+    const pos = list().findIndex((p) => p.id === id);
     const need = Math.ceil((pos + 1) / STEP) * STEP;
     if (need > state.visible) state.visible = need;
     renderPosts();
