@@ -3,3 +3,6 @@ node_modules/
 .env
 *.pem
 *.key
+
+# Drafts stay on this machine until they are published (see CLAUDE.md)
+cms/drafts.json

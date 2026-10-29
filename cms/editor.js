@@ -473,7 +473,10 @@ import { esc, uniq } from '/js/shared.js';
 
   async function remove() {
     const name = entry.title || entry.date;
-    if (!confirm('Delete “' + name + '”?\n\nIt’s removed from content.js. Until you commit, you can bring it back by discarding the change in GitHub Desktop.')) return;
+    const undo = entry.draft
+      ? 'Drafts aren’t kept in git, so this can’t be undone.'
+      : 'It’s removed from content.js. Until you commit, you can bring it back by discarding the change in GitHub Desktop.';
+    if (!confirm('Delete “' + name + '”?\n\n' + undo)) return;
     try {
       const fresh = await fetchContent();
       fresh[type] = fresh[type].filter((x) => x.id !== originalId);
