@@ -230,6 +230,20 @@ window.SITE = {
       "skills": [],
       "body": "\"LISTEN - LEARN - DESIGN - BUILD\" adorns my portrait and also some page headers.\n\nAdding an arrow from \"Build\" to \"Listen\" shows it as the Design Thinking living cycle that I ride.\n\nAnd if, really, what we're building is Context, then I should label the loop as \"Context Management\".\n\nClaude and I jammed on this today.\n\n//\nRemoved \"Last Updated\" from the Work table in favour of a column to enable users to filter by Type [Job, Contract, Project, Product]",
       "excerpt": "Make the LISTEN - LEARN - DESIGN - BUILD tag line more visually impactful."
+    },
+    {
+      "id": "2026-10-29",
+      "date": "2026-10-29",
+      "engagements": [
+        "hetmanek-ca"
+      ],
+      "skills": [
+        "Build",
+        "AI",
+        "Learn"
+      ],
+      "body": "I put the site through [Dev0](https://github.com/tforster/dev0) acceptance criteria audit today. Claude checked every file against the six tests.\n\n| Test | Result |\n| -------- | -------- |\n| Less | Pass |\n| Separate | Partial |\n| Legibility | Pass |\n| Native | Partial |\n| Beneficiary | Fail |\n| Control | Fail |\n\nThe code was lean: no dependencies and no build step. The problem was where it ran. Every page was assembled in the visitor's browser, the one runtime I don't control. Without JavaScript, a page was blank, and a shared Work link previewed with a generic title.\n\nWhat changed:\n\n- The local CMS now writes finished HTML for every Work, Case Study and Letter page. That breaks Dev0's no-compile-step rule, so the exception is written into CLAUDE.md, along with the alternatives we rejected.\n- Drafts stay with the CMS and never deploy. Before, they were hidden on the page but readable in the source.\n- Fonts are self-hosted instead of loaded from Google.",
+      "excerpt": "I put the site through [Dev0](https://github.com/tforster/dev0) today. Claude audited every file against the six tests and then we worked together on fixes."
     }
   ],
   "casestudies": [
