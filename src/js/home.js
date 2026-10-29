@@ -25,7 +25,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
   if (newest) {
     excerptsHtml +=
       '<article class="excerpt"><p>' +
-        '<b class="excerpt__date">' + date.full(newest.date) + '</b>&nbsp; ' + esc(MD.toText(newest.body)) + ' ' +
+        '<b class="excerpt__date">' + date.full(newest.date) + '</b>&nbsp; ' + esc(MD.toText(newest.excerpt || newest.body)) + ' ' +
         '<a class="read-more read-more--fade" href="' + url.post(newest.id) + '" aria-label="' + readMoreLabel(newest) + '">… read more →</a>' +
       '</p></article>';
   }
