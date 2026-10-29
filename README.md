@@ -9,7 +9,7 @@
 Plain HTML, CSS and vanilla JS. There's no build step.
 
 - `src/js/content.js` holds all published content: Work, Build Log posts, Case Studies, Letters. Edit it with the local CMS (below) or by hand. It's plain JSON with Markdown bodies, and dates are `YYYY-MM-DD`.
-- `cms/drafts.json` holds drafts. It's never deployed, so drafts can't be read on the public site.
+- `cms/drafts.json` holds drafts. It stays on your machine: git ignores it, so drafts are never committed, pushed or deployed. That also means drafts aren't backed up until you publish them.
 - Home (`/`) and the Build Log (`/buildlog/`) are built in the browser from `content.js`.
 - Work, Case Study and Letter pages are finished HTML files that the CMS writes from `content.js`: `/work/pengi-by-beatrix` is `src/work/pengi-by-beatrix.html`. Don't edit these files by hand. If you edit `content.js` by hand, start the CMS once and it rewrites them.
 - `src/css/styles.css` holds the design tokens and every style. Layouts are mobile first and switch to desktop at 900px.
@@ -31,6 +31,6 @@ Start it by double-clicking `start-cms.command` in Finder, or by running `npm ru
 
 Bodies use Markdown: `## Heading`, `**bold**`, `*italic*`, `[link](https://…)`, `> quote`, `- list`, `![alt](/assets/…)`. A YouTube link on its own line becomes an embedded video.
 
-Nothing goes live until you commit and push. In GitHub Desktop, make a branch, commit the changed files (`src/js/content.js`, the pages in `src/work`, `src/casestudies` and `src/letters`, any new images, and `cms/drafts.json`), push, open a PR, and merge into `main`. Cloudflare then deploys it. To undo unsaved experiments, discard the changes in GitHub Desktop.
+Nothing goes live until you commit and push. In GitHub Desktop, make a branch, commit the changed files (`src/js/content.js`, the pages in `src/work`, `src/casestudies` and `src/letters` and any new images), push, open a PR, and merge into `main`. Cloudflare then deploys it. To undo unsaved experiments, discard the changes in GitHub Desktop.
 
 Stop the CMS by closing its Terminal window or pressing Ctrl+C.

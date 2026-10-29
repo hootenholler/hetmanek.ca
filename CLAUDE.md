@@ -13,7 +13,7 @@ Static site: plain HTML, CSS and vanilla JS. No build step.
 - Image and file names: lowercase, hyphens, no spaces.
 - Never commit secrets, keys or .env files.
 - Work on feature branches; open PRs into main.
-- Drafts live in cms/drafts.json, never in src/.
+- Drafts live in cms/drafts.json on this machine only: never in src/, never committed (it's in .gitignore). A draft reaches the repo only when it's published.
 
 ## Dev0
 
