@@ -2,7 +2,6 @@
 // Keep the data below valid JSON (double quotes, no trailing commas).
 // Bodies are Markdown. Dates are YYYY-MM-DD. "draft": true hides an entry on the public site.
 window.SITE = {
-  "linkedin": "https://www.linkedin.com/in/hetmanek",
   "work": [
     {
       "id": "schema-app",
@@ -376,40 +375,6 @@ window.SITE = {
           "image": null
         }
       ]
-    },
-    {
-      "id": "does-my-local-cms-work",
-      "title": "Does My Local CMS Work?",
-      "description": "Short description of the case study.",
-      "skills": [
-        "Design",
-        "Build",
-        "AI"
-      ],
-      "order": 1,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "Adding content to my personal website via html and js files is arduous!\n\nUser friendly content management will make the site easier, and more fun to run.",
-          "image": null
-        },
-        {
-          "label": "Solution",
-          "body": "Create a local CMS. \nPreview the content changes locally then merge via GitHub to the production site.",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "Claude Code built it in 10 minutes.\n\nI have autonomy and no third party dependancies.",
-          "image": null
-        },
-        {
-          "label": "Learning",
-          "body": "It seems almost to easy. It's too early to determine if it was a success. This is a test post.",
-          "image": null
-        }
-      ],
-      "draft": true
     }
   ],
   "letters": [

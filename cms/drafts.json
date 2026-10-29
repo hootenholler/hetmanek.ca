@@ -1,0 +1,55 @@
+{
+  "work": [],
+  "buildlog": [
+    {
+      "id": "2026-10-29",
+      "date": "2026-10-29",
+      "engagements": [
+        "hetmanek-ca"
+      ],
+      "skills": [
+        "Build",
+        "AI"
+      ],
+      "body": "I put the site through Dev0 today. Claude audited every file against the six tests.\n\n| Test | Result |\n| -------- | -------- |\n| Less | Pass |\n| Separate | Partial |\n| Legibility | Pass |\n| Native | Partial |\n| Beneficiary | Fail |\n| Control | Fail |\n\nThe code was lean: no dependencies and no build step. The problem was where it ran. Every page was assembled in the visitor's browser, the one runtime I don't control. Without JavaScript, a page was blank, and a shared Work link previewed with a generic title.\n\nWhat changed:\n\n- The local CMS now writes finished HTML for every Work, Case Study and Letter page. That breaks Dev0's no-compile-step rule, so the exception is written into CLAUDE.md, along with the alternatives we rejected.\n- Drafts stay with the CMS and never deploy. Before, they were hidden on the page but readable in the source.\n- Fonts are self-hosted instead of loaded from Google.\n\n>A strong pass in one never excuses a failure in another.",
+      "draft": true
+    }
+  ],
+  "casestudies": [
+    {
+      "id": "does-my-local-cms-work",
+      "title": "Does My Local CMS Work?",
+      "description": "Short description of the case study.",
+      "skills": [
+        "Design",
+        "Build",
+        "AI"
+      ],
+      "order": 1,
+      "sections": [
+        {
+          "label": "Opportunity",
+          "body": "Adding content to my personal website via html and js files is arduous!\n\nUser friendly content management will make the site easier, and more fun to run.",
+          "image": null
+        },
+        {
+          "label": "Solution",
+          "body": "Create a local CMS. \nPreview the content changes locally then merge via GitHub to the production site.",
+          "image": null
+        },
+        {
+          "label": "Wins",
+          "body": "Claude Code built it in 10 minutes.\n\nI have autonomy and no third party dependancies.",
+          "image": null
+        },
+        {
+          "label": "Learning",
+          "body": "It seems almost to easy. It's too early to determine if it was a success. This is a test post.",
+          "image": null
+        }
+      ],
+      "draft": true
+    }
+  ],
+  "letters": []
+}

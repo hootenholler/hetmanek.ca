@@ -1,9 +1,11 @@
 // Home: Build Log excerpts, then tabs (Work, Case Studies, Build Log, Letters & Articles) with filters.
 
-(function () {
-  const { esc, uniq, date, work, workById, posts, casestudies, letters, excerptOf, url, pills, PIN_ICON } = window.H;
+import * as MD from './markdown.js';
+import { esc, uniq, date, derive, excerptOf, url, pills, draftTag } from './shared.js';
+import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.js';
 
-  document.getElementById('linkedin').href = H.LINKEDIN_URL;
+(function () {
+  const { work, workById, posts, casestudies, letters } = derive(window.SITE);
 
   // ---------- excerpts ----------
   const excerptsEl = document.getElementById('excerpts');
@@ -43,7 +45,7 @@
   };
   let resizeTimer;
   window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fitReadMore, 100); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitReadMore);
+  document.fonts.ready.then(fitReadMore);
   fitReadMore();
 
   // ---------- tabs + filters ----------
@@ -85,7 +87,7 @@
       const rows = work.filter((i) => skillMatch(i) && (state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0));
       return table('table--work', 'Work', ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS', 'TYPE', 'STATUS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.desc || '—') + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.type || '—') + '</div>' +
@@ -93,7 +95,7 @@
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<div class="card__top"><span><a class="card__title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</span><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
+          '<div class="card__top"><span><a class="card__title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</span><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
           '<div class="card__text">' + esc(i.desc || '—') + '</div>' +
           pills(i.skills) +
           (i.type ? '<div class="card__text">' + esc(i.type) + '</div>' : '') +
@@ -103,13 +105,13 @@
       const rows = casestudies.filter(skillMatch);
       return table('table--cases table--narrow', 'Case Studies', ['TITLE', 'DESCRIPTION', 'SKILLS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.description || '—') + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</span>' +
+          '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</span>' +
           '<div class="card__text">' + esc(i.description || '—') + '</div>' +
           pills(i.skills) +
         '</div>'));
@@ -119,14 +121,14 @@
       const more = (p) => ' <a class="read-more" href="' + url.post(p.id) + '" aria-label="Read the Build Log post from ' + date.full(p.date) + '">read more →</a>';
       return table('table--log', 'Build Log', ['DATE', 'EXCERPT', 'ENGAGEMENT', 'SKILLS'], rows.map((p) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell" class="cell-date"><a href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + H.draftTag(p) + '</div>' +
+          '<div role="cell" class="cell-date"><a href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(excerptOf(p)) + more(p) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(engagementNames(p.engagements)) + '</div>' +
           '<div role="cell">' + pills(p.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((p) =>
         '<div class="card">' +
-          '<span><a class="card__date-link" href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + H.draftTag(p) + '</span>' +
+          '<span><a class="card__date-link" href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</span>' +
           '<div class="card__text">' + esc(excerptOf(p)) + more(p) + '</div>' +
           '<div class="card__sub">' + esc(engagementNames(p.engagements)) + '</div>' +
           pills(p.skills) +
@@ -136,14 +138,14 @@
       const rows = letters.filter(skillMatch);
       return table('table--letters table--narrow', 'Letters & Articles', ['TITLE', 'SUMMARY', 'SKILLS', 'DATE'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.summary) + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
           '<div role="cell" class="cell-mono cell-mono--muted">' + date.table(i.date) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<span><a class="card__title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</span>' +
+          '<span><a class="card__title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</span>' +
           '<div class="card__text">' + esc(i.summary) + '</div>' +
           pills(i.skills) +
           '<div class="card__mono card__mono--muted">' + date.table(i.date) + '</div>' +
@@ -188,7 +190,7 @@
     const groups = [{ key: 'skills', label: 'SKILLS', options: SKILLS, selected: state.skills }];
     if (isWork) groups.push({ key: 'statuses', label: 'STATUS', options: STATUSES, selected: state.statuses });
 
-    H.rerender(root,
+    rerender(root,
       '<div class="tabbar">' +
         '<div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="Sections">' +
           TABS.map((t, i) => {
@@ -198,11 +200,11 @@
           }).join('') +
         '</div></div>' +
         '<div class="filter-controls">' +
-          H.filterButton(state.open, active, 'home-filters') +
+          filterButton(state.open, active, 'home-filters') +
           (active ? '<button type="button" class="clear-filters" data-action="clear">Clear filters</button>' : '') +
         '</div>' +
       '</div>' +
-      (state.open ? H.filterPanel(groups, 'home-filters') : '') +
+      (state.open ? filterPanel(groups, 'home-filters') : '') +
       '<div class="panels">' +
         (state.tab ? '<div class="tabpanel" role="tabpanel" id="tabpanel" aria-labelledby="tab-' + state.tab + '">' + views[state.tab]() + '</div>' : '') +
       '</div>'
@@ -220,7 +222,7 @@
     const action = btn.dataset.action;
     if (action === 'tab') state.tab = btn.dataset.tab;
     else if (action === 'toggle-filter') state.open = !state.open;
-    else if (action === 'pick') state[btn.dataset.key] = H.toggleIn(state[btn.dataset.key], btn.dataset.value);
+    else if (action === 'pick') state[btn.dataset.key] = toggleIn(state[btn.dataset.key], btn.dataset.value);
     else if (action === 'clear') { state.skills = []; state.statuses = []; }
     else return;
     render();

@@ -1,17 +1,20 @@
 // Local CMS for hetmanek.ca. Run with `npm run cms` (or double-click start-cms.command).
-// Serves the site from /src with an editing bar, plus an editor that writes src/js/content.js
-// and uploads images into src/assets. Nothing in /cms is deployed. Uses only Node's standard library.
+// Serves the site from /src with an editing bar, plus an editor that saves published entries to src/js/content.js,
+// drafts to cms/drafts.json, and the finished Work, Case Study and Letter pages to src/<type>/<id>.html.
+// Uploads images into src/assets. Nothing in /cms is deployed. Uses only Node's standard library.
 
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { exec } from 'node:child_process';
+import { TYPES, renderPages, renderPage } from './pages.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'src');
 const CMS = path.join(ROOT, 'cms');
 const CONTENT = path.join(SRC, 'js', 'content.js');
+const DRAFTS = path.join(CMS, 'drafts.json');
 const ASSETS = path.join(SRC, 'assets');
 const HOST = '127.0.0.1';
 const PORT = Number(process.env.PORT) || 4321;
@@ -21,16 +24,18 @@ const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.avif': 'image/avif',
-  '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8'
+  '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8', '.woff2': 'font/woff2'
 };
 const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
 const CMS_FILES = new Set(['cms.js', 'cms.css', 'editor.js']);
-const REWRITES = [[/^\/(work|casestudies|letters)\/[^/]+\/?$/, '/$1/index.html']];
+const ENTRY = /^\/(work|casestudies|letters)\/([^/]+?)(?:\.html)?\/?$/;
 
-// Added to every site page so it knows it's in CMS mode (drafts visible, editing bar shown).
-const INJECT = '<script>window.CMS_MODE = true;</script><link rel="stylesheet" href="/__cms/cms.css"><script src="/__cms/cms.js" defer></script>';
+// Added to every site page: the editing bar.
+const INJECT = '<link rel="stylesheet" href="/__cms/cms.css"><script src="/__cms/cms.js" defer></script>';
+const inject = (html) => html.replace('</head>', INJECT + '</head>');
 
-// ---------- content file ----------
+// ---------- content: published entries in src/js/content.js, drafts in cms/drafts.json ----------
+const KEYS = ['work', 'buildlog', 'casestudies', 'letters'];
 const MARKER = 'window.SITE =';
 const MARKER_LINE = /^window\.SITE\s*=/m; // the real assignment, at the start of a line (not a mention in a comment)
 function readContent() {
@@ -52,7 +57,8 @@ function validate(d) {
     d[key].forEach((e, i) => {
       const where = key + ' #' + (i + 1) + (e && e.title ? ' (' + e.title + ')' : '');
       if (!e || typeof e !== 'object') return errs.push(where + ' is not an entry');
-      const idOk = key === 'buildlog' ? /^\d{4}-\d{2}-\d{2}(-\d+)?$/.test(e.id) : SLUG.test(e.id);
+      // "index" is refused because src/<type>/index.html would be served as the folder itself.
+      const idOk = key === 'buildlog' ? /^\d{4}-\d{2}-\d{2}(-\d+)?$/.test(e.id) : SLUG.test(e.id) && e.id !== 'index';
       if (!idOk) errs.push(where + ': invalid id "' + e.id + '"');
       if (seen.has(e.id)) errs.push(where + ': duplicate id "' + e.id + '"');
       seen.add(e.id);
@@ -65,12 +71,46 @@ function validate(d) {
   return errs;
 }
 
-function writeContent(data) {
-  const { header } = readContent();
-  const text = header + MARKER + ' ' + JSON.stringify(data, null, 2) + ';\n';
-  const tmp = CONTENT + '.tmp';
-  fs.writeFileSync(tmp, text);
-  fs.renameSync(tmp, CONTENT);
+// The editor sees one list per type, with drafts marked "draft": true. Everything in drafts.json is a draft,
+// flag or not, so an entry added there by hand can't be published by accident.
+// New Work entries go to the top of the list, so Work drafts sit ahead of the published ones.
+function readAll() {
+  const { data } = readContent();
+  const drafts = fs.existsSync(DRAFTS) ? JSON.parse(fs.readFileSync(DRAFTS, 'utf8')) : {};
+  for (const key of KEYS) {
+    const d = (drafts[key] || []).map((e) => Object.assign({}, e, { draft: true }));
+    data[key] = key === 'work' ? d.concat(data[key]) : data[key].concat(d);
+  }
+  return data;
+}
+
+const contentScript = (data) => readContent().header + MARKER + ' ' + JSON.stringify(data, null, 2) + ';\n';
+
+// Writes through a temporary file so a crash never leaves half a file, and skips files that haven't changed.
+function writeIfChanged(file, text) {
+  if (fs.existsSync(file) && fs.readFileSync(file, 'utf8') === text) return;
+  fs.writeFileSync(file + '.tmp', text);
+  fs.renameSync(file + '.tmp', file);
+}
+
+// Splits everything into published and drafts, then writes content.js, drafts.json and the finished pages.
+function publish(all) {
+  const published = Object.assign({}, all), drafts = {};
+  for (const key of KEYS) {
+    published[key] = all[key].filter((e) => !e.draft);
+    drafts[key] = all[key].filter((e) => e.draft);
+  }
+  writeIfChanged(CONTENT, contentScript(published));
+  writeIfChanged(DRAFTS, JSON.stringify(drafts, null, 2) + '\n');
+
+  const pages = renderPages(published);
+  for (const type of TYPES) {
+    const dir = path.join(SRC, type);
+    fs.mkdirSync(dir, { recursive: true });
+    const keep = new Set(pages.filter((p) => p.type === type).map((p) => p.id + '.html'));
+    for (const f of fs.readdirSync(dir)) if (f.endsWith('.html') && !keep.has(f)) fs.rmSync(path.join(dir, f));
+  }
+  for (const p of pages) writeIfChanged(path.join(SRC, p.type, p.id + '.html'), p.html);
 }
 
 // ---------- uploads: src/assets/<folder>/<name>, lowercase-hyphenated, never overwriting ----------
@@ -106,12 +146,18 @@ const readBody = (req, limit) => new Promise((resolve, reject) => {
 function serveFile(res, file, status) {
   const ext = path.extname(file).toLowerCase();
   let body = fs.readFileSync(file);
-  if (ext === '.html' && file.startsWith(SRC)) body = body.toString('utf8').replace('</head>', INJECT + '</head>');
+  if (ext === '.html' && file.startsWith(SRC)) body = inject(body.toString('utf8'));
   send(res, status || 200, body, MIME[ext] || 'application/octet-stream');
 }
 
+// Entry pages and content.js are built from both files on each request, so drafts show up here and nowhere else.
 function serveSite(res, pathname) {
-  for (const [rx, to] of REWRITES) if (rx.test(pathname)) { pathname = pathname.replace(rx, to); break; }
+  if (pathname === '/js/content.js') return send(res, 200, contentScript(readAll()), MIME['.js']);
+  const m = ENTRY.exec(pathname);
+  if (m) {
+    const html = renderPage(readAll(), m[1], decodeURIComponent(m[2]));
+    return html ? send(res, 200, inject(html), MIME['.html']) : serveFile(res, path.join(SRC, '404.html'), 404);
+  }
   let file = path.join(SRC, decodeURIComponent(pathname));
   if (file !== SRC && !file.startsWith(SRC + path.sep)) return send(res, 403, 'Forbidden');
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
@@ -130,14 +176,14 @@ const server = http.createServer(async (req, res) => {
     const p = u.pathname;
 
     if (p === '/__cms/api/content') {
-      if (req.method === 'GET') return json(res, 200, readContent().data);
+      if (req.method === 'GET') return json(res, 200, readAll());
       if (req.method === 'PUT') {
         if (!sameOrigin(req)) return send(res, 403, 'Forbidden');
         let data;
         try { data = JSON.parse((await readBody(req, 5 * 1048576)).toString('utf8')); } catch { return json(res, 400, { errors: ['Could not read the content sent'] }); }
         const errors = validate(data);
         if (errors.length) return json(res, 400, { errors });
-        writeContent(data);
+        publish(data);
         return json(res, 200, { ok: true });
       }
       return send(res, 405, 'Method not allowed');
@@ -167,6 +213,11 @@ server.on('error', (e) => {
   else console.error(e);
   process.exit(1);
 });
+
+// Brings the files in line with content.js on start: moves any hand-marked drafts out of it and rewrites the pages.
+const startErrors = validate(readAll());
+if (startErrors.length) console.error('\n  Pages not rewritten. content.js has problems:\n  - ' + startErrors.join('\n  - ') + '\n');
+else publish(readAll());
 
 server.listen(PORT, HOST, () => {
   const url = 'http://127.0.0.1:' + PORT;

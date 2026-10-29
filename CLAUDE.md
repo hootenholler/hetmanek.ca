@@ -13,6 +13,7 @@ Static site: plain HTML, CSS and vanilla JS. No build step.
 - Image and file names: lowercase, hyphens, no spaces.
 - Never commit secrets, keys or .env files.
 - Work on feature branches; open PRs into main.
+- Drafts live in cms/drafts.json, never in src/.
 
 ## Dev0
 
@@ -46,3 +47,7 @@ Anything you add must pass all six. One failure is a no, unless the architect wr
 - Tools may check code freely: types, lint, format. They may transform it only on the way out, such as minifying. Do not put a compile step between the source and what runs without an exception: src/ is served as written.
 - Comments carry what the code cannot: why, intent, edge cases and the alternative rejected.
 - When you make or propose a decision, record the alternatives you rejected. The code can never show what was ruled out.
+
+### Exceptions
+
+- 2026-10-29, written by James: the local CMS writes finished HTML for Work, Case Study and Letter pages (src/work/<id>.html, src/casestudies/<id>.html, src/letters/<id>.html) whenever content is saved, and when it starts. This breaks "no compile step". Why: pages built only in the browser were blank without JavaScript, and link previews showed a generic title. These files are output: change content.js or cms/pages.mjs, never the files. Rejected: rendering in a Cloudflare Worker (more infrastructure to own); keeping browser rendering with `<noscript>` fallbacks (fixes only part of the problem).

@@ -1,6 +1,7 @@
 {
   "name": "hetmanek-ca",
   "private": true,
+  "type": "module",
   "description": "hetmanek.ca: static site in src/, local CMS in cms/ (no dependencies)",
   "scripts": {
     "cms": "node cms/server.mjs"

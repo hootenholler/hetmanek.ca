@@ -1,5 +1,8 @@
 // Local CMS editor: /__cms/new (pick a type), /__cms/new?type=<type>, /__cms/edit?type=<type>&id=<id>.
-// Reads and writes the whole content file through the local server's /__cms/api/content.
+// Reads and writes all content, published and draft, through the local server's /__cms/api/content.
+
+import * as MD from '/js/markdown.js';
+import { esc, uniq } from '/js/shared.js';
 
 (function () {
   const root = document.getElementById('editor');
@@ -18,12 +21,10 @@
   const SECTIONS = ['Opportunity', 'Solution', 'Wins', 'Learning'];
   const STATUSES = ['Alive', 'Active', 'In Dev', 'In Design', 'Done'];
 
-  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const slugify = (s) => String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
   const ISO = /^\d{4}-\d{2}-\d{2}$/;
   const today = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
-  const uniq = (xs) => Array.from(new Set(xs.filter(Boolean))).sort((a, b) => a.localeCompare(b));
   const clone = (x) => JSON.parse(JSON.stringify(x));
 
   let content, entry, originalId = null, originalDate = null, slugTouched = false, dirty = false;

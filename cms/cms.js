@@ -1,18 +1,15 @@
 // Editing bar added to every site page by the local CMS server (not part of the public site).
 
 (function () {
-  const H = window.H || { work: [], casestudies: [], letters: [] }; // the 404 page has no content scripts
   const path = location.pathname.replace(/\/+$/, '') || '/';
   const seg = path.split('/').filter(Boolean);
-  const TYPES = { work: 'work', casestudies: 'casestudies', letters: 'letters' };
   const LABELS = { work: 'Work entry', casestudies: 'case study', letters: 'letter' };
 
-  // Which entry is this page showing?
+  // Which entry is this page showing? Entry pages are finished HTML, so the address and the page say it all:
+  // the server answers an unknown entry with the 404 page, and a draft's title carries the Draft label.
   let edit = null;
-  if (seg.length === 2 && TYPES[seg[0]]) {
-    const list = { work: H.work, casestudies: H.casestudies, letters: H.letters }[seg[0]];
-    const entry = list.find((x) => x.id === decodeURIComponent(seg[1]));
-    if (entry) edit = { type: seg[0], id: entry.id, label: LABELS[seg[0]], draft: !!entry.draft };
+  if (seg.length === 2 && LABELS[seg[0]] && !document.querySelector('.not-found')) {
+    edit = { type: seg[0], id: decodeURIComponent(seg[1]), label: LABELS[seg[0]], draft: !!document.querySelector('.page-title .draft-tag') };
   }
 
   const editHref = (type, id) => '/__cms/edit?type=' + type + '&id=' + encodeURIComponent(id);

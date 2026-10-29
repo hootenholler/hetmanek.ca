@@ -1,8 +1,13 @@
 // Build Log: the pinned post, then posts newest first, 3 at a time (more load as the reader nears the bottom),
 // Skills + Engagements filters, and /buildlog#<id> deep links.
 
+import * as MD from './markdown.js';
+import { esc, uniq, date, derive, draftTag } from './shared.js';
+import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.js';
+
 (function () {
-  const { esc, uniq, date, posts, hashtag } = window.H;
+  const { posts } = derive(window.SITE);
+  const hashtag = (name) => '#' + name.split(/[^A-Za-z0-9]+/).filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('');
   const STEP = 3;
   const NEAR_BOTTOM = 240;
 
@@ -21,10 +26,10 @@
   function renderControls() {
     const count = state.skills.length + state.engs.length;
     const selected = state.engs.map((v) => ({ key: 'engs', v })).concat(state.skills.map((v) => ({ key: 'skills', v })));
-    H.rerender(controls,
+    rerender(controls,
       '<div class="log-actions">' +
         '<a class="btn-outline" href="/">← Home</a>' +
-        H.filterButton(state.open, count, 'log-filters', 'filter-btn--earth') +
+        filterButton(state.open, count, 'log-filters', 'filter-btn--earth') +
       '</div>' +
       (!state.open && selected.length
         ? '<div class="chips">' + selected.map((s) =>
@@ -32,7 +37,7 @@
           ).join('') + '</div>'
         : '') +
       (state.open
-        ? H.filterPanel([
+        ? filterPanel([
             { key: 'skills', label: 'SKILLS', options: ALL_SKILLS, selected: state.skills },
             { key: 'engs', label: 'ENGAGEMENTS', options: ALL_ENGS, selected: state.engs }
           ], 'log-filters')
@@ -45,7 +50,7 @@
     postsEl.innerHTML = shown.length
       ? shown.slice(0, state.visible).map((p) =>
           '<article class="post" id="' + esc(p.id) + '">' +
-            '<div>' + (p.pinned ? H.PIN_ICON + '<span class="visually-hidden">Pinned: </span>' : '') + '<a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/buildlog#' + esc(p.id) + '">' + date.long(p.date) + '</a>' + H.draftTag(p) + '</div>' +
+            '<div>' + (p.pinned ? PIN_ICON + '<span class="visually-hidden">Pinned: </span>' : '') + '<a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/buildlog#' + esc(p.id) + '">' + date.long(p.date) + '</a>' + draftTag(p) + '</div>' +
             '<div class="prose post__body">' + MD.render(p.body) + '</div>' +
             '<ul class="post__tags" aria-label="Tags">' + p.engagementTitles.concat(p.skills || []).map((t) => '<li>' + esc(hashtag(t)) + '</li>').join('') + '</ul>' +
           '</article>'
@@ -58,7 +63,7 @@
   function maybeLoad() {
     const total = list().length;
     if (state.visible >= total) return;
-    const el = document.scrollingElement || document.documentElement;
+    const el = document.scrollingElement;
     if (el.scrollTop + window.innerHeight >= el.scrollHeight - NEAR_BOTTOM) {
       state.visible = Math.min(total, state.visible + STEP);
       renderPosts();
@@ -66,7 +71,7 @@
   }
   // If the page is too short to scroll (tall screens), the reader could never trigger a load, so load more.
   function fillViewport() {
-    const el = document.scrollingElement || document.documentElement;
+    const el = document.scrollingElement;
     if (el.scrollHeight <= window.innerHeight && state.visible < list().length) {
       state.visible += STEP;
       renderPosts();
@@ -99,7 +104,7 @@
     const action = btn.dataset.action;
     if (action === 'toggle-filter') { state.open = !state.open; renderControls(); return; }
     if (action !== 'pick' && action !== 'remove') return;
-    state[btn.dataset.key] = H.toggleIn(state[btn.dataset.key], btn.dataset.value);
+    state[btn.dataset.key] = toggleIn(state[btn.dataset.key], btn.dataset.value);
     state.visible = STEP;
     renderControls();
     renderPosts();
@@ -111,8 +116,5 @@
 
   renderControls();
   renderPosts();
-  if (location.hash) {
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(goToHash);
-    else goToHash();
-  }
+  if (location.hash) document.fonts.ready.then(goToHash);
 })();
