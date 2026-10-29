@@ -11,7 +11,7 @@ Plain HTML, CSS and vanilla JS. There's no build step.
 - `src/js/content.js` holds all published content: Work, Build Log posts, Case Studies, Letters. Edit it with the local CMS (below) or by hand. It's plain JSON with Markdown bodies, and dates are `YYYY-MM-DD`.
 - `cms/drafts.json` holds drafts. It stays on your machine: git ignores it, so drafts are never committed, pushed or deployed. That also means drafts aren't backed up until you publish them.
 - Home (`/`) and the Build Log (`/buildlog/`) are built in the browser from `content.js`.
-- Work, Case Study and Letter pages are finished HTML files that the CMS writes from `content.js`: `/work/pengi-by-beatrix` is `src/work/pengi-by-beatrix.html`. Don't edit these files by hand. If you edit `content.js` by hand, start the CMS once and it rewrites them.
+- Work, Case Study and Letter pages are finished HTML files that the CMS writes from `content.js`: `/work/project-name` is `src/work/project-name.html`. Don't edit these files by hand. If you edit `content.js` by hand, start the CMS once and it rewrites them.
 - `src/css/styles.css` holds the design tokens and every style. Layouts are mobile first and switch to desktop at 900px.
 - Fonts are self-hosted in `src/assets/fonts` (from Google Fonts, with their licences).
 

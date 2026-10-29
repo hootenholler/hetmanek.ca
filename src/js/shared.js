@@ -1,7 +1,7 @@
 // Content rules and markup used both by the site's pages (in the browser) and by the CMS page writer (in Node):
 // derived content, date formats, URLs and small pieces of markup. Nothing here touches the DOM.
 
-import { firstParagraph } from './markdown.js';
+import { firstParagraph, toText } from './markdown.js';
 
 export const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 export const uniq = (xs) => Array.from(new Set(xs.filter(Boolean))).sort((a, b) => a.localeCompare(b));
@@ -55,7 +55,8 @@ const truncate = (text, n) => {
   const cut = text.slice(0, n);
   return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:.]$/, '') + '…';
 };
-export const excerptOf = (post, n) => post.excerpt || truncate(firstParagraph(post.body), n || 120);
+// A written excerpt is used whole; it may hold Markdown (links, bold), so it's reduced to plain text like the body.
+export const excerptOf = (post, n) => (post.excerpt ? toText(post.excerpt) : truncate(firstParagraph(post.body), n || 120));
 
 // Work, Case Study and Letter pages are files the CMS writes: /work/<id> is served from src/work/<id>.html.
 export const url = {
