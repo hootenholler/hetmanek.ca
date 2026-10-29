@@ -15,7 +15,7 @@
   if (pinned) {
     excerptsHtml +=
       '<article class="excerpt"><p>' +
-        PIN_ICON + '<span class="visually-hidden">Pinned: </span><b class="excerpt__date">' + date.full(pinned.date) + '</b> ' +
+        PIN_ICON + '<span class="visually-hidden">Pinned: </span><b class="excerpt__date">' + date.full(pinned.date) + '</b>&nbsp; ' +
         esc(excerptOf(pinned, 400)) + '&nbsp;&nbsp;&nbsp;' +
         '<a class="read-more" href="' + url.post(pinned.id) + '" aria-label="' + readMoreLabel(pinned) + '">read more →</a>' +
       '</p></article>';
@@ -23,7 +23,7 @@
   if (newest) {
     excerptsHtml +=
       '<article class="excerpt"><p>' +
-        '<b class="excerpt__date">' + date.full(newest.date) + '</b> ' + esc(MD.toText(newest.body)) + ' ' +
+        '<b class="excerpt__date">' + date.full(newest.date) + '</b>&nbsp; ' + esc(MD.toText(newest.body)) + ' ' +
         '<a class="read-more read-more--fade" href="' + url.post(newest.id) + '" aria-label="' + readMoreLabel(newest) + '">… read more →</a>' +
       '</p></article>';
   }
@@ -83,12 +83,12 @@
   const views = {
     work() {
       const rows = work.filter((i) => skillMatch(i) && (state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0));
-      return table('table--work', 'Work', ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS', 'LAST UPDATE', 'STATUS'], rows.map((i) =>
+      return table('table--work', 'Work', ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS', 'TYPE', 'STATUS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
           '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.desc || '—') + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
-          '<div role="cell" class="cell-mono cell-mono--muted">' + (i.lastUpdate ? date.table(i.lastUpdate) : '—') + '</div>' +
+          '<div role="cell" class="cell-text">' + esc(i.type || '—') + '</div>' +
           '<div role="cell" class="cell-mono">' + esc(i.status || '—') + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
@@ -96,7 +96,7 @@
           '<div class="card__top"><span><a class="card__title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + H.draftTag(i) + '</span><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
           '<div class="card__text">' + esc(i.desc || '—') + '</div>' +
           pills(i.skills) +
-          '<div class="card__mono card__mono--muted">' + (i.lastUpdate ? date.table(i.lastUpdate) : '—') + '</div>' +
+          (i.type ? '<div class="card__text">' + esc(i.type) + '</div>' : '') +
         '</div>'));
     },
     cases() {

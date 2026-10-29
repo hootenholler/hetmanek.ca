@@ -90,20 +90,21 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* ---------- inner page header ---------- */
 .site-header {
-  display: grid; grid-template-columns: 1fr auto; grid-template-areas: "name home" "tag tag";
+  display: grid; grid-template-columns: 1fr auto; grid-template-areas: "logo logo" "name home";
   align-items: center; gap: 6px 12px;
   padding: 24px 0 16px; margin-bottom: 28px; border-bottom: 1px solid var(--border);
 }
 .site-header__name { grid-area: name; font-family: var(--font-serif); font-size: 30px; line-height: 1.1; }
-.site-header__tagline { grid-area: tag; font-family: var(--font-tagline); font-size: 15px; letter-spacing: 0.06em; color: var(--forest); }
+.logo { display: block; width: 100%; height: auto; }
+.site-header__logo { grid-area: logo; width: 180px; }
 .site-header__home { grid-area: home; }
 @media (min-width: 900px) {
   .site-header {
-    grid-template-columns: auto 1fr auto; grid-template-areas: "name tag home";
+    grid-template-columns: auto auto 1fr auto; grid-template-areas: "logo name . home";
     column-gap: 24px; padding: 28px 0; margin-bottom: 48px;
   }
-  .site-header__name { font-size: 28px; line-height: 1; align-self: baseline; }
-  .site-header__tagline { font-size: 16px; align-self: baseline; }
+  .site-header__name { font-size: 28px; line-height: 1; }
+  .site-header__logo { width: 176px; }
 }
 
 /* ---------- portrait figure (Home, Build Log) — sizes follow the figure width via cqw ---------- */
@@ -118,12 +119,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .portrait__linkedin { display: block; flex: none; width: 6.5cqw; height: 6.5cqw; min-width: 18px; min-height: 18px; color: var(--ink); }
 .portrait__linkedin svg { display: block; width: 100%; height: 100%; }
 .portrait__img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; background: #DEDED8; border-radius: var(--radius-img); }
-.portrait__tagline {
-  width: 66.667%; align-self: center;
-  font-family: var(--font-tagline); font-weight: 400; font-size: 4.5cqw; line-height: 1.2;
-  letter-spacing: 0.06em; margin-right: -0.06em; white-space: nowrap;
-  text-align: justify; text-align-last: justify; color: var(--forest);
-}
+.portrait__tagline { width: 66.667%; align-self: center; }
 
 /* ---------- filter button, panel, chips ---------- */
 .filter-btn {
@@ -245,7 +241,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .table__row--head {
   padding: 14px 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted);
 }
-.table--work { --cols: minmax(200px, 1.3fr) minmax(240px, 2fr) minmax(200px, 1.5fr) 120px 90px; }
+.table--work { --cols: minmax(200px, 1.3fr) minmax(240px, 2fr) minmax(200px, 1.5fr) minmax(160px, 1.2fr) 90px; }
 .table--cases { --cols: minmax(220px, 1.5fr) minmax(180px, 1.2fr) minmax(200px, 1.5fr); }
 .table--log { --cols: 150px minmax(280px, 3fr) minmax(160px, 1.2fr) minmax(180px, 1.5fr); }
 .table--letters { --cols: minmax(220px, 1.5fr) minmax(240px, 2fr) minmax(200px, 1.5fr) 120px; }

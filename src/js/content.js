@@ -7,9 +7,9 @@ window.SITE = {
     {
       "id": "schema-app",
       "title": "Schema App",
-      "type": "",
+      "type": "Manager of Product and Design",
       "status": "Done",
-      "desc": "Lead Product and Design for startup building AI performance-improving semantic data layers",
+      "desc": "Product and Design leadership for a startup building AI performance-improving Content Knowledge Graphs",
       "skills": [
         "AI",
         "Design",
@@ -20,7 +20,7 @@ window.SITE = {
         "Product Marketing"
       ],
       "updated": "2026-09-05",
-      "body": "",
+      "body": "- Led a team of three product and design leaders as a direct report to the CTO and served on the senior leadership team, aligning Sales, Marketing, Customer Success and Engineering with annual, quarterly, weekly and daily planning through rapid growth.\n- Redesigned the cross-functional operating model across SDLC, analytics-driven decision-making and go-to-market, built for emerging agentic capabilities. Introduced Definition of Ready and Definition of Done governance that removed mid-sprint clarification meetings and workshops, making estimates reliable and sprint throughput more consistent. Onboarded roadmapping software and practices, and automated release notes and updates with domain-tailored messaging, saving about 1 hour of meetings a week.\n- Architected an agentic research-to-strategy pipeline, building the company’s first positioning research capability. It turns Sales and CS call transcripts into personas, problem-capability matrices, positioning and messaging guidance, plus an AI Brand Coach that scores marketing collateral against our positioning. Adopted by every team, including executive leadership.\n- Served as a core member of the senior leadership AI working groups driving policy, systems design and adoption. \n- Restructured the product and design team: Introduced  a Senior Product Designer and created a Design Technologist role, matching a front-end-trained team member’s strengths to a need. He owned the design system, the Figma-to-Claude Design System transition, the Pendo to PostHog analytics migration, and automated reporting.\n- Reduced cost to serve by shifting design toward a product-led rather than service-led application and automating metrics, messaging and business-review reporting, saving CSMs an estimated 3 hours per review.\n- Guided design strategy through significant industry disruption, helping define the company’s position in the emerging Semantic Data Layer / Content Knowledge Graph category.",
       "gallery": []
     },
     {
@@ -32,7 +32,9 @@ window.SITE = {
       "skills": [
         "Design",
         "Build",
-        "Write"
+        "Write",
+        "AI",
+        "Learn"
       ],
       "updated": "2026-10-20",
       "body": "",
@@ -86,17 +88,20 @@ window.SITE = {
     {
       "id": "senior-director-gs1-canada",
       "title": "Senior Director @ GS1 Canada",
-      "type": "",
+      "type": "Senior Director of Product and Design",
       "status": "Done",
-      "desc": "Lead Product and Design for global non-profit driving supply chain standards and data pools",
+      "desc": "Product and UX leadership at non-profit behind the standards and data pools that run Canadian grocery, foodservice, healthcare, pharmacy, cannabis, and general merchandise supply chains.",
       "skills": [
         "Design",
         "Build",
         "People",
-        "Strategy"
+        "Strategy",
+        "Listen",
+        "Learn",
+        "Business"
       ],
       "updated": "2025-10-10",
-      "body": "",
+      "body": "- Drove product and design strategy and tactics, contributing to a 20% revenue increase over four years by transforming:\n- an output-focused feature factory into an outcome-driven value creator\n- a suite of monolithic apps into a service-based, multi-sided platform\n- a group of disjointed user interfaces into a harmonized user experience\n- Grew the team from 5 to 10 members and reduced turnover by 67% \n- Founded Product and Design Communities of Practice\n- Increased clarity, efficiency, and alignment in an extra-ordinarily complex multi-sector, non-profit (budget-constrained) organization via bespoke roadmapping/prioritization frameworks and a company-wide Demo Day that maintained a 4.8/5 CSAT.\n- Trajectory within GS1 Canada: Senior Product Manager (2018) → Solutions Engineer (2019) → Director, Product Management (2020–2021).",
       "gallery": []
     },
     {
@@ -188,7 +193,7 @@ window.SITE = {
         "Build"
       ],
       "body": "Created a case study creation skill. \n\n1. **Start:** “Case Study - [name]”\n2. **Input:** I type via stream of consciousness.\n3. **Turns:** Claude reviews against my personal positioning doc and asks questions to refine and articulate the stream within “Opportunity” ”Solution”,”Wins” and “Lessons” buckets\n4. **Once satisfied**, I have Claude append the resulting bullet points to my master Case Study doc. \n5. **Finally** - I humanify the text and paste into my local hetmanek.ca CMS\n\n\n**Updates**\n- Added Keyboard shortcut handling in the CMS\n- Replace “Engagement” with “Description” row in the Case Studies home page tab. \n- Add Description to the Case Study post creation form in the CMS.\n- *Bug fix* - main section on home page shifted right when tab selected with overflow rows. Fixed by adding to element css - scrollbar-gutter: stable;",
-      "excerpt": "Created a case study creation skill. \n- Start: “Case Study - [name]”\n- Input: I type via stream of consciousness."
+      "excerpt": "Created a case study creation skill that helps make sense of sessions initiated via stream of consciousness keyboard bashing."
     },
     {
       "id": "2026-10-19",
@@ -216,6 +221,16 @@ window.SITE = {
         "Design"
       ],
       "body": "I will be using [Dev0](https://github.com/tforster/dev0) as acceptance criteria henceforth.\n\nIf the code is not able to meet this standard, I expect a compelling argument with Claude Code.\n\n>The default question flips from \"Why not use this library?\" to \"Does this earn its keep?\"\n\n*To earn that right, an addition must pass all six tests. A strong pass in one never excuses a failure in another:*\n\n| Name | What it tests |\n| -------- | -------- |\n|Less |\tDoes it actually reduce complexity, or just hide it? When you add a dependency, you own its entire transitive tree, its configuration, and its infrastructure.|\n|Separate|\tDoes each part do exactly one thing, in its own place, behind a clean interface?|\n|Legibility|\tCan you predict exactly what the code does just by reading it, without having to run it?|\n|Native\t|Does the platform already do this? Favour native APIs and standard JavaScript before reaching for a third-party wrapper.|\n|Beneficiary\t|Who does this actually serve the end user, or just the developer? When developer convenience and user performance conflict, the user wins| \n|Control\t|Do you control where it runs? Push the newest features to the serverless edge or cloud infrastructure where you own the runtime, but be conservative in the browser where you don't.|"
+    },
+    {
+      "id": "2026-10-28",
+      "date": "2026-10-28",
+      "engagements": [
+        "hetmanek-ca"
+      ],
+      "skills": [],
+      "body": "\"LISTEN - LEARN - DESIGN - BUILD\" adorns my portrait and also some page headers.\n\nAdding an arrow from \"Build\" to \"Listen\" shows it as the Design Thinking living cycle that I ride.\n\nAnd if, really, what we're building is Context, then I should label the loop as \"Context Management\".\n\nClaude and I jammed on this today.\n\n//\nRemoved \"Last Updated\" from the Work table in favour of a column to enable users to filter by Type [Job, Contract, Project, Product]",
+      "excerpt": "Make the LISTEN - LEARN - DESIGN - BUILD tag line more visually impactful."
     }
   ],
   "casestudies": [
@@ -275,7 +290,7 @@ window.SITE = {
       "sections": [
         {
           "label": "Opportunity",
-          "body": "A research validated \"Why\" is foundational for building and marketing any product, and consistent compelling messaging improves outcomes across every team. We had neither.\n\nLike many mid-stage B2B SaaS companies, we had not articulated and validated our position through research. The product just worked!\n\nThen the market shifted fast, and we found ourselves competing in a newly forming category. \"It just works\" no longer explained why a buyer should choose us.\n\nThe raw material was already there: every sales and customer service call was recorded. No one had turned it into positioning.\n",
+          "body": "A research validated \"Why\" is foundational for building and marketing any product, and consistent compelling messaging improves outcomes across every team. We had neither.\n\nLike many mid-stage B2B SaaS companies, our position was not articulated and hadn't been validated through research. The product just worked!\n\nThen the market shifted fast, and we found ourselves competing in a newly forming category. \"It just works\" no longer explained why a buyer should choose us.\n\nThe raw material was already there: every sales and customer service call was recorded. No one had turned it into positioning.\n",
           "image": null
         },
         {
