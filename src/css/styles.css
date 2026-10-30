@@ -413,3 +413,31 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Desktop: long-form pages line up with the header logo instead of centring. Last, so it overrides the
    centring above. */
 @media (min-width: 900px) { .case, .letter, .not-found { margin-left: 0; } }
+
+/* ---------- page transitions ---------- */
+/* Cross-document view transitions: the page being left shrinks and fades into the background, and the new page grows
+   out of it. Going to Home reverses the motion, a "boomerang". Only <main> moves; the rest of the page cross-fades.
+   /js/transitions.js sets html[data-tx] to fwd or back. Browsers without view transitions simply navigate. */
+@view-transition { navigation: auto; }
+:root { --tx-dur: 800ms; --tx-out: 0.87; --tx-in: 0.87; --tx-delay: 0.1; --tx-ease: ease-out; }
+main { view-transition-name: page; }
+::view-transition-group(page) { animation-duration: 0s; overflow: clip; }
+::view-transition-old(page), ::view-transition-new(page) {
+  animation-duration: var(--tx-dur); animation-timing-function: var(--tx-ease); animation-fill-mode: both; mix-blend-mode: normal;
+}
+::view-transition-new(page) { animation-delay: calc(var(--tx-dur) * var(--tx-delay)); }
+html[data-tx=fwd]::view-transition-old(page) { animation-name: fwd-out; }
+html[data-tx=fwd]::view-transition-new(page) { animation-name: fwd-in; }
+html[data-tx=back]::view-transition-old(page) { animation-name: back-out; }
+html[data-tx=back]::view-transition-new(page) { animation-name: back-in; }
+@keyframes fwd-out { to { opacity: 0; transform: scale(var(--tx-out)); } }
+@keyframes fwd-in { from { opacity: 0; transform: scale(var(--tx-in)); } }
+@keyframes back-out { to { opacity: 0; transform: scale(var(--tx-in)); } }
+@keyframes back-in { from { opacity: 0; transform: scale(var(--tx-out)); } }
+/* Visitors who ask for less motion get a short fade instead. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(page) { animation: rm-fade-out 120ms both; }
+  ::view-transition-new(page) { animation: rm-fade-in 120ms both; }
+  @keyframes rm-fade-out { to { opacity: 0; } }
+  @keyframes rm-fade-in { from { opacity: 0; } }
+}
