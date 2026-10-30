@@ -10,16 +10,17 @@
 <meta property="og:title" content="{{title}}">
 <meta property="og:description" content="{{description}}">
 <link rel="stylesheet" href="/css/styles.css">
+<script src="/js/transitions.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="container">
   <header class="site-header">
-    <img class="logo site-header__logo" src="/assets/hetmanek-logo.svg" alt="Listen, Learn, Design, Build: Context Management" width="1024" height="280">
-    <a class="site-header__name" href="/">James Hetmanek</a>
+    <a class="site-header__logo" href="/" aria-label="Home"><img class="logo" src="/assets/hetmanek-logo.svg" alt="" width="1024" height="280"></a>
     <a class="btn-outline site-header__home" href="/">← Home</a>
   </header>
 </div>
 <main class="container" id="main" tabindex="-1">{{main}}</main>
+<div class="container only-mobile page-end"><a class="btn-outline" href="/">← Home</a></div>
 </body>
 </html>

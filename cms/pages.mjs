@@ -40,7 +40,7 @@ function work(w, d) {
     main:
       '<article class="work">' +
         '<div class="work__main">' +
-          '<div><h1 class="page-title">' + esc(w.title) + draftTag(w) + '</h1><div class="work__desc">' + esc(w.desc || '') + '</div></div>' +
+          '<div><h1 class="page-title">' + esc(w.title) + draftTag(w) + '</h1><div class="page-desc">' + esc(w.desc || '') + '</div></div>' +
           '<div class="only-mobile">' + meta + '</div>' +
           (w.body ? '<div class="prose">' + MD.render(w.body) + '</div>' : '') +
           (w.gallery && w.gallery.length
@@ -57,12 +57,13 @@ function work(w, d) {
 function caseStudy(c) {
   return {
     title: c.title,
-    description: c.description,
+    description: c.desc,
     main:
       '<article class="case">' +
         '<div>' +
           '<div class="case__eyebrow">Case Study</div>' +
           '<h1 class="page-title">' + esc(c.title) + draftTag(c) + '</h1>' +
+          (c.desc ? '<div class="page-desc">' + esc(c.desc) + '</div>' : '') +
         '</div>' +
         pills(c.skills, true) +
         (c.sections || []).map((s) =>
