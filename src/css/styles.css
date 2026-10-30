@@ -100,22 +100,20 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 /* ---------- inner page header ---------- */
+/* Mobile: the logo (a Home link) is centred, and the Home pill sits at the bottom of the page (.page-end).
+   Desktop: logo left, Home pill right. */
 .site-header {
-  display: grid; grid-template-columns: 1fr auto; grid-template-areas: "logo logo" "name home";
-  align-items: center; gap: 6px 12px;
+  display: flex; justify-content: center; align-items: center;
   padding: 24px 0 16px; margin-bottom: 28px; border-bottom: 1px solid var(--border);
 }
-.site-header__name { grid-area: name; font-family: var(--font-serif); font-size: 30px; line-height: 1.1; }
 .logo { display: block; width: 100%; height: auto; }
-.site-header__logo { grid-area: logo; width: 180px; }
-.site-header__home { grid-area: home; }
+.site-header__logo { display: block; width: 180px; }
+.site-header__home { display: none; }
+.page-end { display: flex; justify-content: center; padding-bottom: 48px; }
 @media (min-width: 900px) {
-  .site-header {
-    grid-template-columns: auto auto 1fr auto; grid-template-areas: "logo name . home";
-    column-gap: 24px; padding: 28px 0; margin-bottom: 48px;
-  }
-  .site-header__name { font-size: 28px; line-height: 1; }
-  .site-header__logo { width: 176px; }
+  .site-header { justify-content: space-between; gap: 24px; padding: 28px 0; margin-bottom: 48px; }
+  .site-header__logo { width: 310px; }
+  .site-header__home { display: inline-flex; }
 }
 
 /* ---------- portrait figure (Home, Build Log) — sizes follow the figure width via cqw ---------- */
@@ -339,14 +337,20 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .page-title { font-family: var(--font-serif); font-weight: 400; margin: 0; }
+/* Work and Case Study titles share one size, with the short description as subtext. */
+.work .page-title, .case .page-title { font-size: 46px; line-height: 1.05; margin-bottom: 12px; }
+.page-desc { font-size: 19px; line-height: 1.4; color: var(--text); }
+@media (min-width: 900px) {
+  .work .page-title, .case .page-title { font-size: 72px; line-height: 1.02; margin-bottom: 16px; }
+  .page-desc { font-size: 22px; }
+}
 .mono-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+
 
 /* ---------- Work entry ---------- */
 .work { display: flex; flex-direction: column; gap: 28px; padding-bottom: 64px; }
 .work__main { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
 .work__aside { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
-.work .page-title { font-size: 46px; line-height: 1.05; margin-bottom: 12px; }
-.work__desc { font-size: 19px; line-height: 1.4; color: var(--text); }
 .gallery { display: flex; gap: 10px; }
 .gallery > * { flex: 1 1 0; min-width: 0; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-img); }
 .meta { margin: 0; }
@@ -362,8 +366,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .work { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 40px 64px; padding-bottom: 120px; }
   .work__main { flex: 1 1 560px; gap: 0; }
   .work__aside { flex: 0 1 320px; min-width: 260px; gap: 0; }
-  .work .page-title { font-size: 72px; line-height: 1.02; margin-bottom: 16px; }
-  .work__desc { font-size: 22px; margin-bottom: 32px; }
+  .work .page-desc { margin-bottom: 32px; }
   .work .gallery { gap: 16px; margin-top: 40px; }
   .meta__row { gap: 16px; }
   .meta__row dt { flex-basis: 110px; font-size: 12px; padding-top: 3px; }
@@ -374,14 +377,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ---------- Case Study ---------- */
 .case { max-width: 800px; margin: 0 auto; padding-bottom: 64px; display: flex; flex-direction: column; gap: 24px; }
 .case__eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
-.case .page-title { font-size: 46px; line-height: 1.05; }
 .case__section { padding-top: 20px; border-top: 1px solid var(--border); }
 .case__label { font-family: var(--font-serif); font-weight: 400; font-size: 26px; line-height: 1.2; margin: 0 0 10px; }
 .case__figure { display: flex; justify-content: flex-end; margin-top: 16px; }
 .case__figure > * { width: 60%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-img); }
 @media (min-width: 900px) {
   .case { gap: 32px; padding-bottom: 120px; }
-  .case .page-title { font-size: 64px; }
   .case__section { display: flex; flex-wrap: wrap; gap: 12px 32px; padding-top: 24px; }
   .case__label { flex: 0 0 140px; margin: 0; }
   .case__body { flex: 1 1 360px; }
@@ -408,3 +409,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .not-found .page-title { font-size: 46px; line-height: 1.05; }
 .not-found p { margin: 0; font-size: 18px; line-height: 1.6; color: var(--text); }
 @media (min-width: 900px) { .not-found .page-title { font-size: 64px; } }
+
+/* Desktop: long-form pages line up with the header logo instead of centring. Last, so it overrides the
+   centring above. */
+@media (min-width: 900px) { .case, .letter, .not-found { margin-left: 0; } }

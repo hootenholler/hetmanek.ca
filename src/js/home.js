@@ -106,13 +106,13 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
       return table('table--cases table--narrow', 'Case Studies', ['TITLE', 'DESCRIPTION', 'SKILLS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
           '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
-          '<div role="cell" class="cell-text">' + esc(i.description || '—') + '</div>' +
+          '<div role="cell" class="cell-text">' + esc(i.desc || '—') + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
           '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</span>' +
-          '<div class="card__text">' + esc(i.description || '—') + '</div>' +
+          '<div class="card__text">' + esc(i.desc || '—') + '</div>' +
           pills(i.skills) +
         '</div>'));
     },

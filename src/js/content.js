@@ -227,7 +227,9 @@ window.SITE = {
       "engagements": [
         "hetmanek-ca"
       ],
-      "skills": [],
+      "skills": [
+        "Design"
+      ],
       "body": "\"LISTEN - LEARN - DESIGN - BUILD\" adorns my portrait and also some page headers.\n\nAdding an arrow from \"Build\" to \"Listen\" shows it as the Design Thinking living cycle that I ride.\n\nAnd if, really, what we're building is Context, then I should label the loop as \"Context Management\".\n\nClaude and I jammed on this today.\n\n//\nRemoved \"Last Updated\" from the Work table in favour of a column to enable users to filter by Type [Job, Contract, Project, Product]",
       "excerpt": "Make the LISTEN - LEARN - DESIGN - BUILD tag line more visually impactful."
     },
@@ -244,52 +246,25 @@ window.SITE = {
       ],
       "body": "I put the site through [Dev0](https://github.com/tforster/dev0) acceptance criteria audit today. Claude checked every file against the six tests.\n\n| Test | Result |\n| -------- | -------- |\n| Less | Pass |\n| Separate | Partial |\n| Legibility | Pass |\n| Native | Partial |\n| Beneficiary | Fail |\n| Control | Fail |\n\nThe code was lean: no dependencies and no build step. The problem was where it ran. Every page was assembled in the visitor's browser, the one runtime I don't control. Without JavaScript, a page was blank, and a shared Work link previewed with a generic title.\n\nWhat changed:\n\n- The local CMS now writes finished HTML for every Work, Case Study and Letter page. That breaks Dev0's no-compile-step rule, so the exception is written into CLAUDE.md, along with the alternatives we rejected.\n- Drafts stay with the CMS and never deploy. Before, they were hidden on the page but readable in the source.\n- Fonts are self-hosted instead of loaded from Google.",
       "excerpt": "I put the site through [Dev0](https://github.com/tforster/dev0) today. Claude audited every file against the six tests and then we worked together on fixes."
+    },
+    {
+      "id": "2026-10-30",
+      "date": "2026-10-30",
+      "engagements": [
+        "hetmanek-ca"
+      ],
+      "skills": [
+        "Design",
+        "Build"
+      ],
+      "body": "Let the new logo do the talking - removed James Hetmanek from the Header Row. \n\nThis of course has implications on page element placing - so I did a cascade of pixel pushing to polish.\n\nFed the Case Study Support tool archived project work documents, expediting Case Study drafting."
     }
   ],
   "casestudies": [
     {
-      "id": "hidden-complexity",
-      "title": "Hidden Complexity",
-      "description": "Why a simple-looking request turned out to hide the real problem.",
-      "skills": [
-        "AI",
-        "Design",
-        "Strategy"
-      ],
-      "order": 1,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          "image": {
-            "src": "",
-            "alt": ""
-          }
-        },
-        {
-          "label": "Solution",
-          "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
-          "image": {
-            "src": "",
-            "alt": ""
-          }
-        },
-        {
-          "label": "Learning",
-          "body": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-          "image": null
-        }
-      ]
-    },
-    {
       "id": "positioning-engine",
       "title": "Agentic Positioning Engine",
-      "description": "Measured, reinforced, and research-validated positioning/messaging for all teams",
+      "desc": "Measured, reinforced, and research-validated positioning/messaging for all teams",
       "skills": [
         "AI",
         "Design",
@@ -329,7 +304,7 @@ window.SITE = {
     {
       "id": "customer-journey",
       "title": "Customer Journey",
-      "description": "Short description of the case study.",
+      "desc": "Short description of the case study.",
       "skills": [],
       "order": 3,
       "sections": [
@@ -364,7 +339,7 @@ window.SITE = {
     {
       "id": "demo-day",
       "title": "Demo Day",
-      "description": "Short description of the case study.",
+      "desc": "Short description of the case study.",
       "skills": [],
       "order": 4,
       "sections": [
@@ -386,6 +361,112 @@ window.SITE = {
         {
           "label": "Learning",
           "body": "**Presenting is professional development.** Cross-functional team members greatly valued the chance to present and build that skill. Anecdotally, it raised their engagement and buy-in.\n\n**Everyone wants their story told.** Other groups wanted their work represented, so we expanded the agenda to include progress demos from departments beyond Product and Design.\n",
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "we-made-it",
+      "title": "WEMADEIT",
+      "desc": "Rebranding Engineering With the Teens It Needs to Reach",
+      "skills": [
+        "Design Research",
+        "People",
+        "Listen",
+        "Learn",
+        "Build"
+      ],
+      "order": 5,
+      "sections": [
+        {
+          "label": "Opportunity",
+          "body": "**Girls were opting out of engineering before they knew what it was.**\n\n- Female enrolment in Ontario engineering schools had stagnated for years, and traditional recruitment tactics weren’t working.\n- A consortium of engineering faculties, backed by Hydro One and Motorola Solutions Foundation, wanted a new approach to outreach: a brand and website that would appeal to high school girls.\n- The core challenge was that adults were designing for teens they weren’t talking to.\n",
+          "image": null
+        },
+        {
+          "label": "Solution",
+          "body": "**Put the target users in the driver’s seat: a paid Youth Think Tank (YTT) of high school girls.**\n\n- Design research, workshop facilitation, experience design, and website design and development.\n- The YTT’s weekly rhythm was a survey, peer, parent and teacher interviews, and a creative “CoLab” assignment. Those assignments became the site’s content.\n- Researchers worked in four themes: femininity and decision-making, communication, imagery and meaning, and perceptions of engineering.\n- Findings became a brand with two personas (Debbie, a young professional engineer, and Zoe, a high school student). They also became two sites: WEMADEIT.ca for teens and a community site for teachers, parents and counsellors.\n- The research turned into strategic recommendations for the consortium, including teacher-focused messaging, an influencer-first social strategy, and brand guidelines for non-designers.\n",
+          "image": null
+        },
+        {
+          "label": "Wins",
+          "body": "- **Research at scale**: 360 surveys and 700+ peer, parent and teacher interviews, including 100 female engineers, 26 engineering students and 7 engineering couples.\n- **Content made by the audience:** 21 user journeys, 10 journey maps of real female engineers, 12 engineering disciplines described, 15 teacher lesson plans, and 80 summer-program posters (40 for teens, 40 for parents).\n- **Brand validated by its audience:** Asked to describe the brand as a person, teens independently described Debbie and Zoe without having seen the guidelines.\n- **Reach and relationships:** 350+ new relationships, including 111 teachers, principals and counsellors; 138 high school students; 77 female engineers; and 12 corporate partners. Three media articles and a Canada AM invitation followed.\n- **Engagement:** ENGBEAUT, a meme the team created, was the most-liked content in limited testing. Facebook reached 2,100 people.\n- **Cultural:** Teens went from research subjects to co-authors, and several said the project changed how they and their friends saw engineering.\n",
+          "image": null
+        },
+        {
+          "label": "Learning",
+          "body": "- Teens engage with ideas that connect to their daily lives, not abstract careers. Content should start from their world.\n- The audience you design for isn’t always the channel that reaches them. Teachers and other influencers mattered more than social media.\n- Co-designing with users produced a brand that resonated with them in a way a consultant-led brand likely wouldn’t have.\n",
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "whats-your-news-app",
+      "title": "What’s Your News? CBC Kids App",
+      "desc": "A screen full of ants! Swipe them away and jam with the ant band!",
+      "skills": [
+        "Design",
+        "Build",
+        "GTM",
+        "People"
+      ],
+      "order": 6,
+      "sections": [
+        {
+          "label": "Opportunity",
+          "body": "CBC Kids needed a free app to extend its What’s Your News (WYN) brand, ready for the CBC Kidsummer Festival in July 2012. The constraints were tight:\n\n- A modest budget.\n- A fixed festival date, about ten weeks after kickoff.\n- A preschool audience.\n- No agreed idea for what the app should be.\n\nIt was early in my design and product career, and it was also the first pitch I won as a young entrepreneur.\n\n",
+          "image": null
+        },
+        {
+          "label": "Solution",
+          "body": "**Process first, concept second.** \n\nI won the engagement with a proposal that fixed the process and deliberately left the product open. It covered research, collaborative wireframes, a “point of no return” asset list, prototype testing and app store submission, each with dates.\n\n**Discovery narrowed about 15 ideas to one.** The ideas came from our team and from the WYN team’s own list. We combined\n\n- Research on top preschool apps.\n- A cost analysis of every idea.\n- Workshops with the client.\n\nThe game concepts were the riskiest. They would have taken the most time and budget, and they would have competed with polished titles like Angry Birds and World of Goo.\n\n**The result was the Theme Song Conductor.** The flow:\n1. A screen full of ants, which the kid clears by swiping, with a counter to gamify it.\n2. Gi Ant greets the child and records their name or news, with an “egg timer” to keep clips short, then asks for a photo.\n3. The kid mixes the theme song by tapping characters to mute and unmute tracks. Their own recording and photo trigger as samples.\n4. When the song ends, the ants flood the screen and the app resets.\n\nI owned the concept, the budget and the client relationship. \n",
+          "image": null
+        },
+        {
+          "label": "Wins",
+          "body": "- Won the RFP as a young entrepreneur.\n- Delivered a kid-generated, remixable take on the theme song, so each child’s voice became part of the brand.\n- Shipped to the App Store on time and on budget.\n- CBC Kids promoted the app on its home page.\n",
+          "image": null
+        },
+        {
+          "label": "Learning",
+          "body": "- **Budget for after launch.** Real use gives feedback that testing never will. A project needs money set aside to respond to it.\n- **Build in analytics.** The app had no in-app analytics, so I couldn’t show how it performed. I would now agree on success measures with the client before design starts.\n- **Discovery pays off.** Research, costing and client workshops let us choose a concept that fit the budget and the date.\n",
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "ruby-skye-p-i-the-haunted-library",
+      "title": "Ruby Skye P.I.: The Haunted Library —",
+      "desc": "Turning a Web Series into a Web World",
+      "skills": [
+        "Build",
+        "Design",
+        "Design Research",
+        "Learn",
+        "GTM",
+        "Strategy",
+        "Listen"
+      ],
+      "order": 7,
+      "sections": [
+        {
+          "label": "Opportunity",
+          "body": "**Season 1 proved the show. It also showed that a series living on a release schedule fades when the schedule ends.**\n\n- Ruby Skye P.I. is a Canadian web series for tweens. Season 1 (The Spam Scam, 12 episodes, fall 2010) was well received, but its web content was tied to the broadcast and became dated.\n- Season 1 research and conversations with the Executive Producer and Writer surfaced a pattern: tweens weren’t on link-sharing social platforms, while teachers, librarians and parents were the way in. A teacher introducing Ruby to a class produced a class-sized bump in viewers that night.\n- As Digital Producer for Season 2, I used those findings to shape how the series would grow.",
+          "image": null
+        },
+        {
+          "label": "Solution",
+          "body": "**Build the web the characters live in, and give teachers a reusable way to bring it into class.**\n\n- **Transmedia world (new in Season 2).** I designed and built all of the sites. The principle was that audiences would experience the same web the characters do, with new URLs revealed as episodes were released. The sites included the O’Deary Library, O’Deary Puzzles and character blogs for Hailey, Diana and The Mint Chip Girls.\n- **Curriculum.** I proposed and wrote the teaching unit from the Season 1 findings: 12 lessons for grades 4-6 Ontario Language Arts and Media Literacy. Each lesson pairs an activity, a teaching objective, discussion, desk work and an episode. A class-wide “Mystery Maintenance” thread tracks suspects and clues. It was designed to be fun, to minimize lesson planning, and to be reused every year.\n- **Generalist role.** I also prepared for the shoot and the release schedule, developed content, and photographed on set.",
+          "image": null
+        },
+        {
+          "label": "Wins",
+          "body": "**Shipped the series’ first transmedia layer.** Season 1 had none; Season 2 launched with the O’Deary Library, O’Deary Puzzles and several character blogs.\n**Turned research into product.** Season 1 findings drove both the web world and the curriculum.\n**Built for reuse.** The curriculum gives teachers a lesson set that works year after year.\n",
+          "image": null
+        },
+        {
+          "label": "Learning",
+          "body": " **Build for longevity.** Evergreen design lets a series keep living.\n\n**Get the contract right!**",
           "image": null
         }
       ]

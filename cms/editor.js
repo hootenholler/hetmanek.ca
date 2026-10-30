@@ -15,7 +15,7 @@ import { esc, uniq } from '/js/shared.js';
   const TYPES = {
     work: { label: 'Work', noun: 'Work entry', blurb: 'A project, role or engagement. Gets its own page and a row in the Work table.' },
     buildlog: { label: 'Build Log post', noun: 'Build Log post', blurb: 'A dated note. Appears on the Build Log, on Home, and on related Work pages.' },
-    casestudies: { label: 'Case Study', noun: 'Case Study', blurb: 'Opportunity, Solution, Wins and Learning, with a one-line description.' },
+    casestudies: { label: 'Case Study', noun: 'Case Study', blurb: 'Opportunity, Solution, Wins and Learning, with a short description.' },
     letters: { label: 'Letter or Article', noun: 'Letter', blurb: 'Long-form writing with a date, summary and cover image.' }
   };
   const SECTIONS = ['Opportunity', 'Solution', 'Wins', 'Learning'];
@@ -50,7 +50,7 @@ import { esc, uniq } from '/js/shared.js';
   const blank = () => ({
     work: { id: '', title: '', type: '', status: '', desc: '', skills: [], updated: today(), body: '', gallery: [] },
     buildlog: { id: '', date: today(), engagements: [], skills: [], body: '' },
-    casestudies: { id: '', title: '', description: '', skills: [], order: Math.max(0, ...content.casestudies.map((c) => c.order || 0)) + 1, sections: SECTIONS.map((label) => ({ label, body: '', image: null })) },
+    casestudies: { id: '', title: '', desc: '', skills: [], order: Math.max(0, ...content.casestudies.map((c) => c.order || 0)) + 1, sections: SECTIONS.map((label) => ({ label, body: '', image: null })) },
     letters: { id: '', title: '', date: today(), summary: '', skills: [], image: null, body: '' }
   })[type];
 
@@ -162,7 +162,7 @@ import { esc, uniq } from '/js/shared.js';
 
     if (type === 'work') return [
       text('title', 'Title', { required: true }), slugField(),
-      text('desc', 'One-line description', { help: 'Shown under the title and in the Work table on Home.' }),
+      text('desc', 'Short description', { help: 'One line, shown under the title and in the Work table on Home.' }),
       '<div class="f-row">' +
         text('status', 'Status', { list: uniq(STATUSES.concat(content.work.map((w) => w.status))), placeholder: 'e.g. In Dev' }) +
         text('type', 'Type', { list: uniq(content.work.map((w) => w.type)), placeholder: 'e.g. Project' }) +
@@ -182,7 +182,7 @@ import { esc, uniq } from '/js/shared.js';
     ];
     if (type === 'casestudies') return [
       text('title', 'Title', { required: true }), slugField(),
-      text('description', 'Description', { required: true, help: 'One line, shown in the Case Studies table on Home.' }),
+      text('desc', 'Short description', { help: 'One line, shown under the title and in the Case Studies table on Home.' }),
       text('order', 'Order', { type: 'number', help: 'Lower numbers come first in the Case Studies table.' }),
       skills
     ].concat(entry.sections.map((s, i) =>
