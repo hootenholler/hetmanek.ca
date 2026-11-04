@@ -23,16 +23,21 @@ function work(w, d) {
       ].map((r) => '<div class="meta__row"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join('') +
     '</dl>';
 
-  const logPosts = d.posts.filter((p) => (p.engagements || []).indexOf(w.id) >= 0);
-  const logSection = logPosts.length
-    ? '<section class="related" aria-labelledby="related-log"><h2 class="mono-label" id="related-log">BUILD LOG</h2><ul class="related__list">' +
-        logPosts.map((p) =>
-          '<li><a class="related__item" href="' + url.post(p.id) + '">' +
-            '<div class="related__item-date">' + date.long(p.date) + '</div>' +
-            '<div class="related__item-text">' + esc(excerptOf(p, 140)) + '</div>' +
-          '</a></li>').join('') +
-      '</ul></section>'
+  // Only the three newest of each; posts are already newest first, letters may be ordered by hand.
+  const about = (x) => (x.engagements || []).indexOf(w.id) >= 0;
+  const logPosts = d.posts.filter(about).slice(0, 3);
+  const letters = d.letters.filter(about).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+  const section = (id, label, items) => items.length
+    ? '<section class="related" aria-labelledby="' + id + '"><h2 class="mono-label" id="' + id + '">' + label + '</h2><ul class="related__list">' + items.join('') + '</ul></section>'
     : '';
+  const item = (href, when, text) =>
+    '<li><a class="related__item" href="' + href + '">' +
+      '<div class="related__item-date">' + date.long(when) + '</div>' +
+      '<div class="related__item-text">' + esc(text) + '</div>' +
+    '</a></li>';
+  const related =
+    section('related-letters', 'LETTERS &amp; ARTICLES', letters.map((l) => item(url.letter(l.id), l.date, l.title))) +
+    section('related-log', 'BUILD LOG', logPosts.map((p) => item(url.post(p.id), p.date, excerptOf(p, 140))));
 
   return {
     title: w.title,
@@ -48,7 +53,7 @@ function work(w, d) {
             : '') +
         '</div>' +
         '<aside class="work__aside" aria-label="Details">' +
-          '<div class="only-desktop">' + meta + '</div>' + logSection +
+          '<div class="only-desktop">' + meta + '</div>' + related +
         '</aside>' +
       '</article>'
   };
@@ -86,7 +91,6 @@ function letter(l) {
       '<article class="letter">' +
         '<div class="letter__date"><time datetime="' + esc(l.date) + '">' + date.full(l.date) + '</time></div>' +
         '<h1 class="page-title">' + esc(l.title) + draftTag(l) + '</h1>' +
-        (l.summary ? '<div class="letter__summary">' + esc(l.summary) + '</div>' : '') +
         (l.image ? image(l.image, 'IMAGE PLACEHOLDER · 3:2', 'letter__image') : '') +
         '<div class="prose">' + MD.render(l.body) + '</div>' +
         pills(l.skills, true) +

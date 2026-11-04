@@ -1,6 +1,6 @@
 // Small Markdown renderer for page bodies, shared by the site, the local CMS editor and the CMS page writer.
 // Supports: ## / ### headings, paragraphs, **bold**, *italic*, [links](url), ![images](src),
-// > quotes, - and 1. lists, | tables |, and a YouTube link on its own line (embedded). Raw HTML is escaped.
+// > quotes, - and 1. lists (nested by indenting), | tables |, and a YouTube link on its own line (embedded). Raw HTML is escaped.
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const safeUrl = (u) => (/^(https?:\/\/|mailto:|\/|#)/i.test(u) ? u : '');
@@ -46,14 +46,38 @@ const table = (lines) => {
     (lines.length > 2 ? '<tbody>' + lines.slice(2).map((l) => row(l, 'td')).join('') + '</tbody>' : '') + '</table></div>';
 };
 
+// Lists: every line is an item; indenting an item (any amount deeper than the one above) nests it under that
+// item. The first item at each level picks <ul> (- or *) or <ol> (1. or 1)) for that level, so bullets can hold
+// numbered steps and the reverse. An item indented between two levels nests under the shallower one.
+// Rejected: CommonMark's rules (continuation paragraphs, lazy lines, exact indent widths): far more code for
+// cases a page body doesn't need.
+const ITEM = /^([ \t]*)([-*]|\d+[.)]) (.*)$/;
+const list = (lines) => {
+  const open = []; // the lists still open, outermost first: { indent, tag }
+  let html = '';
+  lines.forEach((line) => {
+    const [, space, marker, text] = line.match(ITEM);
+    const indent = space.replace(/\t/g, '    ').length;
+    while (open.length && indent < open[open.length - 1].indent) html += '</li></' + open.pop().tag + '>';
+    if (open.length && indent === open[open.length - 1].indent) html += '</li>';
+    else {
+      const tag = /\d/.test(marker) ? 'ol' : 'ul';
+      open.push({ indent, tag });
+      html += '<' + tag + '>';
+    }
+    html += '<li>' + inline(text);
+  });
+  while (open.length) html += '</li></' + open.pop().tag + '>';
+  return html;
+};
+
 export const render = (md) => blocks(md).map((b) => {
   const lines = b.split('\n');
   let m;
   if ((m = b.match(/^(#{1,3}) (.*)$/))) return m[1].length === 3 ? '<h3>' + inline(m[2]) + '</h3>' : '<h2>' + inline(m[2]) + '</h2>';
   if (every(lines, /^>/)) return '<blockquote>' + inline(lines.map((l) => l.replace(/^>\s?/, '')).join('\n')) + '</blockquote>';
-  if (every(lines, /^[-*] /)) return '<ul>' + lines.map((l) => '<li>' + inline(l.slice(2)) + '</li>').join('') + '</ul>';
+  if (every(lines, ITEM)) return list(lines);
   if (isTable(lines)) return table(lines);
-  if (every(lines, /^\d+[.)] /)) return '<ol>' + lines.map((l) => '<li>' + inline(l.replace(/^\d+[.)] /, '')) + '</li>').join('') + '</ol>';
   const yt = lines.length === 1 && youtubeId(b);
   if (yt) return '<div class="embed"><iframe src="https://www.youtube-nocookie.com/embed/' + yt + '" title="YouTube video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
   if (/^!\[[^\]]*\]\([^)\s]+\)$/.test(b)) return inline(b);
@@ -66,7 +90,7 @@ export const toText = (md) => String(md || '')
   .replace(LINK, '$1')
   .replace(/\*\*|__/g, '')
   .replace(/(^|\s)[*_](\S)/g, '$1$2').replace(/(\S)[*_](?=\s|$|[.,;:!?])/g, '$1')
-  .replace(/^(#{1,3}|>|[-*]|\d+[.)]) ?/gm, '')
+  .replace(/^[ \t]*(#{1,3}|>|[-*]|\d+[.)]) ?/gm, '')
   .replace(/^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?$/gm, '')
   .replace(/\\\|/g, PIPE).replace(/\s*\|\s*/g, ' ').split(PIPE).join('|')
   .replace(/\s+/g, ' ')

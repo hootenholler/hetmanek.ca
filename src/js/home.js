@@ -1,4 +1,4 @@
-// Home: Build Log excerpts, then tabs (Work, Case Studies, Build Log, Letters & Articles) with filters.
+// Home: the introduction, then tabs (Work, Case Studies, Build Log, Letters & Articles) with filters.
 
 import * as MD from './markdown.js';
 import { esc, uniq, date, derive, excerptOf, url, pills, draftTag } from './shared.js';
@@ -7,46 +7,8 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
 (function () {
   const { work, workById, posts, casestudies, letters } = derive(window.SITE);
 
-  // ---------- excerpts ----------
-  const excerptsEl = document.getElementById('excerpts');
-  const pinned = posts.find((p) => p.pinned);
-  const newest = posts.find((p) => !p.pinned);
-  const readMoreLabel = (post) => 'Read the Build Log post from ' + date.full(post.date);
-
-  let excerptsHtml = '';
-  if (pinned) {
-    excerptsHtml +=
-      '<article class="excerpt"><p>' +
-        PIN_ICON + '<span class="visually-hidden">Pinned: </span><b class="excerpt__date">' + date.full(pinned.date) + '</b>&nbsp; ' +
-        esc(excerptOf(pinned, 400)) + '&nbsp;&nbsp;&nbsp;' +
-        '<a class="read-more" href="' + url.post(pinned.id) + '" aria-label="' + readMoreLabel(pinned) + '">read more →</a>' +
-      '</p></article>';
-  }
-  if (newest) {
-    excerptsHtml +=
-      '<article class="excerpt"><p>' +
-        '<b class="excerpt__date">' + date.full(newest.date) + '</b>&nbsp; ' + esc(MD.toText(newest.excerpt || newest.body)) + ' ' +
-        '<a class="read-more read-more--fade" href="' + url.post(newest.id) + '" aria-label="' + readMoreLabel(newest) + '">… read more →</a>' +
-      '</p></article>';
-  }
-  excerptsEl.innerHTML = excerptsHtml;
-
-  // The link is inline when the text fits in 3 lines, and pinned to the end of line 3 (with a fade) when it doesn't.
-  const fitReadMore = () => {
-    excerptsEl.querySelectorAll('.excerpt p').forEach((p) => {
-      const link = p.querySelector('.read-more');
-      link.classList.remove('read-more--fade');
-      link.textContent = 'read more →';
-      if (p.scrollHeight > p.clientHeight + 1) {
-        link.classList.add('read-more--fade');
-        link.textContent = '… read more →';
-      }
-    });
-  };
-  let resizeTimer;
-  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fitReadMore, 100); });
-  document.fonts.ready.then(fitReadMore);
-  fitReadMore();
+  // ---------- introduction (Markdown, edited in the CMS) ----------
+  document.getElementById('intro').innerHTML = MD.render(window.SITE.introduction.body);
 
   // ---------- tabs + filters ----------
   const TABS = [
@@ -57,6 +19,9 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
   ];
   const SKILLS = uniq([].concat(...work.map((i) => i.skills), ...casestudies.map((i) => i.skills), ...posts.map((i) => i.skills), ...letters.map((i) => i.skills)));
   const STATUSES = uniq(work.map((i) => i.status));
+  // Job and Project: toggles beside the Filter button on the Work tab, not a group in the panel.
+  // None or all on shows every row, like the panel's options. Rejected: a segmented All / Job / Project control.
+  const TYPES = uniq(work.map((i) => i.type));
 
   // Returning from a content page opens that page's tab; Back restores the tab saved in history.
   // Otherwise no tab is selected until the visitor picks one; the table appears then.
@@ -68,7 +33,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     const hit = FROM.find((f) => ref.pathname.indexOf(f[0]) === 0);
     return hit ? hit[1] : null;
   };
-  const state = { tab: (history.state && history.state.tab) || tabFromReferrer(), open: false, skills: [], statuses: [] };
+  const state = { tab: (history.state && history.state.tab) || tabFromReferrer(), open: false, skills: [], statuses: [], types: [] };
   const root = document.getElementById('browse');
 
   const skillMatch = (item) => state.skills.length === 0 || (item.skills || []).some((s) => state.skills.indexOf(s) >= 0);
@@ -84,7 +49,10 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
 
   const views = {
     work() {
-      const rows = work.filter((i) => skillMatch(i) && (state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0));
+      // Most recent Last Update first; entries without one go last, and ties keep their content order (sort is stable).
+      const rows = work.slice().sort((a, b) => (b.lastUpdate || '').localeCompare(a.lastUpdate || '')).filter((i) => skillMatch(i) &&
+        (state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0) &&
+        (state.types.length === 0 || state.types.indexOf(i.type) >= 0));
       return table('table--work', 'Work', ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS', 'TYPE', 'STATUS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
           '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
@@ -117,37 +85,37 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
         '</div>'));
     },
     log() {
-      const rows = posts.filter(skillMatch);
+      // The pinned post first, then newest first, the same order as the Build Log page.
+      const rows = posts.filter((p) => p.pinned).concat(posts.filter((p) => !p.pinned)).filter(skillMatch);
+      const pin = (p) => (p.pinned ? PIN_ICON + '<span class="visually-hidden">Pinned: </span>' : '');
       const more = (p) => ' <a class="read-more" href="' + url.post(p.id) + '" aria-label="Read the Build Log post from ' + date.full(p.date) + '">read more →</a>';
       return table('table--log', 'Build Log', ['DATE', 'EXCERPT', 'ENGAGEMENT', 'SKILLS'], rows.map((p) =>
         '<div class="table__row" role="row">' +
           '<div role="cell" class="cell-date"><a href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</div>' +
-          '<div role="cell" class="cell-text">' + esc(excerptOf(p)) + more(p) + '</div>' +
+          '<div role="cell" class="cell-text">' + pin(p) + esc(excerptOf(p)) + more(p) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(engagementNames(p.engagements)) + '</div>' +
           '<div role="cell">' + pills(p.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((p) =>
         '<div class="card">' +
           '<span><a class="card__date-link" href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</span>' +
-          '<div class="card__text">' + esc(excerptOf(p)) + more(p) + '</div>' +
+          '<div class="card__text">' + pin(p) + esc(excerptOf(p)) + more(p) + '</div>' +
           '<div class="card__sub">' + esc(engagementNames(p.engagements)) + '</div>' +
           pills(p.skills) +
         '</div>'));
     },
     articles() {
       const rows = letters.filter(skillMatch);
-      return table('table--letters table--narrow', 'Letters & Articles', ['TITLE', 'SUMMARY', 'SKILLS', 'DATE'], rows.map((i) =>
+      return table('table--letters table--narrow', 'Letters & Articles', ['TITLE', 'SUMMARY', 'DATE'], rows.map((i) =>
         '<div class="table__row" role="row">' +
           '<div role="cell"><a class="cell-title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.summary) + '</div>' +
-          '<div role="cell">' + pills(i.skills) + '</div>' +
           '<div role="cell" class="cell-mono cell-mono--muted">' + date.table(i.date) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
           '<span><a class="card__title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</span>' +
           '<div class="card__text">' + esc(i.summary) + '</div>' +
-          pills(i.skills) +
           '<div class="card__mono card__mono--muted">' + date.table(i.date) + '</div>' +
         '</div>'));
     }
@@ -186,7 +154,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     const prevTab = shownTab;
     const oldPanel = root.querySelector('.tabpanel:not(.tabpanel--leaving)');
     const isWork = state.tab === 'work';
-    const active = state.skills.length + (isWork ? state.statuses.length : 0);
+    const active = state.skills.length + (isWork ? state.statuses.length + state.types.length : 0);
     const groups = [{ key: 'skills', label: 'SKILLS', options: SKILLS, selected: state.skills }];
     if (isWork) groups.push({ key: 'statuses', label: 'STATUS', options: STATUSES, selected: state.statuses });
 
@@ -201,6 +169,9 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
         '</div></div>' +
         '<div class="filter-controls">' +
           filterButton(state.open, active, 'home-filters') +
+          (isWork && TYPES.length ? '<div class="type-toggles" role="group" aria-label="Type">' + TYPES.map((t) =>
+            '<button type="button" class="type-toggle" data-action="pick" data-key="types" data-value="' + esc(t) + '" aria-pressed="' + (state.types.indexOf(t) >= 0) + '">' + esc(t) + '</button>').join('') +
+          '</div>' : '') +
           (active ? '<button type="button" class="clear-filters" data-action="clear">Clear filters</button>' : '') +
         '</div>' +
       '</div>' +
@@ -223,7 +194,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     if (action === 'tab') state.tab = btn.dataset.tab;
     else if (action === 'toggle-filter') state.open = !state.open;
     else if (action === 'pick') state[btn.dataset.key] = toggleIn(state[btn.dataset.key], btn.dataset.value);
-    else if (action === 'clear') { state.skills = []; state.statuses = []; }
+    else if (action === 'clear') { state.skills = []; state.statuses = []; state.types = []; }
     else return;
     render();
     if (action === 'clear') root.querySelector('[data-action="toggle-filter"]').focus();

@@ -23,6 +23,7 @@
       '<span class="cms-bar__badge">Local CMS</span>' +
       '<span class="cms-bar__note">Saved changes go live when you commit and push in GitHub Desktop.</span>' +
       '<span class="cms-bar__actions">' +
+        (path === '/' ? '<a class="cms-btn cms-btn--light" href="/__cms/edit?type=introduction">Edit introduction</a>' : '') +
         (edit
           ? (edit.draft ? '<span class="draft-tag">Draft</span>' : '') +
             '<a class="cms-btn cms-btn--light" href="' + editHref(edit.type, edit.id) + '">Edit this ' + edit.label + '</a>'

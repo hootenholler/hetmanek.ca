@@ -1,4 +1,5 @@
-// Local CMS editor: /__cms/new (pick a type), /__cms/new?type=<type>, /__cms/edit?type=<type>&id=<id>.
+// Local CMS editor: /__cms/new (pick a type), /__cms/new?type=<type>, /__cms/edit?type=<type>&id=<id>,
+// and /__cms/edit?type=introduction for the one introduction on Home.
 // Reads and writes all content, published and draft, through the local server's /__cms/api/content.
 
 import * as MD from '/js/markdown.js';
@@ -51,7 +52,7 @@ import { esc, uniq } from '/js/shared.js';
     work: { id: '', title: '', type: '', status: '', desc: '', skills: [], updated: today(), body: '', gallery: [] },
     buildlog: { id: '', date: today(), engagements: [], skills: [], body: '' },
     casestudies: { id: '', title: '', desc: '', skills: [], order: Math.max(0, ...content.casestudies.map((c) => c.order || 0)) + 1, sections: SECTIONS.map((label) => ({ label, body: '', image: null })) },
-    letters: { id: '', title: '', date: today(), summary: '', skills: [], image: null, body: '' }
+    letters: { id: '', title: '', date: today(), summary: '', engagements: [], skills: [], image: null, body: '' }
   })[type];
 
   const PREFIX = { work: '/work/', casestudies: '/casestudies/', letters: '/letters/' };
@@ -126,7 +127,7 @@ import { esc, uniq } from '/js/shared.js';
       '</div>' +
       '<details class="md-help"><summary>Formatting help</summary><table>' +
         [['## Heading', 'Section heading', 'Alt+2'], ['**bold**  *italic*', 'Bold, italic', 'B, I'], ['[link text](https://…)', 'Link', 'K'], ['> Quote', 'Pull quote', 'Shift+9'],
-         ['- item', 'Bulleted list (1. for numbered)', 'Shift+8, Shift+7'], ['![description](/assets/…)', 'Image (use Insert image)'], ['https://youtu.be/…', 'YouTube video, on its own line'],
+         ['- item', 'Bulleted list (1. for numbered)', 'Shift+8, Shift+7'], ['- item\n  - sub-item', 'Nested list (indent with spaces)'], ['![description](/assets/…)', 'Image (use Insert image)'], ['https://youtu.be/…', 'YouTube video, on its own line'],
          ['| A | B |\n|---|---|\n| 1 | 2 |', 'Table (a header row, a --- divider row, then rows)'], ['A blank line', 'Starts a new paragraph']].map((r) =>
           '<tr><td><code>' + esc(r[0]) + '</code></td><td>' + r[1] + '</td><td class="md-help__keys">' + (r[2] ? r[2].split(', ').map((k) => '<kbd>' + MOD + k + '</kbd>').join(' ') : '') + '</td></tr>').join('') +
       '</table></details>' + help(o.help) + '</div>';
@@ -193,7 +194,8 @@ import { esc, uniq } from '/js/shared.js';
     if (type === 'letters') return [
       text('title', 'Title', { required: true }), slugField(),
       text('date', 'Date', { type: 'date', required: true }),
-      text('summary', 'Summary', { help: 'One line, shown under the title and in the Letters & Articles table.' }),
+      text('summary', 'Summary', { help: 'One line, shown in the Letters & Articles table on Home.' }),
+      tags('engagements', 'Engagements', workOptions, { help: 'Which Work entries this is about. It’s listed on those pages.' }),
       skills,
       imageField('image', 'Cover image', '3:2 landscape looks best.'),
       markdown('body', 'Body', { rows: 18 })
@@ -216,6 +218,25 @@ import { esc, uniq } from '/js/shared.js';
             '<button type="button" class="cms-btn cms-btn--light" data-save="draft">' + (published ? 'Unpublish (save as draft)' : 'Save draft & preview') + '</button>' +
             '<a class="cms-link" href="' + (isEdit ? pageUrl({ id: originalId }) : '/') + '">Cancel</a>' +
             (isEdit ? '<button type="button" class="cms-link cms-link--danger editor__delete" data-delete>Delete</button>' : '') +
+            '<span class="editor__status" id="status" role="status"></span>' +
+          '</div>' +
+        '</form>' +
+      '</div>';
+  }
+
+  // Kept apart from TYPES so it isn't offered under "Add new content": there's only ever one.
+  function renderIntro() {
+    document.title = 'Edit introduction · hetmanek.ca CMS';
+    root.innerHTML =
+      '<div class="editor">' +
+        '<p class="mono-label">HOME / INTRODUCTION</p>' +
+        '<h1 class="page-title editor__title">Edit introduction</h1>' +
+        '<form class="editor__form" novalidate>' +
+          markdown('body', 'Introduction', { rows: 10, help: 'Shown beside the portrait on Home. Saving writes it to content.js; commit to publish.' }) +
+          '<div class="editor__errors" role="alert" id="errors"></div>' +
+          '<div class="editor__actions">' +
+            '<button type="submit" class="cms-btn">Save</button>' +
+            '<a class="cms-link" href="/">Cancel</a>' +
             '<span class="editor__status" id="status" role="status"></span>' +
           '</div>' +
         '</form>' +
@@ -353,7 +374,7 @@ import { esc, uniq } from '/js/shared.js';
       remove();
     }
   });
-  root.addEventListener('submit', (e) => { e.preventDefault(); save(true); });
+  root.addEventListener('submit', (e) => { e.preventDefault(); if (type === 'introduction') saveIntro(); else save(true); });
 
   root.addEventListener('keydown', (e) => {
     const input = e.target.closest('[data-tag-new]');
@@ -447,9 +468,9 @@ import { esc, uniq } from '/js/shared.js';
       }
       if (type === 'casestudies' && e.order === '') delete e.order;
 
-      // Renaming a Work entry: keep Build Log posts pointing at it.
+      // Renaming a Work entry: keep Build Log posts and letters pointing at it.
       if (type === 'work' && mode === 'edit' && e.id !== originalId) {
-        fresh.buildlog.forEach((p) => { p.engagements = (p.engagements || []).map((x) => (x === originalId ? e.id : x)); });
+        fresh.buildlog.concat(fresh.letters).forEach((p) => { p.engagements = (p.engagements || []).map((x) => (x === originalId ? e.id : x)); });
       }
 
       // The working copy started as a full copy of the entry, so it replaces it outright.
@@ -471,6 +492,21 @@ import { esc, uniq } from '/js/shared.js';
     }
   }
 
+  async function saveIntro() {
+    const status = document.getElementById('status');
+    try {
+      const fresh = await fetchContent();
+      fresh.introduction = { body: entry.body.trim() };
+      status.textContent = 'Saving…';
+      await putContent(fresh);
+      dirty = false;
+      location.href = '/';
+    } catch (err) {
+      status.textContent = '';
+      showErrors(err.message.split('\n'));
+    }
+  }
+
   async function remove() {
     const name = entry.title || entry.date;
     const undo = entry.draft
@@ -481,7 +517,7 @@ import { esc, uniq } from '/js/shared.js';
       const fresh = await fetchContent();
       fresh[type] = fresh[type].filter((x) => x.id !== originalId);
       if (type === 'work') {
-        fresh.buildlog.forEach((p) => { p.engagements = (p.engagements || []).filter((x) => x !== originalId); });
+        fresh.buildlog.concat(fresh.letters).forEach((p) => { p.engagements = (p.engagements || []).filter((x) => x !== originalId); });
       }
       await putContent(fresh);
       dirty = false;
@@ -499,6 +535,7 @@ import { esc, uniq } from '/js/shared.js';
       root.innerHTML = '<div class="editor"><h1 class="page-title editor__title">Can’t load content</h1><p class="editor__lede">' + esc(err.message) + '</p></div>';
       return;
     }
+    if (type === 'introduction') { entry = clone(content.introduction); return renderIntro(); }
     if (!TYPES[type]) return renderPicker();
     if (mode === 'edit') {
       const found = content[type].find((x) => x.id === params.get('id'));
@@ -515,7 +552,7 @@ import { esc, uniq } from '/js/shared.js';
         entry.skills = entry.skills || [];
         entry.sections = SECTIONS.map((label) => (entry.sections || []).find((s) => s.label === label) || { label, body: '', image: null });
       }
-      if (type === 'letters') entry.skills = entry.skills || [];
+      if (type === 'letters') { entry.engagements = entry.engagements || []; entry.skills = entry.skills || []; }
     } else {
       entry = blank();
     }
