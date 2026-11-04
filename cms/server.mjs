@@ -1,6 +1,6 @@
 // Local CMS for hetmanek.ca. Run with `npm run cms` (or double-click start-cms.command).
 // Serves the site from /src with an editing bar, plus an editor that saves published entries to src/js/content.js,
-// drafts to cms/drafts.json, and the finished Work, Case Study and Letter pages to src/<type>/<id>.html.
+// drafts to cms/drafts.json (the Home introduction has no drafts), and the finished Work, Case Study and Letter pages to src/<type>/<id>.html.
 // Uploads images into src/assets. Nothing in /cms is deployed. Uses only Node's standard library.
 
 import http from 'node:http';
@@ -51,6 +51,8 @@ const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const ISO = /^\d{4}-\d{2}-\d{2}$/;
 function validate(d) {
   const errs = [];
+  // The one introduction on Home: an object, not a list, and never a draft.
+  if (!d.introduction || typeof d.introduction.body !== 'string') errs.push('introduction must have a text body');
   for (const key of ['work', 'buildlog', 'casestudies', 'letters']) {
     if (!Array.isArray(d[key])) { errs.push(key + ' must be a list'); continue; }
     const seen = new Set();

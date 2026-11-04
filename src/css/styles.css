@@ -122,7 +122,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
   width: 66.667%; height: 32px; align-self: center;
   display: flex; align-items: center; justify-content: space-between; gap: 8px;
 }
-.portrait__name { font-family: var(--font-serif); font-size: 9cqw; line-height: 1.1; white-space: nowrap; }
+.portrait__name { margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: 9cqw; line-height: 1.1; white-space: nowrap; }
+@media (min-width: 900px) { .portrait__name { font-size: 32px; } }
 .portrait__name--centered { width: 100%; justify-content: center; }
 .portrait__name .sub { color: var(--muted); }
 .portrait__linkedin { display: block; flex: none; width: 6.5cqw; height: 6.5cqw; min-width: 18px; min-height: 18px; color: var(--ink); }
@@ -180,26 +181,17 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* ---------- Home ---------- */
 .home-top { display: flex; flex-direction: column; gap: 28px; padding: 28px 0 8px; }
-.excerpts { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
-.excerpt { max-width: 640px; margin: 0; }
-.excerpt p {
-  margin: 0; position: relative; max-height: calc(1.6em * 3); overflow: hidden;
-  font-size: 18px; line-height: 1.6; color: var(--text);
-}
+.intro { display: flex; flex-direction: column; gap: 28px; min-width: 0; max-width: 640px; }
+.intro > * { margin: 0; font-size: 18px; line-height: 1.6; color: var(--text); }
 .pin-icon {
   display: inline-block; vertical-align: -1px; margin-right: 6px;
   fill: none; stroke: var(--forest); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
 }
-.excerpt__date { font-weight: 600; color: var(--ink); }
 .read-more { font-weight: 400; font-style: italic; color: var(--link-blue); white-space: nowrap; }
-.read-more--fade {
-  position: absolute; right: 0; bottom: 0; padding-left: 40px;
-  background: linear-gradient(to right, rgba(245, 245, 242, 0), var(--bg) 32px);
-}
 @media (min-width: 900px) {
   .home-top { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 32px 48px; padding: 48px 0 56px; }
   .home-top .portrait { flex: 0 1 25%; min-width: 240px; }
-  .excerpts { flex: 1 1 520px; gap: 32px; padding-top: 38px; }
+  .intro { flex: 1 1 520px; gap: 32px; padding-top: 38px; }
 }
 
 .browse { padding: 16px 0 64px; }
@@ -221,6 +213,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .tab:focus-visible { outline-offset: -2px; }
 .filter-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 0; }
 .browse .filter-panel { margin-bottom: 12px; }
+.type-toggles { display: flex; gap: 8px; }
+.type-toggle {
+  min-height: var(--touch-min); padding: 0 18px;
+  border: 1px solid var(--ink); border-radius: var(--radius-pill);
+  background: var(--surface); color: var(--ink); font-size: 15px; font-weight: 500;
+}
+.type-toggle[aria-pressed="false"]:hover { color: var(--accent); }
+.type-toggle[aria-pressed="true"] { background: var(--ink); color: #fff; }
 /* Tables slide within this frame; only the x-axis is clipped so a taller outgoing table isn't cut off. */
 .panels { position: relative; overflow: hidden; }
 @supports (overflow-x: clip) { .panels { overflow: visible; overflow-x: clip; } }
@@ -253,7 +253,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .table--work { --cols: minmax(200px, 1.3fr) minmax(240px, 2fr) minmax(200px, 1.5fr) minmax(160px, 1.2fr) 90px; }
 .table--cases { --cols: minmax(220px, 1.5fr) minmax(180px, 1.2fr) minmax(200px, 1.5fr); }
 .table--log { --cols: 150px minmax(280px, 3fr) minmax(160px, 1.2fr) minmax(180px, 1.5fr); }
-.table--letters { --cols: minmax(220px, 1.5fr) minmax(240px, 2fr) minmax(200px, 1.5fr) 120px; }
+.table--letters { --cols: minmax(220px, 1.5fr) minmax(240px, 2fr) 120px; }
 .cell-title { font-size: 18px; font-weight: 500; line-height: 1.3; }
 .cell-text { font-size: 15px; color: var(--text); }
 .cell-mono { font-family: var(--font-mono); font-size: 13px; padding-top: 2px; }
@@ -315,7 +315,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .prose a { text-decoration: underline; text-underline-offset: 3px; }
 .prose h3 { font-family: var(--font-sans); font-weight: 600; font-size: 19px; line-height: 1.3; margin: 24px 0 8px; }
 .prose ul, .prose ol { margin: 0 0 16px; padding-left: 1.3em; font-size: 17px; line-height: 1.6; color: var(--text); }
-.prose li + li { margin-top: 4px; }
+.prose li + li { margin-top: 16px; }
+.prose li > ul, .prose li > ol { margin: 12px 0 0; font-size: inherit; }
+.prose li li + li { margin-top: 12px; }
 .md-table { overflow-x: auto; margin: 0 0 16px; }
 .md-table table { border-collapse: collapse; min-width: 100%; font-size: 16px; line-height: 1.5; color: var(--text); }
 .md-table th, .md-table td { padding: 10px 16px 10px 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
@@ -336,12 +338,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .prose blockquote { margin: 36px 0; padding-left: 24px; font-size: 28px; }
 }
 
-.page-title { font-family: var(--font-serif); font-weight: 400; margin: 0; }
+.page-title { font-family: var(--font-serif); font-weight: 400; font-size: 38px; margin: 0; }
+@media (min-width: 900px) { .page-title { font-size: 42px; } }
 /* Work and Case Study titles share one size, with the short description as subtext. */
-.work .page-title, .case .page-title { font-size: 46px; line-height: 1.05; margin-bottom: 12px; }
+.work .page-title, .case .page-title { line-height: 1.05; margin-bottom: 12px; }
 .page-desc { font-size: 19px; line-height: 1.4; color: var(--text); }
 @media (min-width: 900px) {
-  .work .page-title, .case .page-title { font-size: 72px; line-height: 1.02; margin-bottom: 16px; }
+  .work .page-title, .case .page-title { line-height: 1.02; margin-bottom: 16px; }
   .page-desc { font-size: 22px; }
 }
 .mono-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
@@ -393,22 +396,20 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ---------- Letter ---------- */
 .letter { max-width: 680px; margin: 0 auto; padding-bottom: 64px; display: flex; flex-direction: column; gap: 20px; }
 .letter__date { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
-.letter .page-title { font-size: 44px; line-height: 1.05; }
-.letter__summary { font-size: 19px; line-height: 1.45; color: var(--text); }
+.letter .page-title { line-height: 1.05; }
 .letter__image { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-img); }
 @media (min-width: 900px) {
   .letter { gap: 28px; padding-bottom: 120px; }
   .letter__date { font-size: 13px; }
-  .letter .page-title { font-size: 68px; line-height: 1.03; }
-  .letter__summary { font-size: 21px; }
+  .letter .page-title { line-height: 1.03; }
   .letter .ph { font-size: 12px; }
 }
 
 /* ---------- not found ---------- */
 .not-found { max-width: 680px; margin: 0 auto; padding-bottom: 120px; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
-.not-found .page-title { font-size: 46px; line-height: 1.05; }
+.not-found .page-title { line-height: 1.05; }
 .not-found p { margin: 0; font-size: 18px; line-height: 1.6; color: var(--text); }
-@media (min-width: 900px) { .not-found .page-title { font-size: 64px; } }
+
 
 /* Desktop: long-form pages line up with the header logo instead of centring. Last, so it overrides the
    centring above. */
@@ -419,7 +420,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
    out of it. Going to Home reverses the motion, a "boomerang". Only <main> moves; the rest of the page cross-fades.
    /js/transitions.js sets html[data-tx] to fwd or back. Browsers without view transitions simply navigate. */
 @view-transition { navigation: auto; }
-:root { --tx-dur: 800ms; --tx-out: 0.87; --tx-in: 0.87; --tx-delay: 0.1; --tx-ease: ease-out; }
+:root { --tx-dur: 800ms; --tx-out: 0.87; --tx-in: 0.87; --tx-delay: 0.7; --tx-ease: ease-out; }
 main { view-transition-name: page; }
 ::view-transition-group(page) { animation-duration: 0s; overflow: clip; }
 ::view-transition-old(page), ::view-transition-new(page) {

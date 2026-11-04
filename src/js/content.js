@@ -2,13 +2,75 @@
 // Keep the data below valid JSON (double quotes, no trailing commas).
 // Bodies are Markdown. Dates are YYYY-MM-DD. "draft": true hides an entry on the public site.
 window.SITE = {
+  "introduction": {
+    "body": "I build products, people, and processes.\n\nI believe:\n\n- Qualities in, Qualities out\n- Aesthetics is 10% of design. How It Works is 80%.\n- [Work is love made visible](https://poets.org/poem/work-4)"
+  },
   "work": [
     {
-      "id": "schema-app",
-      "title": "Schema App",
-      "type": "Manager of Product and Design",
+      "id": "unome",
+      "title": "UNOME",
+      "type": "Project",
+      "status": "In Design",
+      "desc": "UNOME is a rating tool that replaces \"How Good Is It?\" with \"How Is It Good?\"",
+      "skills": [
+        "AI",
+        "Build",
+        "Design",
+        "Learn",
+        "Listen",
+        "People"
+      ],
+      "updated": "2026-11-04",
+      "body": "Each person who rates something gets a fixed budget of points to spread across a set of qualities. Because the budget is fixed, raters have to decide what stands out. The combined input of many raters produces a profile: a shape that shows the character of the thing being rated, with a record of where the group agrees and where it splits.\n\nUNOME is a configurable framework. The same mechanism can be set up for a classroom discussion, a sprint retrospective, a product review or a team debrief.\n\n## The Problem\n**Rating tools answer one question.** Grades, star ratings, NPS and CSAT all measure amplitude: how much, compared with a standard or an average. That's useful for ranking and weak for describing. Two students with the same B+ may have almost nothing in common, and two products with 4.2 stars may be good at entirely different things.\n\n**A single rating hides what happens in the group.** A rating reflects one rater's vantage point, preferences and blind spots, and a score doesn't capture which things the group disagrees about, which is often what's most worth discussing.\nThe context is changing. Work and learning are changing quickly, and a single score is a thin description of the value a person, team or product brings. \n\n## The Insight\nUNOME rests on two ideas.\n**A fixed budget turns a score into a character.** A rater distributes a fixed total (for example, 100 points) across a set of qualities. Every point given to one quality is taken from another, so the rater has to say what stands out. Two things can be equally good and still be different, and the profile shows how.\n**Many perspectives give a steadier picture than one.** Individual raters are noisy and idiosyncratic. Aggregated, much of that individual quirk cancels out. The aggregate isn't \"the truth\" about the thing. It's a reliable picture of how a group perceives it, and how that picture differs between groups (peers, teacher, self) is information in its own right.",
+      "gallery": []
+    },
+    {
+      "id": "owner-operator-wooden-giant-productions",
+      "title": "Owner / Operator - Wooden Giant Productions",
+      "type": "Job",
       "status": "Done",
-      "desc": "Product and Design leadership for a startup building AI performance-improving Content Knowledge Graphs",
+      "desc": "Entrepreneurial web-development and digital strategy agency",
+      "skills": [
+        "Business",
+        "Build",
+        "Design",
+        "GTM",
+        "Learn",
+        "Listen",
+        "People",
+        "Product Marketing",
+        "Design Research",
+        "Strategy"
+      ],
+      "updated": "2015-07-08",
+      "body": "Digital product, design, and strategy for clients across retail, content, marketing, health care, education, children's media, sports, entrepreneurship, not-for-profit, farming, and music. Notable projects:\n\n- **Floorball Canada (floorballreferee.com)**: Designed, produced, and built an online courseware and referee-management platform that gave the national board a country-wide training solution. Includes a 30-lesson e-learning course (writing, video production and editing), plus user management, tiered payment processing, forums and forms.\n- **Misfit Studio**: Maintained website and ran business management for a pilates, yoga, and movement studio through its recovery from a devastating flood and its move to a new Queen St West location, while expanding its offerings. Covered operations, accounting, payroll and billing, HR, marketing, and change management.\n- **WEMADEIT (Hydro-One & 5 Ontario universities)**: Led discovery, research, and production of the online components of a rebrand of engineering aimed at increasing female enrolment in engineering programs, including 360 surveys and 700+ peer, parent and teacher interviews. Designed and built the website\n- **Scopify (Royal Ontario Museum):** Designed a downloadable phone app that augments the museum exhibit experience with augmented reality.\n- **Ruby Skye P.I.:** digital production, design, and web development for a web series with multichannel story interfaces and Ontario-curriculum-interwoven materials.\n- **CBC Kids:** product management, design, and development for the What's Your News?! iPhone and Android app.",
+      "gallery": []
+    },
+    {
+      "id": "senior-product-manager-st-joseph-content",
+      "title": "Senior Product Manager - St Joseph Content",
+      "type": "Job",
+      "status": "Done",
+      "desc": "Product Leadership for \"Create Once, Publish Everywhere\" marketing platform",
+      "skills": [
+        "People",
+        "Strategy",
+        "Build",
+        "Business",
+        "Design",
+        "Learn",
+        "Listen"
+      ],
+      "updated": "2018-06-08",
+      "body": "St. Joseph Content produced flyers and catalogues for national retailers. Progressed from Senior Business Analyst (2015–2016) to Senior Product Manager (2016–2018).\n\n- Sold and led a complete rebuild of the proprietary ECMS platform, from a client-specific Python monolith into a multi-tenant Node.js microservice SaaS product for national retail clients, designed to increase scalability and client lock-in.\n- Led a team that grew from 6 to 10, building the next-generation product while maintaining legacy applications. The team built and maintained apps, APIs, and cloud infrastructure for content production, management, and distribution ecosystems.\n- Owned the product end to end: market research, roadmap, requirements, UX/UI design, sales collateral, SOWs and SLAs, hiring and retention.\n- As Senior Business Analyst, led the build and onboarding of Shoppers Drug Mart's national digital flyer and offer distribution program, including API integrations with upstream and downstream systems and vendors.\n- Delivered analytic driven recommendations for Canon Canada's canonfeatures.ca, reducing bounce rate by 50% and improving conversions by 200%.",
+      "gallery": []
+    },
+    {
+      "id": "schema-app",
+      "title": "Manager of Product and Design - Schema App",
+      "type": "Job",
+      "status": "Done",
+      "desc": "Product and Design Leadership for a startup building AI performance-improving Content Knowledge Graphs",
       "skills": [
         "AI",
         "Design",
@@ -25,8 +87,8 @@ window.SITE = {
     {
       "id": "hetmanek-ca",
       "title": "hetmanek.ca",
-      "type": "",
-      "status": "In Design",
+      "type": "Project",
+      "status": "In Development",
       "desc": "This website to support my career",
       "skills": [
         "Design",
@@ -42,7 +104,7 @@ window.SITE = {
     {
       "id": "opportunity-assessment-engine",
       "title": "Opportunity Assessment Engine",
-      "type": "",
+      "type": "Project",
       "status": "In Dev",
       "desc": "Is opportunity x worth doing? How much? In which ways?",
       "skills": [
@@ -86,8 +148,8 @@ window.SITE = {
     },
     {
       "id": "senior-director-gs1-canada",
-      "title": "Senior Director @ GS1 Canada",
-      "type": "Senior Director of Product and Design",
+      "title": "Senior Director - GS1 Canada",
+      "type": "Job",
       "status": "Done",
       "desc": "Product and UX leadership at non-profit behind the standards and data pools that run Canadian grocery, foodservice, healthcare, pharmacy, cannabis, and general merchandise supply chains.",
       "skills": [
@@ -100,13 +162,13 @@ window.SITE = {
         "Business"
       ],
       "updated": "2025-10-10",
-      "body": "- Drove product and design strategy and tactics, contributing to a 20% revenue increase over four years by transforming:\n- an output-focused feature factory into an outcome-driven value creator\n- a suite of monolithic apps into a service-based, multi-sided platform\n- a group of disjointed user interfaces into a harmonized user experience\n- Grew the team from 5 to 10 members and reduced turnover by 67% \n- Founded Product and Design Communities of Practice\n- Increased clarity, efficiency, and alignment in an extra-ordinarily complex multi-sector, non-profit (budget-constrained) organization via bespoke roadmapping/prioritization frameworks and a company-wide Demo Day that maintained a 4.8/5 CSAT.\n- Trajectory within GS1 Canada: Senior Product Manager (2018) → Solutions Engineer (2019) → Director, Product Management (2020–2021).",
+      "body": "- Drove product and design strategy and tactics, contributing to a 20% revenue increase over four years by transforming:\n    - an output-focused feature factory into an outcome-driven value creator\n    - a suite of monolithic apps into a service-based, multi-sided platform\n    - a group of disjointed user interfaces into a harmonized user experience\n- Grew the team from 5 to 10 members and reduced turnover by 67% \n- Founded Product and Design Communities of Practice\n- Increased clarity, efficiency, and alignment in an extra-ordinarily complex multi-sector, non-profit (budget-constrained) organization via bespoke roadmapping/prioritization frameworks and a company-wide Demo Day that maintained a 4.8/5 CSAT.\n- Trajectory within GS1 Canada: Senior Product Manager (2018) → Solutions Engineer (2019) → Director, Product Management (2020–2021).",
       "gallery": []
     },
     {
       "id": "at-the-bedside-podcast",
       "title": "At the Bedside Podcast",
-      "type": "",
+      "type": "Project",
       "status": "Active",
       "desc": "Automate social media marketing",
       "skills": [
@@ -118,23 +180,9 @@ window.SITE = {
       "gallery": []
     },
     {
-      "id": "essence-of",
-      "title": "Essence Of",
-      "type": "",
-      "status": "In Design",
-      "desc": "Social game",
-      "skills": [
-        "Design",
-        "GTM"
-      ],
-      "updated": "2026-01-13",
-      "body": "",
-      "gallery": []
-    },
-    {
       "id": "project-eggdrop",
       "title": "Project Eggdrop",
-      "type": "",
+      "type": "Project",
       "status": "Done",
       "desc": "App to teaching kids new media literacies",
       "skills": [
@@ -147,10 +195,10 @@ window.SITE = {
     },
     {
       "id": "my-story-island",
-      "title": "My Story Island",
-      "type": "",
+      "title": "Digital Producer / Performer - My Story Island, Taipei",
+      "type": "Job",
       "status": "Done",
-      "desc": "interactive animated theatre turned into educational content",
+      "desc": "Build and sell theatrical interactive animated educational content",
       "skills": [
         "Design",
         "Build",
@@ -159,7 +207,7 @@ window.SITE = {
         "GTM"
       ],
       "updated": "2008-06-09",
-      "body": "",
+      "body": "- Wrote and led a team of artists, animators, actors, developers, and teachers in creating educational, curriculum-interwoven, interactive multimedia programs for kids ages 2–11.\n- Tripled sales as product manager of “Yippee Phonics,” repurposing existing content for mobile use in ESL curriculum.\n- Wrote, recorded, and scored music for 20 hours of animated programming.\n- Performed over 400 shows as “Mister Giant Jim.”",
       "gallery": []
     },
     {
@@ -206,7 +254,7 @@ window.SITE = {
         "GTM"
       ],
       "excerpt": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD:",
-      "body": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD (definition of done):\n\n**- No placeholder content\n- Work pages for all roles in my resume\n- 4 case studies\n- 5 build logs\n- 1 Article or Letter re: this build**"
+      "body": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD (definition of done):\n\n- No placeholder content\n- Work pages for all roles in my resume\n- 4 case studies\n- 5 build logs   -- **done**\n- 1 Article or Letter -- **done**"
     },
     {
       "id": "2026-10-23",
@@ -258,6 +306,30 @@ window.SITE = {
         "Build"
       ],
       "body": "Let the new logo do the talking - removed James Hetmanek from the Header Row. \n\nThis of course has implications on page element placing - so I did a cascade of pixel pushing to polish.\n\nFed the Case Study Support tool archived project work documents, expediting Case Study drafting."
+    },
+    {
+      "id": "2026-11-03",
+      "date": "2026-11-03",
+      "engagements": [
+        "unome"
+      ],
+      "skills": [
+        "AI",
+        "Design",
+        "Learn"
+      ],
+      "body": "Gathered all my thoughts, notes and sketches re: UNOME into a project document. Then I argued with Claude to refine it into a brief that Claude Design could use to product concepts.\n\n![Conceptual Mockups of UNOME app](/assets/buildlog/2026-11-03/unome-initial-concepts.png)",
+      "excerpt": "Gathered all my thoughts, notes and sketches re: UNOME into a project document. Then I argued with Claude to refine it into a brief that Claude Design could use to product concepts."
+    },
+    {
+      "id": "2026-11-04",
+      "date": "2026-11-04",
+      "engagements": [],
+      "skills": [
+        "Build",
+        "Design"
+      ],
+      "body": "**Site and CMS changes**\n\n- Build Log excerpts beside the portrait are replaced by an introduction that I can edit in the CMS. \n- Work is sorted by most recent Last Update. Job and Project buttons beside Filter narrow the rows by Type.\n- Build Log table: the pinned post comes first, with a pin icon in front of its excerpt.\n\n- A new Letters & Articles section lists the three newest related letters. Below it, Build Log is limited to the three newest posts.\n- Letter & Articles:\n    - the summary no longer appears on the page. It's still the description link previews show.\n    - Removed the Skills column from Letters & Articles table\n    - Letter form has an Engagements picker for linking a letter to Work entries.\n\n- CSS updates too numerous to mention"
     }
   ],
   "casestudies": [
@@ -435,7 +507,7 @@ window.SITE = {
         },
         {
           "label": "Wins",
-          "body": "**Shipped the series’ first transmedia layer.** Season 1 had none; Season 2 launched with the O’Deary Library, O’Deary Puzzles and several character blogs.\n**Turned research into product.** Season 1 findings drove both the web world and the curriculum.\n**Built for reuse.** The curriculum gives teachers a lesson set that works year after year.\n",
+          "body": "**Shipped the series’ first transmedia layer.** \n\n- Season 1 had none; Season 2 launched with the O’Deary Library, O’Deary Puzzles and several character blogs.\n\n**Turned research into product.** \n\n- Season 1 findings drove both the web world and the curriculum.\n\n**Built for reuse.** \n\n- The curriculum gives teachers a lesson set that works year after year.\n",
           "image": null
         },
         {
@@ -463,32 +535,22 @@ window.SITE = {
       "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n\n> Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.\n\nNeque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.\n\n## A section heading\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
     },
     {
-      "id": "letter-title-placeholder",
-      "title": "Letter title placeholder",
-      "date": "2026-10-05",
-      "summary": "Another placeholder summary for the list.",
+      "id": "reinvigorate-culture-with-deeper-collaborative-ethos",
+      "title": "How can we reinvigorate internet culture with a deeper collaborative ethos?",
+      "date": "2026-11-04",
+      "summary": "I’d like to see us spend more time exploring how a group working from a diversity of perspectives can produce results that are different from a group of domain experts.",
       "skills": [
-        "AI"
+        "Build",
+        "Design",
+        "Learn",
+        "People",
+        "Write"
       ],
-      "image": {
-        "src": "",
-        "alt": ""
-      },
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n\n> Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.\n\nNeque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.\n\n## A section heading\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
-    },
-    {
-      "id": "another-letter-placeholder",
-      "title": "Another letter placeholder",
-      "date": "2026-09-21",
-      "summary": "A third placeholder summary for the list.",
-      "skills": [
-        "People"
-      ],
-      "image": {
-        "src": "",
-        "alt": ""
-      },
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n\n> Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.\n\nNeque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.\n\n## A section heading\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+      "image": null,
+      "body": "Dear Mentor,\n\nI’m curious about ways that we can reinvigorate culture and our economy with a more collaborative ethos.\n\nThe old days of the internet held promise for deeper democratization. Online chat boards removed co-location and shared time as necessary for collaboration. Groups of people could share, connect, and refine ideas asynchronously. It was possible for a person’s contribution to be measured by quality, rather than by credentials or economic influence alone.\n\nSocial media (initially) expanded this capacity of the internet. The early days were glorious with people connecting by niche and interest in ways never before seen in human activity. Those connections were what drove humanity’s first wave of migrating parts of our lives to the net.\n\nIn order to pay for these platforms at scale, capital shifted the core purpose away from connecting people (collaboration, democratization) - towards generating revenue (hierarchy, capitalization). \n\nAlgorithmic engines present the internet to you according to calculations that maximize revenue. This means that the primary interaction is between user and algorithm. Human to human connection is secondary, and abstracted by the algorithm.\n\nPeople are becoming less humanly and more mechanistically organized. It feels as though we are more and more isolated while being more and more homogenized.\n\nThe internet is diluting our species superpower of communication and collaboration.\n \nA power that is made super by a group with varied expertise working together within a domain. I’d like to see us spend more time exploring how a group working from a diversity of perspectives can produce results that are different from a group of domain experts.\n\nYet the internet buckets and routes us according to segments. Early social media connected people by niche, which they chose, could see, and could leave. Today’s platforms segment us, which we don’t choose, can’t see, and are routed within. I think the difference is agency.\n\nEarly social media connected us by niche, but the niches shared spaces, and ideas crossed between them. Today each of us gets a private feed. We’re tightly connected inside our segment and almost unconnected across segments. The internet still gives us contact with other groups, but as spectacle, not collaboration. What we lost is the commons where different perspectives could meet and work on something together.\n\nNothing more to add at this point. I'm working on a solution in this space, and I just wanted to put these thoughts to paper.\n\nSincerely,\nJames\n\n![Describe the image](/assets/letters/reinvigorate-culture-with-deeper-collaborative-ethos/letter-exceprt-power-made-super.jpg)",
+      "engagements": [
+        "unome"
+      ]
     }
   ]
 };
