@@ -3,7 +3,7 @@
 // Bodies are Markdown. Dates are YYYY-MM-DD. "draft": true hides an entry on the public site.
 window.SITE = {
   "introduction": {
-    "body": "I build products, people, and processes.\n\nI believe:\n\n- Qualities in, Qualities out\n- Aesthetics is 10% of design. How It Works is 80%.\n- [Work is love made visible](https://poets.org/poem/work-4)"
+    "body": "I listen, learn, design and build. Let this website show you how.\n\nI believe:\n\n- Qualities in, Qualities out\n- Aesthetics is 10% of design. How It Works is 80%.\n- Commons-based peer production and collaborative modalities are under-utilized\n- [Work is love made visible](https://poets.org/poem/work-4)\n- Context is Everything"
   },
   "work": [
     {
@@ -11,7 +11,7 @@ window.SITE = {
       "title": "UNOME",
       "type": "Project",
       "status": "In Design",
-      "desc": "UNOME is a rating tool that replaces \"How Good Is It?\" with \"How Is It Good?\"",
+      "desc": "Replaces \"How Good Is It?\" with \"How Is It Good?\"",
       "skills": [
         "AI",
         "Build",
@@ -335,7 +335,7 @@ window.SITE = {
   "casestudies": [
     {
       "id": "positioning-engine",
-      "title": "Agentic Positioning Engine",
+      "title": "Positioning Engine",
       "desc": "Measured, reinforced, and research-validated positioning/messaging for all teams",
       "skills": [
         "AI",
@@ -381,11 +381,8 @@ window.SITE = {
         "People",
         "Design",
         "Strategy",
-        "Listen",
-        "Learn",
-        "GTM",
-        "Design Research",
-        "Business"
+        "Galvanizing",
+        "GTM"
       ],
       "order": 4,
       "sections": [
@@ -413,25 +410,26 @@ window.SITE = {
     },
     {
       "id": "we-made-it",
-      "title": "WEMADEIT",
-      "desc": "Rebranding Engineering With the Teens It Needs to Reach",
+      "title": "Rebrand Engineering via Design Research",
+      "desc": "Who better to research how teens tick, than teens?",
       "skills": [
         "Design Research",
         "People",
         "Listen",
         "Learn",
-        "Build"
+        "Build",
+        "Design"
       ],
       "order": 5,
       "sections": [
         {
           "label": "Opportunity",
-          "body": "**Girls were opting out of engineering before they knew what it was.**\n\n- Female enrolment in Ontario engineering schools had stagnated for years, and traditional recruitment tactics weren’t working.\n- A consortium of engineering faculties, backed by Hydro One and Motorola Solutions Foundation, wanted a new approach to outreach: a brand and website that would appeal to high school girls.\n- The core challenge was that adults were designing for teens they weren’t talking to.\n",
+          "body": "**Girls were opting out of engineering before they knew what it was.**\n\n- Female enrolment in Ontario engineering schools had stagnated for years, and traditional recruitment tactics weren’t working.\n- A consortium of engineering faculties, backed by Hydro One and Motorola Solutions Foundation, wanted a new approach to outreach: a brand and website that would appeal to high school girls.\n\n> adults were designing for teens they weren’t talking to.\n",
           "image": null
         },
         {
           "label": "Solution",
-          "body": "**Put the target users in the driver’s seat: a paid Youth Think Tank (YTT) of high school girls.**\n\n- Design research, workshop facilitation, experience design, and website design and development.\n- The YTT’s weekly rhythm was a survey, peer, parent and teacher interviews, and a creative “CoLab” assignment. Those assignments became the site’s content.\n- Researchers worked in four themes: femininity and decision-making, communication, imagery and meaning, and perceptions of engineering.\n- Findings became a brand with two personas (Debbie, a young professional engineer, and Zoe, a high school student). They also became two sites: WEMADEIT.ca for teens and a community site for teachers, parents and counsellors.\n- The research turned into strategic recommendations for the consortium, including teacher-focused messaging, an influencer-first social strategy, and brand guidelines for non-designers.\n",
+          "body": "**Stop** adults designing for teens that they weren't talking to\n\n**Start** put the target users in the driver’s seat: a paid Youth Think Tank (YTT) of high school girls.\n\n- **A weekly rhythm:** a survey, peer, parent and teacher interviews, and a creative “CoLab” assignment. Those assignments became the site’s content.\n- **Four research themes:** femininity and decision-making, communication, imagery and meaning, and perceptions of engineering.\n- **Findings became a brand** with two personas (Debbie, a young professional engineer, and Zoe, a high school student) and two sites: WEMADEIT.ca for teens, and a community site for teachers, parents and counsellors.\n- **Strategic recommendations** for the consortium: teacher-focused messaging, an influencer-first social strategy, and brand guidelines for non-designers.\n\n",
           "image": null
         },
         {
@@ -482,8 +480,8 @@ window.SITE = {
     },
     {
       "id": "ruby-skye-p-i-the-haunted-library",
-      "title": "Ruby Skye P.I.: The Haunted Library",
-      "desc": "Turning a Web Series into a Web World",
+      "title": "Going To Market via Novel Channels",
+      "desc": "Turning a Web Series into a Web World. Ruby Skye P.I.: The Haunted Library Season 2.",
       "skills": [
         "Build",
         "Design",
@@ -497,12 +495,12 @@ window.SITE = {
       "sections": [
         {
           "label": "Opportunity",
-          "body": "**Season 1 proved the show. It also showed that a series living on a release schedule fades when the schedule ends.**\n\n- Ruby Skye P.I. is a Canadian web series for tweens. Season 1 (The Spam Scam, 12 episodes, fall 2010) was well received, but its web content was tied to the broadcast and became dated.\n- Season 1 research and conversations with the Executive Producer and Writer surfaced a pattern: tweens weren’t on link-sharing social platforms, while teachers, librarians and parents were the way in. A teacher introducing Ruby to a class produced a class-sized bump in viewers that night.\n- As Digital Producer for Season 2, I used those findings to shape how the series would grow.",
+          "body": "**Season 1 broke ground, won awards, and showed that a series living on a release schedule fades when the schedule ends.**\n\n- Ruby Skye P.I. trail-blazed transmedia web-series in 2010 -  but its web content was tied to the broadcast and became dated.\n- Tweens weren’t on link-sharing social platforms - so teachers, librarians and parents were the way in. A teacher introducing Ruby to a class produced a class-sized bump in viewers that night.\n- As Digital Producer for Season 2, I used those findings to shape how the series would grow.",
           "image": null
         },
         {
           "label": "Solution",
-          "body": "**Build the web the characters live in, and give teachers a reusable way to bring it into class.**\n\n- **Transmedia world (new in Season 2).** I designed and built all of the sites. The principle was that audiences would experience the same web the characters do, with new URLs revealed as episodes were released. The sites included the O’Deary Library, O’Deary Puzzles and character blogs for Hailey, Diana and The Mint Chip Girls.\n- **Curriculum.** I proposed and wrote the teaching unit from the Season 1 findings: 12 lessons for grades 4-6 Ontario Language Arts and Media Literacy. Each lesson pairs an activity, a teaching objective, discussion, desk work and an episode. A class-wide “Mystery Maintenance” thread tracks suspects and clues. It was designed to be fun, to minimize lesson planning, and to be reused every year.\n- **Generalist role.** I also prepared for the shoot and the release schedule, developed content, and photographed on set.",
+          "body": "**Build the web the characters live in. Give teachers a reusable way to bring it into class.**\n\n- **Transmedia world (new in Season 2).** I designed and built all of the sites. The principle was that audiences would experience the same web the characters do, with new URLs revealed as episodes were released. The sites included the O’Deary Library, O’Deary Puzzles and character blogs for Hailey, Diana and The Mint Chip Girls.\n- **Curriculum.** I proposed and wrote the teaching unit from the Season 1 findings: 12 lessons for grades 4-6 Ontario Language Arts and Media Literacy. Each lesson pairs an activity, a teaching objective, discussion, desk work and an episode. A class-wide “Mystery Maintenance” thread tracks suspects and clues. It was designed to be fun, to minimize lesson planning, and to be reused every year.\n- **Generalist role.** I also prepared for the shoot and the release schedule, developed content, and photographed on set.",
           "image": null
         },
         {
@@ -513,6 +511,83 @@ window.SITE = {
         {
           "label": "Learning",
           "body": " **Build for longevity.** Evergreen design lets a series keep living.\n\n**Get the contract right!**",
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "user-journey-optimization-framework",
+      "title": "User Journey Optimization Framework",
+      "desc": "The all-seeing eye of CX. Zoom in to the touchpoint. Zoom out to the journey.",
+      "skills": [
+        "Design Research",
+        "Design",
+        "Business",
+        "Build",
+        "Learn",
+        "Listen",
+        "GTM",
+        "Product Marketing",
+        "People",
+        "Strategy"
+      ],
+      "order": 1,
+      "sections": [
+        {
+          "label": "Opportunity",
+          "body": "CX success belongs to everyone. But each department sees its own slice through its own lens, with its own budget and priorities\n\nGS1 Canada serves six sectors, six subscriber types, and dozens of needs and tasks: complexity via 365 distinct user journeys. No one could say which journeys mattered most or how to efficiently and effectively improve them.\n\nMeanwhile:\n\n- Resellers were out-funneling GS1 for people who just needed a barcode.\n- Billing issues generated an outsized percentage of annual support cases. \n- A $$$ attribute campaign led to only n subscribers adopting. \n\n> How do we get on the same page?",
+          "image": null
+        },
+        {
+          "label": "Solution",
+          "body": "**Stop**  mapping journeys one at a time.\n\n**Start** understanding customers and users holistically via a matrix of touchpoints by journey, so the whole portfolio can be seen, filtered, and compared, then drilled into.\n\n### How it works\n*Conventional journey maps are hard to compare and contrast, especially at scale. A matrix lets you see the portfolio as a whole and also break any single journey into fine detail.*\n\n**Structure:** \n\n- Touchpoints *(rows)* are grouped by stage *(i.e., Product Discovery, Sign Up, JTBD, Billing, off-boarding)*.\n- Each row carries: user needs, tasks, and expectations  |  value definition | links to VOC evidence *(recordings, transcripts)* | SWOT | Metrics and KPIs | maintenance costs | policy barriers | internal stakeholders | **health score** *(derived from above)* | a named caretaker\n- The matrix can be filtered by journeys, which are comprised of touch-points.\n\n### **Two uses from one structure.**\n\n1. **Health**. See journey and touchpoint health from a bird’s-eye view, including where patterns are consistent and where they aren’t.\n- **Discovery.** That same analysis feeds research for designing solutions and for identifying and prioritizing the highest-value opportunities.\n\n\n",
+          "image": null
+        },
+        {
+          "label": "Wins",
+          "body": "\n\n",
+          "image": null
+        },
+        {
+          "label": "Learning",
+          "body": "**Bring a shared solution, not a mandate.** \nLarge cross-functional work is political work, so design for that from the start. A neutral, customer-centered frame lets each department see its own part without giving up ownership. \n\n**Change the unit of analysis.** \nComparison needs a common structure, so choose the structure before collecting the stories.\n",
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "team-excellence-engine",
+      "title": "~~Performance Management~~ Team Excellence Engine",
+      "desc": "Define “good” once, per role, with evidence, and performance management becomes a team sport.",
+      "skills": [
+        "Build",
+        "Design",
+        "Design Research",
+        "Learn",
+        "Listen",
+        "People",
+        "Strategy"
+      ],
+      "order": 4,
+      "sections": [
+        {
+          "label": "Opportunity",
+          "body": "- Performance conversations ran on impressions. Reviews felt subjective, and nobody shared a definition of “good.” Growth across the team was uneven, and development plans weren’t tied to evidence. The annual review didn’t help: it was high-level lip service, and the process wasn’t built to enforce rigor or accountability.\n- There was also a gap on the business side. The business could say which capabilities it needed from Product and Design, but nothing connected those needs to a plan for building them.\n- I had a second problem as the leader. With a team of ten, I could be blind to the reality of my team’s work on the ground.\n",
+          "image": null
+        },
+        {
+          "label": "Solution",
+          "body": "Define what “good” looks like for each role, anchored in observable evidence, and assess it in the open with the team.\n\n### How it works\n\n- **Six pillars**. Learn, Envision, Plan, Execute, Measure and Influence cover the product lifecycle from understanding users and market through to influencing the organization. Each pillar breaks into scopes. Learn, for example, splits into voice-of-customer, market and product knowledge. [GAP: confirm the pillars were chosen to mirror the capabilities the business asked for.]\n- **Anchored levels**. Every scope has behavioural descriptions at four levels: Not Performing (0), Developing (3), Performing (6) and Outperforming (9). Shading marks in-between scores (+1 or −1), so a score always sits next to a description rather than a bare number.\n- **Evidence built into the sheet**. Each pillar lists the artifacts that count as proof (an interview register, a roadmap, an MBR/QBR). Notes and evidence columns sit beside the score so every score can be substantiated.\n- **One rubric per role**. I folded the framework into the competency ladders, so each role has its own rubric and expectations.\n- **Scored together, in the open**. I led the assessment with the team in our Community of Practice. The rubric was explicit about expectations, and the team was encouraged to argue for a higher score if they had evidence. The scoreboard was visible to departmental leadership.\n- **An input, not a verdict**. The scoreboard’s main job was to drive professional-excellence conversations and growth plans. It was one input to formal performance reviews, which also weighed external factors. High developer turnover on a team, for instance, affects a Product Manager’s ability to deliver on time, on budget and at quality.\n\n",
+          "image": null
+        },
+        {
+          "label": "Wins",
+          "body": "- Team members felt seen and cared for. I used the scoreboard as evidence in formal performance reviews.\n- It gave the team a venue to tell their own story of what they were accomplishing, which I couldn’t have seen from my seat.\n- Retention: [placeholder]\n- Engagement: [placeholder]\n- Internal referrals: [placeholder]\n",
+          "image": null
+        },
+        {
+          "label": "Learning",
+          "body": "- **Define “good” once, per role.** An explicit, level-anchored standard makes growth discussable. Evidence, not impression, settles scores.\n- **Make the assessment a venue, not a verdict.** A leader can’t see all the work. Give people a place to tell their story with evidence, and let them contest a score.\n- **Let the teacher be taught.** Collaborative assessment teaches the assessor too. Engaging people in self- and peer-assessment makes them actors in their own improvement.\n- **Score the person, then adjust for context.** Weigh external factors separately, so the number stays honest and the review stays fair.\n",
           "image": null
         }
       ]

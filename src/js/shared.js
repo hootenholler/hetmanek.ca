@@ -53,7 +53,9 @@ export function derive(site) {
 const truncate = (text, n) => {
   if (text.length <= n) return text;
   const cut = text.slice(0, n);
-  return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:.]$/, '') + '…';
+  const kept = cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:.]$/, '');
+  // A cut inside ~~struck text~~ closes it, so the struck words stay struck and no stray ~~ shows.
+  return kept + (kept.split('~~').length % 2 === 0 ? '~~' : '') + '…';
 };
 // A written excerpt is used whole; it may hold Markdown (links, bold), so it's reduced to plain text like the body.
 export const excerptOf = (post, n) => (post.excerpt ? toText(post.excerpt) : truncate(firstParagraph(post.body), n || 120));

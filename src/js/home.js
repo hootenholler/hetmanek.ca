@@ -55,16 +55,16 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
         (state.types.length === 0 || state.types.indexOf(i.type) >= 0));
       return table('table--work', 'Work', ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS', 'TYPE', 'STATUS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
-          '<div role="cell" class="cell-text">' + esc(i.desc || '—') + '</div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
+          '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
           '<div role="cell" class="cell-text">' + esc(i.type || '—') + '</div>' +
           '<div role="cell" class="cell-mono">' + esc(i.status || '—') + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<div class="card__top"><span><a class="card__title" href="' + url.work(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</span><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
-          '<div class="card__text">' + esc(i.desc || '—') + '</div>' +
+          '<div class="card__top"><span><a class="card__title" href="' + url.work(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
+          '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
           pills(i.skills) +
           (i.type ? '<div class="card__text">' + esc(i.type) + '</div>' : '') +
         '</div>'));
@@ -73,14 +73,14 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
       const rows = casestudies.filter(skillMatch);
       return table('table--cases table--narrow', 'Case Studies', ['TITLE', 'DESCRIPTION', 'SKILLS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
-          '<div role="cell" class="cell-text">' + esc(i.desc || '—') + '</div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
+          '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
           '<div role="cell">' + pills(i.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</span>' +
-          '<div class="card__text">' + esc(i.desc || '—') + '</div>' +
+          '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span>' +
+          '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
           pills(i.skills) +
         '</div>'));
     },
@@ -92,15 +92,15 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
       return table('table--log', 'Build Log', ['DATE', 'EXCERPT', 'ENGAGEMENT', 'SKILLS'], rows.map((p) =>
         '<div class="table__row" role="row">' +
           '<div role="cell" class="cell-date"><a href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</div>' +
-          '<div role="cell" class="cell-text">' + pin(p) + esc(excerptOf(p)) + more(p) + '</div>' +
-          '<div role="cell" class="cell-text">' + esc(engagementNames(p.engagements)) + '</div>' +
+          '<div role="cell" class="cell-text">' + pin(p) + MD.strike(excerptOf(p)) + more(p) + '</div>' +
+          '<div role="cell" class="cell-text">' + MD.strike(engagementNames(p.engagements)) + '</div>' +
           '<div role="cell">' + pills(p.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((p) =>
         '<div class="card">' +
           '<span><a class="card__date-link" href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</span>' +
-          '<div class="card__text">' + pin(p) + esc(excerptOf(p)) + more(p) + '</div>' +
-          '<div class="card__sub">' + esc(engagementNames(p.engagements)) + '</div>' +
+          '<div class="card__text">' + pin(p) + MD.strike(excerptOf(p)) + more(p) + '</div>' +
+          '<div class="card__sub">' + MD.strike(engagementNames(p.engagements)) + '</div>' +
           pills(p.skills) +
         '</div>'));
     },
@@ -108,14 +108,14 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
       const rows = letters.filter(skillMatch);
       return table('table--letters table--narrow', 'Letters & Articles', ['TITLE', 'SUMMARY', 'DATE'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</div>' +
-          '<div role="cell" class="cell-text">' + esc(i.summary) + '</div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.letter(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
+          '<div role="cell" class="cell-text">' + MD.strike(i.summary) + '</div>' +
           '<div role="cell" class="cell-mono cell-mono--muted">' + date.table(i.date) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<span><a class="card__title" href="' + url.letter(i.id) + '">' + esc(i.title) + '</a>' + draftTag(i) + '</span>' +
-          '<div class="card__text">' + esc(i.summary) + '</div>' +
+          '<span><a class="card__title" href="' + url.letter(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span>' +
+          '<div class="card__text">' + MD.strike(i.summary) + '</div>' +
           '<div class="card__mono card__mono--muted">' + date.table(i.date) + '</div>' +
         '</div>'));
     }
@@ -167,7 +167,9 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
             return '<button type="button" class="tab" role="tab" id="tab-' + t.id + '" data-action="tab" data-tab="' + t.id + '" aria-selected="' + on + '"' + (on ? ' aria-controls="tabpanel"' : '') + ' tabindex="' + (focusable ? 0 : -1) + '">' + esc(t.label) + '</button>';
           }).join('') +
         '</div></div>' +
-        '<div class="filter-controls">' +
+        // Invisible until a tab is picked (no table yet for them to act on). Hidden rather than left out, so the tab
+        // bar keeps its height and doesn't jump when the button appears; visibility also takes it out of tab order.
+        '<div class="filter-controls' + (state.tab ? '' : ' filter-controls--waiting') + '">' +
           filterButton(state.open, active, 'home-filters') +
           (isWork && TYPES.length ? '<div class="type-toggles" role="group" aria-label="Type">' + TYPES.map((t) =>
             '<button type="button" class="type-toggle" data-action="pick" data-key="types" data-value="' + esc(t) + '" aria-pressed="' + (state.types.indexOf(t) >= 0) + '">' + esc(t) + '</button>').join('') +
@@ -181,10 +183,31 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
       '</div>'
     );
     shownTab = state.tab;
+    if (state.tab && homeTop.classList.contains('home-top--centred')) release();
     if (state.tab !== prevTab) {
       animatePanels(prevTab, oldPanel);
       history.replaceState(Object.assign({}, history.state, { tab: state.tab }), '');
     }
+  }
+
+  // ---------- home-top + tab bar: centred in the window until the first tab is picked ----------
+  // The block runs from the top of home-top's content to the bottom of the tab bar. Centring it needs its height,
+  // which CSS can't read, so it's measured here and handed to CSS as --centre-pad (home-top's top padding);
+  // CSS applies it on desktop only and runs the slide. The padding moves the whole block, so the block's height
+  // doesn't depend on it. Rejected: min-height: 100svh with align-content: center (centres home-top alone and
+  // pushes the tabs below the fold); interpolate-size (Chromium only).
+  const homeTop = document.querySelector('.home-top');
+  const centre = () => {
+    const top = homeTop.getBoundingClientRect().top + parseFloat(getComputedStyle(homeTop).paddingTop);
+    const block = root.querySelector('.tabbar').getBoundingClientRect().bottom - top;
+    const above = homeTop.getBoundingClientRect().top + scrollY;
+    homeTop.style.setProperty('--centre-pad', Math.round((document.documentElement.clientHeight - block) / 2 - above) + 'px');
+  };
+  // Adding the transition and dropping the centred padding in one step makes the browser animate between them.
+  function release() {
+    removeEventListener('resize', centre);
+    homeTop.classList.add('home-top--releasing');
+    homeTop.classList.remove('home-top--centred');
   }
 
   root.addEventListener('click', (e) => {
@@ -213,4 +236,11 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
   });
 
   render();
+  // After the first render, so the tab bar exists to be measured.
+  if (!state.tab) {
+    homeTop.classList.add('home-top--centred');
+    centre();
+    addEventListener('resize', centre);
+    document.fonts.ready.then(centre); // the serif's real height can differ from the fallback's
+  }
 })();

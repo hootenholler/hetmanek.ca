@@ -33,7 +33,7 @@ function work(w, d) {
   const item = (href, when, text) =>
     '<li><a class="related__item" href="' + href + '">' +
       '<div class="related__item-date">' + date.long(when) + '</div>' +
-      '<div class="related__item-text">' + esc(text) + '</div>' +
+      '<div class="related__item-text">' + MD.strike(text) + '</div>' +
     '</a></li>';
   const related =
     section('related-letters', 'LETTERS &amp; ARTICLES', letters.map((l) => item(url.letter(l.id), l.date, l.title))) +
@@ -45,7 +45,7 @@ function work(w, d) {
     main:
       '<article class="work">' +
         '<div class="work__main">' +
-          '<div><h1 class="page-title">' + esc(w.title) + draftTag(w) + '</h1><div class="page-desc">' + esc(w.desc || '') + '</div></div>' +
+          '<div><h1 class="page-title">' + MD.strike(w.title) + draftTag(w) + '</h1><div class="page-desc">' + MD.strike(w.desc || '') + '</div></div>' +
           '<div class="only-mobile">' + meta + '</div>' +
           (w.body ? '<div class="prose">' + MD.render(w.body) + '</div>' : '') +
           (w.gallery && w.gallery.length
@@ -67,8 +67,8 @@ function caseStudy(c) {
       '<article class="case">' +
         '<div>' +
           '<div class="case__eyebrow">Case Study</div>' +
-          '<h1 class="page-title">' + esc(c.title) + draftTag(c) + '</h1>' +
-          (c.desc ? '<div class="page-desc">' + esc(c.desc) + '</div>' : '') +
+          '<h1 class="page-title">' + MD.strike(c.title) + draftTag(c) + '</h1>' +
+          (c.desc ? '<div class="page-desc">' + MD.strike(c.desc) + '</div>' : '') +
         '</div>' +
         pills(c.skills, true) +
         (c.sections || []).map((s) =>
@@ -90,7 +90,7 @@ function letter(l) {
     main:
       '<article class="letter">' +
         '<div class="letter__date"><time datetime="' + esc(l.date) + '">' + date.full(l.date) + '</time></div>' +
-        '<h1 class="page-title">' + esc(l.title) + draftTag(l) + '</h1>' +
+        '<h1 class="page-title">' + MD.strike(l.title) + draftTag(l) + '</h1>' +
         (l.image ? image(l.image, 'IMAGE PLACEHOLDER · 3:2', 'letter__image') : '') +
         '<div class="prose">' + MD.render(l.body) + '</div>' +
         pills(l.skills, true) +
@@ -104,8 +104,8 @@ const RENDER = { work, casestudies: caseStudy, letters: letter };
 function page(type, entry, d) {
   const p = RENDER[type](entry, d);
   return TEMPLATE
-    .replaceAll('{{title}}', () => esc(p.title))
-    .replaceAll('{{description}}', () => esc(p.description || DEFAULT_DESCRIPTION))
+    .replaceAll('{{title}}', () => esc(MD.unstrike(p.title)))
+    .replaceAll('{{description}}', () => esc(MD.unstrike(p.description) || DEFAULT_DESCRIPTION))
     .replace('{{main}}', () => p.main);
 }
 

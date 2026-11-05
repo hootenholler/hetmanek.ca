@@ -1,10 +1,12 @@
 // Small Markdown renderer for page bodies, shared by the site, the local CMS editor and the CMS page writer.
-// Supports: ## / ### headings, paragraphs, **bold**, *italic*, [links](url), ![images](src),
+// Supports: ## / ### headings, paragraphs, **bold**, *italic*, ~~strikethrough~~, [links](url), ![images](src),
 // > quotes, - and 1. lists (nested by indenting), | tables |, and a YouTube link on its own line (embedded). Raw HTML is escaped.
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const safeUrl = (u) => (/^(https?:\/\/|mailto:|\/|#)/i.test(u) ? u : '');
 
+// ~~strikethrough~~ also works in one-line fields (titles, descriptions, summaries, excerpts) through strike().
+const STRIKE = /~~([^~\n]+)~~/g;
 const IMG = /!\[([^\]]*)\]\(([^)\s]+)\)/g;
 const LINK = /\[([^\]]+)\]\(([^)\s]+)\)/g;
 
@@ -12,6 +14,8 @@ const inline = (s) => esc(s)
   .replace(IMG, (m, alt, src) => (safeUrl(src) ? '<img src="' + src + '" alt="' + alt + '" loading="lazy">' : ''))
   .replace(LINK, (m, text, href) => (safeUrl(href) ? '<a href="' + href + '">' + text + '</a>' : text))
   .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  // <del>, as GitHub's Markdown does; browsers strike it through by default. Rejected: <s>, same look, no GFM precedent.
+  .replace(STRIKE, '<del>$1</del>')
   .replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?![*\w])/g, '$1<em>$2</em>')
   .replace(/(^|[^\w])_([^_\s][^_]*?)_(?!\w)/g, '$1<em>$2</em>')
   .replace(/\n/g, '<br>');
@@ -84,7 +88,7 @@ export const render = (md) => blocks(md).map((b) => {
   return '<p>' + inline(b) + '</p>';
 }).join('');
 
-// Plain text, for excerpts.
+// Plain text, for excerpts. ~~ is kept so an excerpt shown through strike() stays struck through.
 export const toText = (md) => String(md || '')
   .replace(IMG, '')
   .replace(LINK, '$1')
@@ -95,6 +99,11 @@ export const toText = (md) => String(md || '')
   .replace(/\\\|/g, PIPE).replace(/\s*\|\s*/g, ' ').split(PIPE).join('|')
   .replace(/\s+/g, ' ')
   .trim();
+
+// A one-line field as HTML: escaped, with ~~text~~ struck through and no other formatting.
+export const strike = (s) => esc(s).replace(STRIKE, '<del>$1</del>');
+// The same field where HTML can't go (<title>, meta descriptions, aria-labels): the ~~ markers removed.
+export const unstrike = (s) => String(s == null ? '' : s).replace(/~~/g, '');
 
 export const firstParagraph = (md) => {
   const b = blocks(md).find((x) => !/^(#{1,3} |!\[)/.test(x) && !youtubeId(x) && !isTable(x.split('\n')));

@@ -126,7 +126,7 @@ import { esc, uniq } from '/js/shared.js';
         '<div class="md__preview" aria-label="Preview"><span class="md__preview-label">PREVIEW</span><div class="prose" id="' + id + '-pv">' + MD.render(getPath(entry, key)) + '</div></div>' +
       '</div>' +
       '<details class="md-help"><summary>Formatting help</summary><table>' +
-        [['## Heading', 'Section heading', 'Alt+2'], ['**bold**  *italic*', 'Bold, italic', 'B, I'], ['[link text](https://…)', 'Link', 'K'], ['> Quote', 'Pull quote', 'Shift+9'],
+        [['## Heading', 'Section heading', 'Alt+2'], ['**bold**  *italic*', 'Bold, italic', 'B, I'], ['~~strikethrough~~', 'Strikethrough'], ['[link text](https://…)', 'Link', 'K'], ['> Quote', 'Pull quote', 'Shift+9'],
          ['- item', 'Bulleted list (1. for numbered)', 'Shift+8, Shift+7'], ['- item\n  - sub-item', 'Nested list (indent with spaces)'], ['![description](/assets/…)', 'Image (use Insert image)'], ['https://youtu.be/…', 'YouTube video, on its own line'],
          ['| A | B |\n|---|---|\n| 1 | 2 |', 'Table (a header row, a --- divider row, then rows)'], ['A blank line', 'Starts a new paragraph']].map((r) =>
           '<tr><td><code>' + esc(r[0]) + '</code></td><td>' + r[1] + '</td><td class="md-help__keys">' + (r[2] ? r[2].split(', ').map((k) => '<kbd>' + MOD + k + '</kbd>').join(' ') : '') + '</td></tr>').join('') +

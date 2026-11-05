@@ -181,17 +181,27 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* ---------- Home ---------- */
 .home-top { display: flex; flex-direction: column; gap: 28px; padding: 28px 0 8px; }
-.intro { display: flex; flex-direction: column; gap: 28px; min-width: 0; max-width: 640px; }
-.intro > * { margin: 0; font-size: 18px; line-height: 1.6; color: var(--text); }
+/* Introduction: its own spacing, tighter than page bodies. --intro-space is the old gap between excerpts;
+   paragraphs sit at 50% of it, and a paragraph and a list (either order) at 30%. */
+.intro { --intro-space: 28px; display: flex; flex-direction: column; min-width: 0; max-width: 640px; }
+.intro > * { margin: 0; font-family: var(--font-serif); font-size: 20px; line-height: 1.6; color: var(--text); }
+.intro > * + * { margin-top: calc(var(--intro-space) * 0.5); }
+.intro > p + :is(ul, ol), .intro > :is(ul, ol) + p { margin-top: calc(var(--intro-space) * 0.3); }
 .pin-icon {
   display: inline-block; vertical-align: -1px; margin-right: 6px;
   fill: none; stroke: var(--forest); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
 }
 .read-more { font-weight: 400; font-style: italic; color: var(--link-blue); white-space: nowrap; }
 @media (min-width: 900px) {
-  .home-top { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 32px 48px; padding: 48px 0 56px; }
+  /* first baseline: the bottom of the introduction's first line sits on the bottom of the name, whatever their
+     sizes. Rejected: a padding-top worked out from the two line heights (breaks when either size changes). */
+  .home-top { flex-direction: row; flex-wrap: wrap; align-items: first baseline; gap: 32px 48px; padding: 48px 0 56px; }
   .home-top .portrait { flex: 0 1 25%; min-width: 240px; }
-  .intro { flex: 1 1 520px; gap: 32px; padding-top: 38px; }
+  /* Until the first tab is picked, Home's top section and the tab bar below it are centred in the window as one
+     block (--centre-pad is measured in home.js), then slide up to the 48px top padding over the first table's 1s wipe, on the same easing. */
+  .home-top--centred { padding-top: max(48px, var(--centre-pad, 48px)); }
+  .home-top--releasing { transition: padding-top 1s cubic-bezier(0.65, 0, 0.35, 1); }
+  .intro { --intro-space: 32px; flex: 1 1 520px; }
 }
 
 .browse { padding: 16px 0 64px; }
@@ -213,6 +223,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .tab:focus-visible { outline-offset: -2px; }
 .filter-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 0; }
 .browse .filter-panel { margin-bottom: 12px; }
+.filter-controls--waiting { visibility: hidden; }
 .type-toggles { display: flex; gap: 8px; }
 .type-toggle {
   min-height: var(--touch-min); padding: 0 18px;
@@ -437,6 +448,7 @@ html[data-tx=back]::view-transition-new(page) { animation-name: back-in; }
 @keyframes back-in { from { opacity: 0; transform: scale(var(--tx-out)); } }
 /* Visitors who ask for less motion get a short fade instead. */
 @media (prefers-reduced-motion: reduce) {
+  .home-top--releasing { transition: none; }
   ::view-transition-old(page) { animation: rm-fade-out 120ms both; }
   ::view-transition-new(page) { animation: rm-fade-in 120ms both; }
   @keyframes rm-fade-out { to { opacity: 0; } }

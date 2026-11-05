@@ -33,7 +33,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
       '</div>' +
       (!state.open && selected.length
         ? '<div class="chips">' + selected.map((s) =>
-            '<button type="button" class="chip" data-action="remove" data-key="' + s.key + '" data-value="' + esc(s.v) + '" aria-label="Remove filter ' + esc(s.v) + '">' + esc(s.v) + '<span aria-hidden="true">×</span></button>'
+            '<button type="button" class="chip" data-action="remove" data-key="' + s.key + '" data-value="' + esc(s.v) + '" aria-label="Remove filter ' + esc(MD.unstrike(s.v)) + '">' + MD.strike(s.v) + '<span aria-hidden="true">×</span></button>'
           ).join('') + '</div>'
         : '') +
       (state.open
