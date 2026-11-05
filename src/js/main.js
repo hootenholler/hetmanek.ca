@@ -1,6 +1,7 @@
 // Browser-only helpers shared by Home and the Build Log: filter controls, the pin icon, and focus-keeping re-renders.
 
 import { esc } from './shared.js';
+import { strike } from './markdown.js';
 
 const FILTER_ICON = {
   closed: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M4.5 8h7M7 12h2"/></svg>',
@@ -18,7 +19,7 @@ export const filterPanel = (groups, panelId, cls) =>
       '<div class="filter-group" role="group" aria-labelledby="' + panelId + '-' + g.key + '">' +
         '<div class="filter-group__label" id="' + panelId + '-' + g.key + '">' + esc(g.label) + '</div>' +
         '<div class="filter-options">' + g.options.map((o) =>
-          '<button type="button" class="filter-option" data-action="pick" data-key="' + g.key + '" data-value="' + esc(o) + '" aria-pressed="' + (g.selected.indexOf(o) >= 0) + '">' + esc(o) + '</button>'
+          '<button type="button" class="filter-option" data-action="pick" data-key="' + g.key + '" data-value="' + esc(o) + '" aria-pressed="' + (g.selected.indexOf(o) >= 0) + '">' + strike(o) + '</button>'
         ).join('') + '</div>' +
       '</div>'
     ).join('') +
