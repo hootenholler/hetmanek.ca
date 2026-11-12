@@ -104,9 +104,6 @@ textarea.f__input { line-height: 1.55; resize: vertical; }
 .gallery-field { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
 .gallery-field > .img-field { width: 100%; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
 
-.section-fs { margin: 0; padding: 20px 0 0; border: 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 16px; }
-.section-fs legend { padding: 0; font-family: var(--font-serif); font-size: 26px; line-height: 1.2; float: left; width: 100%; }
-.section-fs .f--md .f__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 .editor__errors:not(:empty) { padding: 14px 18px; border: 1px solid #B42318; border-radius: 8px; background: #FDECEA; color: #7A1A12; font-size: 15px; }
 .editor__errors p { margin: 0 0 6px; font-weight: 600; }

@@ -2,12 +2,11 @@
 // Skills + Engagements filters, and /buildlog#<id> deep links.
 
 import * as MD from './markdown.js';
-import { esc, uniq, date, derive, draftTag } from './shared.js';
+import { esc, uniq, date, derive, draftTag, hashtag } from './shared.js';
 import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.js';
 
 (function () {
   const { posts } = derive(window.SITE);
-  const hashtag = (name) => '#' + name.split(/[^A-Za-z0-9]+/).filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('');
   const STEP = 3;
   const NEAR_BOTTOM = 240;
 
@@ -52,7 +51,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
           '<article class="post" id="' + esc(p.id) + '">' +
             '<div>' + (p.pinned ? PIN_ICON + '<span class="visually-hidden">Pinned: </span>' : '') + '<a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/buildlog#' + esc(p.id) + '">' + date.long(p.date) + '</a>' + draftTag(p) + '</div>' +
             '<div class="prose post__body">' + MD.render(p.body) + '</div>' +
-            '<ul class="post__tags" aria-label="Tags">' + p.engagementTitles.concat(p.skills || []).map((t) => '<li>' + esc(hashtag(t)) + '</li>').join('') + '</ul>' +
+            '<ul class="skill-tags" aria-label="Tags">' + p.engagementTitles.concat(p.skills || []).map((t) => '<li>' + esc(hashtag(t)) + '</li>').join('') + '</ul>' +
           '</article>'
         ).join('')
       : '<div class="empty">No posts match these filters.</div>';

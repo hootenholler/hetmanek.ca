@@ -1,11 +1,11 @@
-// Home: the introduction, then tabs (Work, Case Studies, Build Log, Letters & Articles) with filters.
+// Home: the introduction, then tabs (Work, Projects, Solutions, Build Log, Letters & Articles) with filters.
 
 import * as MD from './markdown.js';
-import { esc, uniq, date, derive, excerptOf, url, pills, draftTag } from './shared.js';
+import { esc, uniq, date, derive, excerptOf, url, skillTags, draftTag } from './shared.js';
 import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.js';
 
 (function () {
-  const { work, workById, posts, casestudies, letters } = derive(window.SITE);
+  const { work, projects, engagementById, posts, solutions, letters } = derive(window.SITE);
 
   // ---------- introduction (Markdown, edited in the CMS) ----------
   document.getElementById('intro').innerHTML = MD.render(window.SITE.introduction.body);
@@ -13,19 +13,17 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
   // ---------- tabs + filters ----------
   const TABS = [
     { id: 'work', label: 'Work' },
-    { id: 'cases', label: 'Case Studies' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'solutions', label: 'Solutions' },
     { id: 'log', label: 'Build Log' },
     { id: 'articles', label: 'Letters & Articles' }
   ];
-  const SKILLS = uniq([].concat(...work.map((i) => i.skills), ...casestudies.map((i) => i.skills), ...posts.map((i) => i.skills), ...letters.map((i) => i.skills)));
-  const STATUSES = uniq(work.map((i) => i.status));
-  // Job and Project: toggles beside the Filter button on the Work tab, not a group in the panel.
-  // None or all on shows every row, like the panel's options. Rejected: a segmented All / Job / Project control.
-  const TYPES = uniq(work.map((i) => i.type));
+  const SKILLS = uniq([].concat(...work.map((i) => i.skills), ...projects.map((i) => i.skills), ...solutions.map((i) => i.skills), ...posts.map((i) => i.skills), ...letters.map((i) => i.skills)));
+  const STATUSES = uniq(projects.map((i) => i.status));
 
   // Returning from a content page opens that page's tab; Back restores the tab saved in history.
   // Otherwise no tab is selected until the visitor picks one; the table appears then.
-  const FROM = [['/work/', 'work'], ['/casestudies/', 'cases'], ['/buildlog', 'log'], ['/letters/', 'articles']];
+  const FROM = [['/work/', 'work'], ['/projects/', 'projects'], ['/solutions/', 'solutions'], ['/buildlog', 'log'], ['/letters/', 'articles']];
   const tabFromReferrer = () => {
     let ref;
     try { ref = new URL(document.referrer); } catch (e) { return null; }
@@ -33,11 +31,11 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     const hit = FROM.find((f) => ref.pathname.indexOf(f[0]) === 0);
     return hit ? hit[1] : null;
   };
-  const state = { tab: (history.state && history.state.tab) || tabFromReferrer(), open: false, skills: [], statuses: [], types: [] };
+  const state = { tab: (history.state && history.state.tab) || tabFromReferrer(), open: false, skills: [], statuses: [] };
   const root = document.getElementById('browse');
 
   const skillMatch = (item) => state.skills.length === 0 || (item.skills || []).some((s) => state.skills.indexOf(s) >= 0);
-  const engagementNames = (ids) => (ids || []).map((id) => (workById[id] || {}).title).filter(Boolean).join(', ') || '—';
+  const engagementNames = (ids) => (ids || []).map((id) => (engagementById[id] || {}).title).filter(Boolean).join(', ') || '—';
   const empty = '<div class="empty">Nothing matches these filters.</div>';
 
   const header = (labels) => '<div class="table__row table__row--head" role="row">' + labels.map((l) => '<div role="columnheader">' + l + '</div>').join('') + '</div>';
@@ -47,41 +45,42 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     '</div></div>';
   const cards = (rows) => '<div class="only-mobile">' + rows.join('') + (rows.length ? '' : empty) + '</div>';
 
+  // The Work and Projects tabs: the same table, in the order derive() gives. Status shows (and filters) on Projects only.
+  const engagements = (items, href, label, cls, withStatus) => {
+    const status = (i) => (withStatus ? '<div role="cell" class="cell-mono">' + esc(i.status || '—') + '</div>' : '');
+    const rows = items.filter((i) => skillMatch(i) &&
+      (!withStatus || state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0));
+    return table(cls, label, ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS'].concat(withStatus ? ['STATUS'] : []), rows.map((i) =>
+      '<div class="table__row" role="row">' +
+        '<div role="cell"><a class="cell-title" href="' + href(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
+        '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
+        '<div role="cell">' + skillTags(i.skills) + '</div>' +
+        status(i) +
+      '</div>')) +
+    cards(rows.map((i) =>
+      '<div class="card">' +
+        '<div class="card__top"><span><a class="card__title" href="' + href(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span>' + (withStatus ? '<span class="card__mono">' + esc(i.status || '—') + '</span>' : '') + '</div>' +
+        '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
+        skillTags(i.skills) +
+      '</div>'));
+  };
+
   const views = {
-    work() {
-      // Most recent Last Update first; entries without one go last, and ties keep their content order (sort is stable).
-      const rows = work.slice().sort((a, b) => (b.lastUpdate || '').localeCompare(a.lastUpdate || '')).filter((i) => skillMatch(i) &&
-        (state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0) &&
-        (state.types.length === 0 || state.types.indexOf(i.type) >= 0));
-      return table('table--work', 'Work', ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS', 'TYPE', 'STATUS'], rows.map((i) =>
+    work: () => engagements(work, url.work, 'Work', 'table--work', false),
+    projects: () => engagements(projects, url.project, 'Projects', 'table--projects', true),
+    solutions() {
+      const rows = solutions.filter(skillMatch);
+      return table('table--solutions table--narrow', 'Solutions', ['TITLE', 'DESCRIPTION', 'SKILLS'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.work(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
+          '<div role="cell"><a class="cell-title" href="' + url.solution(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
           '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
-          '<div role="cell">' + pills(i.skills) + '</div>' +
-          '<div role="cell" class="cell-text">' + esc(i.type || '—') + '</div>' +
-          '<div role="cell" class="cell-mono">' + esc(i.status || '—') + '</div>' +
+          '<div role="cell">' + skillTags(i.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<div class="card__top"><span><a class="card__title" href="' + url.work(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
+          '<span><a class="card__title" href="' + url.solution(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span>' +
           '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
-          pills(i.skills) +
-          (i.type ? '<div class="card__text">' + esc(i.type) + '</div>' : '') +
-        '</div>'));
-    },
-    cases() {
-      const rows = casestudies.filter(skillMatch);
-      return table('table--cases table--narrow', 'Case Studies', ['TITLE', 'DESCRIPTION', 'SKILLS'], rows.map((i) =>
-        '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
-          '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
-          '<div role="cell">' + pills(i.skills) + '</div>' +
-        '</div>')) +
-      cards(rows.map((i) =>
-        '<div class="card">' +
-          '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span>' +
-          '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
-          pills(i.skills) +
+          skillTags(i.skills) +
         '</div>'));
     },
     log() {
@@ -94,14 +93,14 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
           '<div role="cell" class="cell-date"><a href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</div>' +
           '<div role="cell" class="cell-text">' + pin(p) + MD.strike(excerptOf(p)) + more(p) + '</div>' +
           '<div role="cell" class="cell-text">' + MD.strike(engagementNames(p.engagements)) + '</div>' +
-          '<div role="cell">' + pills(p.skills) + '</div>' +
+          '<div role="cell">' + skillTags(p.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((p) =>
         '<div class="card">' +
           '<span><a class="card__date-link" href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</span>' +
           '<div class="card__text">' + pin(p) + MD.strike(excerptOf(p)) + more(p) + '</div>' +
           '<div class="card__sub">' + MD.strike(engagementNames(p.engagements)) + '</div>' +
-          pills(p.skills) +
+          skillTags(p.skills) +
         '</div>'));
     },
     articles() {
@@ -153,10 +152,10 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
   function render() {
     const prevTab = shownTab;
     const oldPanel = root.querySelector('.tabpanel:not(.tabpanel--leaving)');
-    const isWork = state.tab === 'work';
-    const active = state.skills.length + (isWork ? state.statuses.length + state.types.length : 0);
+    const byStatus = state.tab === 'projects'; // the one tab that also filters by Status
+    const active = state.skills.length + (byStatus ? state.statuses.length : 0);
     const groups = [{ key: 'skills', label: 'SKILLS', options: SKILLS, selected: state.skills }];
-    if (isWork) groups.push({ key: 'statuses', label: 'STATUS', options: STATUSES, selected: state.statuses });
+    if (byStatus) groups.push({ key: 'statuses', label: 'STATUS', options: STATUSES, selected: state.statuses });
 
     rerender(root,
       '<div class="tabbar">' +
@@ -171,9 +170,6 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
         // bar keeps its height and doesn't jump when the button appears; visibility also takes it out of tab order.
         '<div class="filter-controls' + (state.tab ? '' : ' filter-controls--waiting') + '">' +
           filterButton(state.open, active, 'home-filters') +
-          (isWork && TYPES.length ? '<div class="type-toggles" role="group" aria-label="Type">' + TYPES.map((t) =>
-            '<button type="button" class="type-toggle" data-action="pick" data-key="types" data-value="' + esc(t) + '" aria-pressed="' + (state.types.indexOf(t) >= 0) + '">' + esc(t) + '</button>').join('') +
-          '</div>' : '') +
           (active ? '<button type="button" class="clear-filters" data-action="clear">Clear filters</button>' : '') +
         '</div>' +
       '</div>' +
@@ -217,7 +213,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     if (action === 'tab') state.tab = btn.dataset.tab;
     else if (action === 'toggle-filter') state.open = !state.open;
     else if (action === 'pick') state[btn.dataset.key] = toggleIn(state[btn.dataset.key], btn.dataset.value);
-    else if (action === 'clear') { state.skills = []; state.statuses = []; state.types = []; }
+    else if (action === 'clear') { state.skills = []; state.statuses = []; }
     else return;
     render();
     if (action === 'clear') root.querySelector('[data-action="toggle-filter"]').focus();

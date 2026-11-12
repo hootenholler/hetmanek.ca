@@ -1,25 +1,25 @@
-// Finished HTML for Work, Case Study and Letter entries, so those pages work without JavaScript and give
+// Finished HTML for Work, Project, Solution and Letter entries, so those pages work without JavaScript and give
 // link previews a real title and description. The server writes these to src/<type>/<id>.html on every save,
 // and renders drafts the same way on request. A Dev0 exception approved by James on 2026-10-29 (see CLAUDE.md).
 // This file only builds strings; the server does the file writing.
 
 import fs from 'node:fs';
 import * as MD from '../src/js/markdown.js';
-import { esc, date, derive, excerptOf, url, pills, image, draftTag } from '../src/js/shared.js';
+import { esc, date, derive, excerptOf, url, skillTags, image, draftTag } from '../src/js/shared.js';
 
 const TEMPLATE = fs.readFileSync(new URL('./page.html', import.meta.url), 'utf8');
 const DEFAULT_DESCRIPTION = 'James Hetmanek: listen, learn, design, build.';
 
 // Folder under src/ for each type. Every .html file in these folders is written by the CMS.
-export const TYPES = ['work', 'casestudies', 'letters'];
+export const TYPES = ['work', 'projects', 'solutions', 'letters'];
 
-function work(w, d) {
+// Work and Project pages share one layout.
+function engagement(w, d) {
   const meta =
     '<dl class="meta">' +
-      [['TYPE', esc(w.type || '—')],
-       ['STATUS', esc(w.status || '—')],
-       ['LAST UPDATE', w.lastUpdate ? date.table(w.lastUpdate) : '—'],
-       ['SKILLS', pills(w.skills, true) || '—']
+      // One row, "Oct 2024 – Present": no end date means the work is still going; no start date shows a dash.
+      [['DATES', w.started ? date.month(w.started) + ' – ' + (w.ended ? date.month(w.ended) : 'Present') : '—'],
+       ['SKILLS', skillTags(w.skills) || '—']
       ].map((r) => '<div class="meta__row"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join('') +
     '</dl>';
 
@@ -59,26 +59,22 @@ function work(w, d) {
   };
 }
 
-function caseStudy(c) {
+// Two columns like Work pages (the .work layout): title, description and body on the left, skills on the right.
+// On mobile the skills sit under the description, as Work's details do.
+function solution(c) {
+  const meta = '<dl class="meta"><div class="meta__row"><dt>SKILLS</dt><dd>' + (skillTags(c.skills) || '—') + '</dd></div></dl>';
   return {
     title: c.title,
     description: c.desc,
     main:
-      '<article class="case">' +
-        '<div>' +
-          '<div class="case__eyebrow">Case Study</div>' +
-          '<h1 class="page-title">' + MD.strike(c.title) + draftTag(c) + '</h1>' +
-          (c.desc ? '<div class="page-desc">' + MD.strike(c.desc) + '</div>' : '') +
+      '<article class="work">' +
+        '<div class="work__main">' +
+          '<div><div class="solution__eyebrow">Solution</div><h1 class="page-title">' + MD.strike(c.title) + draftTag(c) + '</h1>' +
+            (c.desc ? '<div class="page-desc">' + MD.strike(c.desc) + '</div>' : '') + '</div>' +
+          '<div class="only-mobile">' + meta + '</div>' +
+          (c.body ? '<div class="prose">' + MD.render(c.body) + '</div>' : '') +
         '</div>' +
-        pills(c.skills, true) +
-        (c.sections || []).map((s) =>
-          '<section class="case__section">' +
-            '<h2 class="case__label">' + esc(s.label) + '</h2>' +
-            '<div class="case__body">' +
-              '<div class="prose">' + MD.render(s.body) + '</div>' +
-              (s.image ? '<div class="case__figure">' + image(s.image) + '</div>' : '') +
-            '</div>' +
-          '</section>').join('') +
+        '<aside class="work__aside" aria-label="Details"><div class="only-desktop">' + meta + '</div></aside>' +
       '</article>'
   };
 }
@@ -93,12 +89,12 @@ function letter(l) {
         '<h1 class="page-title">' + MD.strike(l.title) + draftTag(l) + '</h1>' +
         (l.image ? image(l.image, 'IMAGE PLACEHOLDER · 3:2', 'letter__image') : '') +
         '<div class="prose">' + MD.render(l.body) + '</div>' +
-        pills(l.skills, true) +
+        skillTags(l.skills) +
       '</article>'
   };
 }
 
-const RENDER = { work, casestudies: caseStudy, letters: letter };
+const RENDER = { work: engagement, projects: engagement, solutions: solution, letters: letter };
 
 // {{main}} is filled last, so text inside an entry's body is never read as a slot.
 function page(type, entry, d) {

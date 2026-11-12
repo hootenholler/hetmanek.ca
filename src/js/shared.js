@@ -14,12 +14,14 @@ export const date = {
   long: (iso) => { const t = parts(iso); return MONTHS[t.m] + ' ' + ordinal(t.d) + ', ' + t.y; }, // October 19th, 2026
   full: (iso) => { const t = parts(iso); return MONTHS[t.m] + ' ' + t.d + ', ' + t.y; },          // October 19, 2026
   table: (iso) => { const t = parts(iso); return t.d + '-' + MONTHS[t.m].slice(0, 3) + '-' + t.y; }, // 19-Oct-2026
-  short: (iso) => { const t = parts(iso); return MONTHS[t.m].slice(0, 3) + ' ' + t.d + ', ' + t.y; } // Oct 19, 2026
+  short: (iso) => { const t = parts(iso); return MONTHS[t.m].slice(0, 3) + ' ' + t.d + ', ' + t.y; }, // Oct 19, 2026
+  month: (iso) => { const t = parts(iso); return MONTHS[t.m].slice(0, 3) + ' ' + t.y; } // Oct 2026
 };
 
 // ---- derived content. Returns new objects; the content passed in is left as it was.
 export function derive(site) {
-  const titles = Object.fromEntries(site.work.map((w) => [w.id, w.title]));
+  // Build Log posts and letters name Work and Project entries alike by id ("engagements"); ids are unique across both.
+  const titles = Object.fromEntries(site.work.concat(site.projects).map((w) => [w.id, w.title]));
 
   // Newest first; id = YYYY-MM-DD with -2, -3 suffixes for same-day posts (oldest keeps the bare date).
   // The CMS always writes an id; this covers posts written by hand.
@@ -35,17 +37,21 @@ export function derive(site) {
     engagementTitles: (post.engagements || []).map((id) => titles[id]).filter(Boolean)
   }));
 
-  // Last Update = the later of `updated` and the newest Build Log post referencing the engagement.
-  const work = site.work.map((w) => {
+  // Work: newest Started first; entries without one go last, and ties keep their content order (sort is stable).
+  const work = site.work.slice().sort((a, b) => (b.started || '').localeCompare(a.started || ''));
+  // Projects: Last Update = the later of `updated` and the newest Build Log post referencing the project;
+  // newest first, entries without one last.
+  const projects = site.projects.map((w) => {
     const newest = posts.find((post) => (post.engagements || []).indexOf(w.id) >= 0);
     return Object.assign({}, w, { lastUpdate: newest && newest.date > (w.updated || '') ? newest.date : w.updated });
-  });
+  }).sort((a, b) => (b.lastUpdate || '').localeCompare(a.lastUpdate || ''));
 
   return {
     work,
-    workById: Object.fromEntries(work.map((w) => [w.id, w])),
+    projects,
+    engagementById: Object.fromEntries(work.concat(projects).map((w) => [w.id, w])),
     posts,
-    casestudies: site.casestudies.slice().sort((a, b) => (a.order || 0) - (b.order || 0)),
+    solutions: site.solutions.slice().sort((a, b) => (a.order || 0) - (b.order || 0)),
     letters: site.letters.slice().sort((a, b) => (a.order != null && b.order != null ? a.order - b.order : b.date.localeCompare(a.date)))
   };
 }
@@ -60,17 +66,21 @@ const truncate = (text, n) => {
 // A written excerpt is used whole; it may hold Markdown (links, bold), so it's reduced to plain text like the body.
 export const excerptOf = (post, n) => (post.excerpt ? toText(post.excerpt) : truncate(firstParagraph(post.body), n || 120));
 
-// Work, Case Study and Letter pages are files the CMS writes: /work/<id> is served from src/work/<id>.html.
+// Work, Project, Solution and Letter pages are files the CMS writes: /work/<id> is served from src/work/<id>.html.
 export const url = {
   work: (id) => '/work/' + encodeURIComponent(id),
-  caseStudy: (id) => '/casestudies/' + encodeURIComponent(id),
+  project: (id) => '/projects/' + encodeURIComponent(id),
+  solution: (id) => '/solutions/' + encodeURIComponent(id),
   letter: (id) => '/letters/' + encodeURIComponent(id),
   post: (id) => '/buildlog#' + encodeURIComponent(id)
 };
 
 // ---- shared markup
-export const pills = (skills, large) => (skills && skills.length
-  ? '<ul class="pills' + (large ? ' pills--lg' : '') + '" aria-label="Skills">' + skills.map((s) => '<li class="pill">' + esc(s) + '</li>').join('') + '</ul>'
+// "Product Marketing" → "#ProductMarketing". Used for skill tags and the Build Log's tags.
+export const hashtag = (name) => '#' + name.split(/[^A-Za-z0-9]+/).filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+// Skills as hashtags, not pills. The .skill-tags style is shared with the Build Log's tags (Work, Project and skill names).
+export const skillTags = (skills) => (skills && skills.length
+  ? '<ul class="skill-tags" aria-label="Skills">' + skills.map((s) => '<li>' + esc(hashtag(s)) + '</li>').join('') + '</ul>'
   : '');
 
 const placeholder = (label, cls) => '<div class="ph' + (cls ? ' ' + cls : '') + '" role="img" aria-label="Image placeholder">' + esc(label || 'IMAGE') + '</div>';

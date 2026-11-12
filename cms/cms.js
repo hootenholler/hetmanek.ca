@@ -3,7 +3,7 @@
 (function () {
   const path = location.pathname.replace(/\/+$/, '') || '/';
   const seg = path.split('/').filter(Boolean);
-  const LABELS = { work: 'Work entry', casestudies: 'case study', letters: 'letter' };
+  const LABELS = { work: 'Work entry', projects: 'Project entry', solutions: 'solution', letters: 'letter' };
 
   // Which entry is this page showing? Entry pages are finished HTML, so the address and the page say it all:
   // the server answers an unknown entry with the 404 page, and a draft's title carries the Draft label.

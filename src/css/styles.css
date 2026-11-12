@@ -64,13 +64,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .only-mobile { display: none !important; }
 }
 
-/* ---------- pills and buttons ---------- */
-.pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.pill {
-  padding: 2px 10px; border: 1px solid var(--border-strong); border-radius: var(--radius-pill);
-  background: var(--surface); font-size: 13px; line-height: 1.6;
+/* ---------- skill tags and buttons ---------- */
+/* Skill tags: hashtags, not pills. 6px between lines, 14px between tags. */
+.skill-tags {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0; padding: 0; list-style: none;
+  font-family: var(--font-mono); font-weight: 400; font-size: 13px; line-height: 1.5; letter-spacing: 0.02em; color: var(--forest);
 }
-.pills--lg .pill { display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; line-height: 1.2; }
 
 .btn-outline {
   display: inline-flex; align-items: center; justify-content: center;
@@ -224,14 +223,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .filter-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 0; }
 .browse .filter-panel { margin-bottom: 12px; }
 .filter-controls--waiting { visibility: hidden; }
-.type-toggles { display: flex; gap: 8px; }
-.type-toggle {
-  min-height: var(--touch-min); padding: 0 18px;
-  border: 1px solid var(--ink); border-radius: var(--radius-pill);
-  background: var(--surface); color: var(--ink); font-size: 15px; font-weight: 500;
-}
-.type-toggle[aria-pressed="false"]:hover { color: var(--accent); }
-.type-toggle[aria-pressed="true"] { background: var(--ink); color: #fff; }
 /* Tables slide within this frame; only the x-axis is clipped so a taller outgoing table isn't cut off. */
 .panels { position: relative; overflow: hidden; }
 @supports (overflow-x: clip) { .panels { overflow: visible; overflow-x: clip; } }
@@ -261,8 +252,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .table__row--head {
   padding: 14px 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted);
 }
-.table--work { --cols: minmax(200px, 1.3fr) minmax(240px, 2fr) minmax(200px, 1.5fr) minmax(160px, 1.2fr) 90px; }
-.table--cases { --cols: minmax(220px, 1.5fr) minmax(180px, 1.2fr) minmax(200px, 1.5fr); }
+.table--work { --cols: minmax(200px, 1.3fr) minmax(240px, 2fr) minmax(200px, 1.5fr); }
+.table--projects { --cols: minmax(200px, 1.3fr) minmax(240px, 2fr) minmax(200px, 1.5fr) 90px; }
+.table--solutions { --cols: minmax(220px, 1.5fr) minmax(180px, 1.2fr) minmax(200px, 1.5fr); }
 .table--log { --cols: 150px minmax(280px, 3fr) minmax(160px, 1.2fr) minmax(180px, 1.5fr); }
 .table--letters { --cols: minmax(220px, 1.5fr) minmax(240px, 2fr) 120px; }
 .cell-title { font-size: 18px; font-weight: 500; line-height: 1.3; }
@@ -295,7 +287,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .post { display: flex; flex-direction: column; gap: 12px; max-width: 640px; scroll-margin-top: 16px; }
 .post__date { align-self: flex-start; font-size: 18px; line-height: 1.6; font-weight: 600; padding: 4px 0; }
 .post p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--text); }
-.post__tags { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 0; padding: 0; list-style: none; font-size: 15px; line-height: 1.6; color: var(--forest); }
 .posts .empty { padding: 0; font-size: 17px; line-height: 1.6; }
 @media (min-width: 900px) {
   .log-layout { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 32px 48px; padding: 48px 0 120px; }
@@ -312,7 +303,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .post { gap: 14px; scroll-margin-top: 32px; }
   .post__date { padding: 0; }
   .post p { font-size: 18px; }
-  .post__tags { gap: 4px 14px; font-size: 16px; }
   .posts .empty { font-size: 18px; }
 }
 
@@ -351,17 +341,17 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .page-title { font-family: var(--font-serif); font-weight: 400; font-size: 38px; margin: 0; }
 @media (min-width: 900px) { .page-title { font-size: 42px; } }
-/* Work and Case Study titles share one size, with the short description as subtext. */
-.work .page-title, .case .page-title { line-height: 1.05; margin-bottom: 12px; }
+/* Work, Project and Solution titles share one size, with the short description as subtext. */
+.work .page-title { line-height: 1.05; margin-bottom: 12px; }
 .page-desc { font-size: 19px; line-height: 1.4; color: var(--text); }
 @media (min-width: 900px) {
-  .work .page-title, .case .page-title { line-height: 1.02; margin-bottom: 16px; }
+  .work .page-title { line-height: 1.02; margin-bottom: 16px; }
   .page-desc { font-size: 22px; }
 }
 .mono-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
 
 
-/* ---------- Work entry ---------- */
+/* ---------- Work entry (also Project and Solution pages) ---------- */
 .work { display: flex; flex-direction: column; gap: 28px; padding-bottom: 64px; }
 .work__main { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
 .work__aside { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
@@ -388,21 +378,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .related__item { min-height: 0; }
 }
 
-/* ---------- Case Study ---------- */
-.case { max-width: 800px; margin: 0 auto; padding-bottom: 64px; display: flex; flex-direction: column; gap: 24px; }
-.case__eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
-.case__section { padding-top: 20px; border-top: 1px solid var(--border); }
-.case__label { font-family: var(--font-serif); font-weight: 400; font-size: 26px; line-height: 1.2; margin: 0 0 10px; }
-.case__figure { display: flex; justify-content: flex-end; margin-top: 16px; }
-.case__figure > * { width: 60%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-img); }
-@media (min-width: 900px) {
-  .case { gap: 32px; padding-bottom: 120px; }
-  .case__section { display: flex; flex-wrap: wrap; gap: 12px 32px; padding-top: 24px; }
-  .case__label { flex: 0 0 140px; margin: 0; }
-  .case__body { flex: 1 1 360px; }
-  .case__figure { margin-top: 18px; }
-  .case__figure > * { width: 240px; max-width: 100%; }
-}
+/* ---------- Solution (laid out with the Work entry styles above) ---------- */
+.solution__eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
 
 /* ---------- Letter ---------- */
 .letter { max-width: 680px; margin: 0 auto; padding-bottom: 64px; display: flex; flex-direction: column; gap: 20px; }
@@ -424,7 +401,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* Desktop: long-form pages line up with the header logo instead of centring. Last, so it overrides the
    centring above. */
-@media (min-width: 900px) { .case, .letter, .not-found { margin-left: 0; } }
+@media (min-width: 900px) { .letter, .not-found { margin-left: 0; } }
 
 /* ---------- page transitions ---------- */
 /* Cross-document view transitions: the page being left shrinks and fades into the background, and the new page grows
