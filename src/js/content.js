@@ -7,9 +7,117 @@ window.SITE = {
   },
   "work": [
     {
+      "id": "owner-operator-wooden-giant-productions",
+      "title": "Owner / Operator - Wooden Giant Productions",
+      "desc": "Entrepreneurial web-development and digital strategy agency",
+      "skills": [
+        "Business",
+        "Build",
+        "Design",
+        "GTM",
+        "Learn",
+        "Listen",
+        "People",
+        "Product Marketing",
+        "Design Research",
+        "Strategy"
+      ],
+      "body": "Digital product, design, and strategy for clients across retail, content, marketing, health care, education, children's media, sports, entrepreneurship, not-for-profit, farming, and music. Notable projects:\n\n- **Floorball Canada (floorballreferee.com)**: Designed, produced, and built an online courseware and referee-management platform that gave the national board a country-wide training solution. Includes a 30-lesson e-learning course (writing, video production and editing), plus user management, tiered payment processing, forums and forms.\n- **Misfit Studio**: Maintained website and ran business management for a pilates, yoga, and movement studio through its recovery from a devastating flood and its move to a new Queen St West location, while expanding its offerings. Covered operations, accounting, payroll and billing, HR, marketing, and change management.\n- **WEMADEIT (Hydro-One & 5 Ontario universities)**: Led discovery, research, and production of the online components of a rebrand of engineering aimed at increasing female enrolment in engineering programs, including 360 surveys and 700+ peer, parent and teacher interviews. Designed and built the website\n- **Scopify (Royal Ontario Museum):** Designed a downloadable phone app that augments the museum exhibit experience with augmented reality.\n- **Ruby Skye P.I.:** digital production, design, and web development for a web series with multichannel story interfaces and Ontario-curriculum-interwoven materials.\n- **CBC Kids:** product management, design, and development for the What's Your News?! iPhone and Android app.",
+      "gallery": [],
+      "started": "2005-01-01",
+      "ended": "2015-03-13"
+    },
+    {
+      "id": "senior-product-manager-st-joseph-content",
+      "title": "Senior Product Manager - St Joseph Content",
+      "desc": "Product Leadership for \"Create Once, Publish Everywhere\" marketing platform",
+      "skills": [
+        "People",
+        "Strategy",
+        "Build",
+        "Business",
+        "Design",
+        "Learn",
+        "Listen"
+      ],
+      "body": "St. Joseph Content produced flyers and catalogues for national retailers. Progressed from Senior Business Analyst (2015–2016) to Senior Product Manager (2016–2018).\n\n- Sold and led a complete rebuild of the proprietary ECMS platform, from a client-specific Python monolith into a multi-tenant Node.js microservice SaaS product for national retail clients, designed to increase scalability and client lock-in.\n- Led a team that grew from 6 to 10, building the next-generation product while maintaining legacy applications. The team built and maintained apps, APIs, and cloud infrastructure for content production, management, and distribution ecosystems.\n- Owned the product end to end: market research, roadmap, requirements, UX/UI design, sales collateral, SOWs and SLAs, hiring and retention.\n- As Senior Business Analyst, led the build and onboarding of Shoppers Drug Mart's national digital flyer and offer distribution program, including API integrations with upstream and downstream systems and vendors.\n- Delivered analytic driven recommendations for Canon Canada's canonfeatures.ca, reducing bounce rate by 50% and improving conversions by 200%.",
+      "gallery": [],
+      "started": "2015-03-31",
+      "ended": "2018-08-31"
+    },
+    {
+      "id": "schema-app",
+      "title": "Manager of Product and Design - Schema App",
+      "desc": "Product and Design Leadership for a startup building AI performance-improving Content Knowledge Graphs",
+      "skills": [
+        "AI",
+        "Design",
+        "Build",
+        "People",
+        "Strategy",
+        "GTM",
+        "Product Marketing"
+      ],
+      "body": "- Led a team of three product and design leaders as a direct report to the CTO and served on the senior leadership team, aligning Sales, Marketing, Customer Success and Engineering with annual, quarterly, weekly and daily planning through rapid growth.\n- Redesigned the cross-functional operating model across SDLC, analytics-driven decision-making and go-to-market, built for emerging agentic capabilities. Introduced Definition of Ready and Definition of Done governance that removed mid-sprint clarification meetings and workshops, making estimates reliable and sprint throughput more consistent. Onboarded roadmapping software and practices, and automated release notes and updates with domain-tailored messaging, saving about 1 hour of meetings a week.\n- Architected an agentic research-to-strategy pipeline, building the company’s first positioning research capability. It turns Sales and CS call transcripts into personas, problem-capability matrices, positioning and messaging guidance, plus an AI Brand Coach that scores marketing collateral against our positioning. Adopted by every team, including executive leadership.\n- Served as a core member of the senior leadership AI working groups driving policy, systems design and adoption. \n- Restructured the product and design team: Introduced  a Senior Product Designer and created a Design Technologist role, matching a front-end-trained team member’s strengths to a need. He owned the design system, the Figma-to-Claude Design System transition, the Pendo to PostHog analytics migration, and automated reporting.\n- Reduced cost to serve by shifting design toward a product-led rather than service-led application and automating metrics, messaging and business-review reporting, saving CSMs an estimated 3 hours per review.\n- Guided design strategy through significant industry disruption, helping define the company’s position in the emerging Semantic Data Layer / Content Knowledge Graph category.",
+      "gallery": [],
+      "started": "2025-10-27",
+      "ended": "2026-10-30"
+    },
+    {
+      "id": "senior-director-gs1-canada",
+      "title": "Senior Director - GS1 Canada",
+      "desc": "Product and UX leadership at non-profit behind the standards and data pools that run Canadian grocery, foodservice, healthcare, pharmacy, cannabis, and general merchandise supply chains.",
+      "skills": [
+        "Design",
+        "Build",
+        "People",
+        "Strategy",
+        "Listen",
+        "Learn",
+        "Business"
+      ],
+      "body": "- Drove product and design strategy and tactics, contributing to a 20% revenue increase over four years by transforming:\n    - an output-focused feature factory into an outcome-driven value creator\n    - a suite of monolithic apps into a service-based, multi-sided platform\n    - a group of disjointed user interfaces into a harmonized user experience\n- Grew the team from 5 to 10 members and reduced turnover by 67% \n- Founded Product and Design Communities of Practice\n- Increased clarity, efficiency, and alignment in an extra-ordinarily complex multi-sector, non-profit (budget-constrained) organization via bespoke roadmapping/prioritization frameworks and a company-wide Demo Day that maintained a 4.8/5 CSAT.\n- Trajectory within GS1 Canada: Senior Product Manager (2018) → Solutions Engineer (2019) → Director, Product Management (2020–2021).",
+      "gallery": [],
+      "started": "2018-09-12",
+      "ended": "2025-10-10"
+    },
+    {
+      "id": "my-story-island",
+      "title": "Digital Producer / Performer - My Story Island, Taipei",
+      "desc": "Build and sell theatrical interactive animated educational content",
+      "skills": [
+        "Design",
+        "Build",
+        "Strategy",
+        "Business",
+        "GTM"
+      ],
+      "body": "- Wrote and led a team of artists, animators, actors, developers, and teachers in creating educational, curriculum-interwoven, interactive multimedia programs for kids ages 2–11.\n- Tripled sales as product manager of “Yippee Phonics,” repurposing existing content for mobile use in ESL curriculum.\n- Wrote, recorded, and scored music for 20 hours of animated programming.\n- Performed over 400 shows as “Mister Giant Jim.”",
+      "gallery": [],
+      "started": "2007-06-04",
+      "ended": "2008-11-03"
+    },
+    {
+      "id": "tune-your-ride",
+      "title": "Tune Your Ride",
+      "desc": "Stationary Bicycle Powered Event Services",
+      "skills": [
+        "People",
+        "Listen",
+        "Learn",
+        "Design",
+        "Build"
+      ],
+      "body": "",
+      "gallery": [],
+      "started": "2014-01-01",
+      "ended": "2020-11-12"
+    }
+  ],
+  "projects": [
+    {
       "id": "unome",
       "title": "UNOME",
-      "type": "Project",
       "status": "In Design",
       "desc": "Replaces \"How Good Is It?\" with \"How Is It Good?\"",
       "skills": [
@@ -25,69 +133,8 @@ window.SITE = {
       "gallery": []
     },
     {
-      "id": "owner-operator-wooden-giant-productions",
-      "title": "Owner / Operator - Wooden Giant Productions",
-      "type": "Job",
-      "status": "Done",
-      "desc": "Entrepreneurial web-development and digital strategy agency",
-      "skills": [
-        "Business",
-        "Build",
-        "Design",
-        "GTM",
-        "Learn",
-        "Listen",
-        "People",
-        "Product Marketing",
-        "Design Research",
-        "Strategy"
-      ],
-      "updated": "2015-07-08",
-      "body": "Digital product, design, and strategy for clients across retail, content, marketing, health care, education, children's media, sports, entrepreneurship, not-for-profit, farming, and music. Notable projects:\n\n- **Floorball Canada (floorballreferee.com)**: Designed, produced, and built an online courseware and referee-management platform that gave the national board a country-wide training solution. Includes a 30-lesson e-learning course (writing, video production and editing), plus user management, tiered payment processing, forums and forms.\n- **Misfit Studio**: Maintained website and ran business management for a pilates, yoga, and movement studio through its recovery from a devastating flood and its move to a new Queen St West location, while expanding its offerings. Covered operations, accounting, payroll and billing, HR, marketing, and change management.\n- **WEMADEIT (Hydro-One & 5 Ontario universities)**: Led discovery, research, and production of the online components of a rebrand of engineering aimed at increasing female enrolment in engineering programs, including 360 surveys and 700+ peer, parent and teacher interviews. Designed and built the website\n- **Scopify (Royal Ontario Museum):** Designed a downloadable phone app that augments the museum exhibit experience with augmented reality.\n- **Ruby Skye P.I.:** digital production, design, and web development for a web series with multichannel story interfaces and Ontario-curriculum-interwoven materials.\n- **CBC Kids:** product management, design, and development for the What's Your News?! iPhone and Android app.",
-      "gallery": []
-    },
-    {
-      "id": "senior-product-manager-st-joseph-content",
-      "title": "Senior Product Manager - St Joseph Content",
-      "type": "Job",
-      "status": "Done",
-      "desc": "Product Leadership for \"Create Once, Publish Everywhere\" marketing platform",
-      "skills": [
-        "People",
-        "Strategy",
-        "Build",
-        "Business",
-        "Design",
-        "Learn",
-        "Listen"
-      ],
-      "updated": "2018-06-08",
-      "body": "St. Joseph Content produced flyers and catalogues for national retailers. Progressed from Senior Business Analyst (2015–2016) to Senior Product Manager (2016–2018).\n\n- Sold and led a complete rebuild of the proprietary ECMS platform, from a client-specific Python monolith into a multi-tenant Node.js microservice SaaS product for national retail clients, designed to increase scalability and client lock-in.\n- Led a team that grew from 6 to 10, building the next-generation product while maintaining legacy applications. The team built and maintained apps, APIs, and cloud infrastructure for content production, management, and distribution ecosystems.\n- Owned the product end to end: market research, roadmap, requirements, UX/UI design, sales collateral, SOWs and SLAs, hiring and retention.\n- As Senior Business Analyst, led the build and onboarding of Shoppers Drug Mart's national digital flyer and offer distribution program, including API integrations with upstream and downstream systems and vendors.\n- Delivered analytic driven recommendations for Canon Canada's canonfeatures.ca, reducing bounce rate by 50% and improving conversions by 200%.",
-      "gallery": []
-    },
-    {
-      "id": "schema-app",
-      "title": "Manager of Product and Design - Schema App",
-      "type": "Job",
-      "status": "Done",
-      "desc": "Product and Design Leadership for a startup building AI performance-improving Content Knowledge Graphs",
-      "skills": [
-        "AI",
-        "Design",
-        "Build",
-        "People",
-        "Strategy",
-        "GTM",
-        "Product Marketing"
-      ],
-      "updated": "2026-09-05",
-      "body": "- Led a team of three product and design leaders as a direct report to the CTO and served on the senior leadership team, aligning Sales, Marketing, Customer Success and Engineering with annual, quarterly, weekly and daily planning through rapid growth.\n- Redesigned the cross-functional operating model across SDLC, analytics-driven decision-making and go-to-market, built for emerging agentic capabilities. Introduced Definition of Ready and Definition of Done governance that removed mid-sprint clarification meetings and workshops, making estimates reliable and sprint throughput more consistent. Onboarded roadmapping software and practices, and automated release notes and updates with domain-tailored messaging, saving about 1 hour of meetings a week.\n- Architected an agentic research-to-strategy pipeline, building the company’s first positioning research capability. It turns Sales and CS call transcripts into personas, problem-capability matrices, positioning and messaging guidance, plus an AI Brand Coach that scores marketing collateral against our positioning. Adopted by every team, including executive leadership.\n- Served as a core member of the senior leadership AI working groups driving policy, systems design and adoption. \n- Restructured the product and design team: Introduced  a Senior Product Designer and created a Design Technologist role, matching a front-end-trained team member’s strengths to a need. He owned the design system, the Figma-to-Claude Design System transition, the Pendo to PostHog analytics migration, and automated reporting.\n- Reduced cost to serve by shifting design toward a product-led rather than service-led application and automating metrics, messaging and business-review reporting, saving CSMs an estimated 3 hours per review.\n- Guided design strategy through significant industry disruption, helping define the company’s position in the emerging Semantic Data Layer / Content Knowledge Graph category.",
-      "gallery": []
-    },
-    {
       "id": "hetmanek-ca",
       "title": "hetmanek.ca",
-      "type": "Project",
       "status": "In Development",
       "desc": "This website to support my career",
       "skills": [
@@ -104,7 +151,6 @@ window.SITE = {
     {
       "id": "opportunity-assessment-engine",
       "title": "Opportunity Assessment Engine",
-      "type": "Project",
       "status": "In Dev",
       "desc": "Is opportunity x worth doing? How much? In which ways?",
       "skills": [
@@ -120,7 +166,6 @@ window.SITE = {
     {
       "id": "pengi-by-beatrix",
       "title": "Pengi by Beatrix",
-      "type": "Project",
       "status": "Alive",
       "desc": "Next level lemonade stand. A fashion business for my kids.",
       "skills": [
@@ -147,28 +192,8 @@ window.SITE = {
       ]
     },
     {
-      "id": "senior-director-gs1-canada",
-      "title": "Senior Director - GS1 Canada",
-      "type": "Job",
-      "status": "Done",
-      "desc": "Product and UX leadership at non-profit behind the standards and data pools that run Canadian grocery, foodservice, healthcare, pharmacy, cannabis, and general merchandise supply chains.",
-      "skills": [
-        "Design",
-        "Build",
-        "People",
-        "Strategy",
-        "Listen",
-        "Learn",
-        "Business"
-      ],
-      "updated": "2025-10-10",
-      "body": "- Drove product and design strategy and tactics, contributing to a 20% revenue increase over four years by transforming:\n    - an output-focused feature factory into an outcome-driven value creator\n    - a suite of monolithic apps into a service-based, multi-sided platform\n    - a group of disjointed user interfaces into a harmonized user experience\n- Grew the team from 5 to 10 members and reduced turnover by 67% \n- Founded Product and Design Communities of Practice\n- Increased clarity, efficiency, and alignment in an extra-ordinarily complex multi-sector, non-profit (budget-constrained) organization via bespoke roadmapping/prioritization frameworks and a company-wide Demo Day that maintained a 4.8/5 CSAT.\n- Trajectory within GS1 Canada: Senior Product Manager (2018) → Solutions Engineer (2019) → Director, Product Management (2020–2021).",
-      "gallery": []
-    },
-    {
       "id": "at-the-bedside-podcast",
       "title": "At the Bedside Podcast",
-      "type": "Project",
       "status": "Active",
       "desc": "Automate social media marketing",
       "skills": [
@@ -182,7 +207,6 @@ window.SITE = {
     {
       "id": "project-eggdrop",
       "title": "Project Eggdrop",
-      "type": "Project",
       "status": "Done",
       "desc": "App to teaching kids new media literacies",
       "skills": [
@@ -190,40 +214,6 @@ window.SITE = {
         "Design Research"
       ],
       "updated": "2009-04-02",
-      "body": "",
-      "gallery": []
-    },
-    {
-      "id": "my-story-island",
-      "title": "Digital Producer / Performer - My Story Island, Taipei",
-      "type": "Job",
-      "status": "Done",
-      "desc": "Build and sell theatrical interactive animated educational content",
-      "skills": [
-        "Design",
-        "Build",
-        "Strategy",
-        "Business",
-        "GTM"
-      ],
-      "updated": "2008-06-09",
-      "body": "- Wrote and led a team of artists, animators, actors, developers, and teachers in creating educational, curriculum-interwoven, interactive multimedia programs for kids ages 2–11.\n- Tripled sales as product manager of “Yippee Phonics,” repurposing existing content for mobile use in ESL curriculum.\n- Wrote, recorded, and scored music for 20 hours of animated programming.\n- Performed over 400 shows as “Mister Giant Jim.”",
-      "gallery": []
-    },
-    {
-      "id": "tune-your-ride",
-      "title": "Tune Your Ride",
-      "type": "",
-      "status": "Done",
-      "desc": "Stationary Bicycle Powered Event Services",
-      "skills": [
-        "People",
-        "Listen",
-        "Learn",
-        "Design",
-        "Build"
-      ],
-      "updated": "2017-09-11",
       "body": "",
       "gallery": []
     }
@@ -330,9 +320,19 @@ window.SITE = {
         "Design"
       ],
       "body": "**Site and CMS changes**\n\n- Build Log excerpts beside the portrait are replaced by an introduction that I can edit in the CMS. \n- Work is sorted by most recent Last Update. Job and Project buttons beside Filter narrow the rows by Type.\n- Build Log table: the pinned post comes first, with a pin icon in front of its excerpt.\n\n- A new Letters & Articles section lists the three newest related letters. Below it, Build Log is limited to the three newest posts.\n- Letter & Articles:\n    - the summary no longer appears on the page. It's still the description link previews show.\n    - Removed the Skills column from Letters & Articles table\n    - Letter form has an Engagements picker for linking a letter to Work entries.\n\n- CSS updates too numerous to mention"
+    },
+    {
+      "id": "2026-11-12",
+      "date": "2026-11-12",
+      "engagements": [
+        "hetmanek-ca"
+      ],
+      "skills": [],
+      "body": "For the purpose of this site, “Case Studies” is wrong - they’re actually “Solutions”. \n\nFind & Replace had consequences on Page Titles, URLs, existing links, & Semantics.  \n\nWorth changing so I can highlight the thinking, design and insights rather than proprietary business specifics of their first instance.\n\n\n**On the site**\n\n- The 6 Project pages moved from /work/ to /projects/. I added a redirect for each one to src/_redirects, so old /work/<project> links still land on the right page.\n- Home works as before. Projects are ordered by Last updated, and Work by newest Started. No Work entry has a Started date yet, so Work stays in its current order until you add them.\n- I updated Home, the tab you return to from a Project page, and the Build Log links. I checked Home, a Project page, both editor forms and the new-content picker in the browser.\n- Work tab on Home: the columns are Engagement, Description and Skills, and the Filter panel shows Skills only. The phone cards no longer show a status.\n- Projects tab: Status stays as a column and as a filter.\n- Work pages: the right column shows Started, Ended, Skills, with dates shown like \"Oct 2026\". An empty Ended shows \"Present\". This applies to every /work/ page, Projects included.\n\n\n**In the CMS**\n\n- \"+ Add new content\" offers Work and Project as separate choices.\n- Work entry form: Title, Page address (hetmanek.ca/work/), Short description, Started, Ended, Skills, Page body and Gallery. Status, Type and Last updated are gone.\n- Project entry form: the same fields, plus Status and Last updated. Its page address starts hetmanek.ca/projects/. Type is gone.\n- Build Log posts and Letters can still link to Work and Project entries. Renaming or deleting either kind keeps those links in step.\n- A Work entry and a Project entry can't share a page address, because those links match entries by address alone. The editor and the server both reject it.\n- Work entries have two new date pickers, Started and Ended. The CMS rejects a date that isn't a real date.",
+      "excerpt": "For the purpose of this site, “Case Studies” is wrong - they’re actually “Solutions”."
     }
   ],
-  "casestudies": [
+  "solutions": [
     {
       "id": "positioning-engine",
       "title": "Positioning Engine",
@@ -347,31 +347,7 @@ window.SITE = {
         "Build"
       ],
       "order": 2,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "A research validated \"Why\" is foundational for building and marketing any product, and consistent compelling messaging improves outcomes across every team. We had neither.\n\nLike many mid-stage B2B SaaS companies, our position was not articulated and hadn't been validated through research. The product just worked!\n\nThen the market shifted fast, and we found ourselves competing in a newly forming category. \"It just works\" no longer explained why a buyer should choose us.\n\nThe raw material was already there: every sales and customer service call was recorded. No one had turned it into positioning.\n",
-          "image": null
-        },
-        {
-          "label": "Solution",
-          "body": "**An agentic research-to-strategy pipeline, architected and built hands-on, with cross-functional review at every stage.**\n\n1. **Personas.** An LLM skill read the call transcripts and co-authored buyer personas with me. Each persona listed problems and pain points ranked by urgency and willingness to pay.\n2. **Problem-capability matrix.** I mapped those pain points against what the business actually offers.\n3. **Competitive differentiation.** I worked with an LLM to scan the market and identify where we were differentiated.\n4. **Master Positioning Document.** Six core differentiators, each grounded in the research above.\n5. **Messaging Library.** Co-authored with an LLM, using the brand voice guide.\n6. **AI Brand Coach.** User submits collateral (emails, sales decks, website and content copy). The GPT returns a rubric-based grade, feedback tied to the positioning and messaging docs, and suggestions for improvement. \n",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "The company's first positioning research capability enabling us to articulate our value in terms that resonate with the market in a newly forming category.\n\nAdopted by every team, including executive leadership.\n\n**Efficiency:** delivered at 60%+ lower cost than a comparable agency repositioning, in 3 months at 0.5 FTE.\n\n**Customer outcomes:** CSAT improved in Business Reviews, which we attributed to improved messaging.\n\n**Sales outcomes:** win rate increased.\n\n**Workflow:** the Brand Coach became an essential tool throughout the sales cycle.\n\n**Cultural and systemic:** positioning became shared work. Department leaders co-owned the docs, customer-facing teams discussed it in their regular meetings, and collateral review became self-serve.\n",
-          "image": {
-            "src": "",
-            "alt": ""
-          }
-        },
-        {
-          "label": "Learning",
-          "body": "**Positioning drifts.** The market moved while our positioning stayed static. Next time, I'd re-run the whole engine, including win/loss analysis, quarterly to detect and fix drift.\n\n**Evaluate the evaluator continuously.** I validated the Brand Coach against known-good and known-bad collateral. Next time, I'd extend that into an ongoing eval: a human-scored golden set, tracked grader agreement, and a check on whether Brand Coach scores correlate with win rate, re-run each quarter alongside the positioning refresh.\n\n**Positioning drives more than marketing.** Strong positioning and messaging also drives prioritization and design decisions, and earns engineering buy-in.\n",
-          "image": null
-        }
-      ]
+      "body": "## Opportunity\n\nA research validated \"Why\" is foundational for building and marketing any product, and consistent compelling messaging improves outcomes across every team. We had neither.\n\nLike many mid-stage B2B SaaS companies, our position was not articulated and hadn't been validated through research. The product just worked!\n\nThen the market shifted fast, and we found ourselves competing in a newly forming category. \"It just works\" no longer explained why a buyer should choose us.\n\nThe raw material was already there: every sales and customer service call was recorded. No one had turned it into positioning.\n\n## Solution\n\n**An agentic research-to-strategy pipeline, architected and built hands-on, with cross-functional review at every stage.**\n\n1. **Personas.** An LLM skill read the call transcripts and co-authored buyer personas with me. Each persona listed problems and pain points ranked by urgency and willingness to pay.\n2. **Problem-capability matrix.** I mapped those pain points against what the business actually offers.\n3. **Competitive differentiation.** I worked with an LLM to scan the market and identify where we were differentiated.\n4. **Master Positioning Document.** Six core differentiators, each grounded in the research above.\n5. **Messaging Library.** Co-authored with an LLM, using the brand voice guide.\n6. **AI Brand Coach.** User submits collateral (emails, sales decks, website and content copy). The GPT returns a rubric-based grade, feedback tied to the positioning and messaging docs, and suggestions for improvement.\n\n## Wins\n\nThe company's first positioning research capability enabling us to articulate our value in terms that resonate with the market in a newly forming category.\n\nAdopted by every team, including executive leadership.\n\n**Efficiency:** delivered at 60%+ lower cost than a comparable agency repositioning, in 3 months at 0.5 FTE.\n\n**Customer outcomes:** CSAT improved in Business Reviews, which we attributed to improved messaging.\n\n**Sales outcomes:** win rate increased.\n\n**Workflow:** the Brand Coach became an essential tool throughout the sales cycle.\n\n**Cultural and systemic:** positioning became shared work. Department leaders co-owned the docs, customer-facing teams discussed it in their regular meetings, and collateral review became self-serve.\n\n## Learning\n\n**Positioning drifts.** The market moved while our positioning stayed static. Next time, I'd re-run the whole engine, including win/loss analysis, quarterly to detect and fix drift.\n\n**Evaluate the evaluator continuously.** I validated the Brand Coach against known-good and known-bad collateral. Next time, I'd extend that into an ongoing eval: a human-scored golden set, tracked grader agreement, and a check on whether Brand Coach scores correlate with win rate, re-run each quarter alongside the positioning refresh.\n\n**Positioning drives more than marketing.** Strong positioning and messaging also drives prioritization and design decisions, and earns engineering buy-in."
     },
     {
       "id": "demo-day",
@@ -385,28 +361,7 @@ window.SITE = {
         "GTM"
       ],
       "order": 4,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "No one could see the whole product picture.\n\nCommunication was costly and misunderstandings were common.\n\nGS1 Canada is a complex organization serving grocery, foodservice, cannabis, general merchandise, healthcare and pharmaceutical, each with its own use cases, problem spaces, and working groups.\n\nWithin product and engineering, multiple siloed products integrated poorly through abstraction layers, both in the stacks and in the organization \n\n**The result:** it was hard for the whole organization to understand what we were building, what was on the roadmap, and why. \n",
-          "image": null
-        },
-        {
-          "label": "Solution",
-          "body": "**A monthly all-hands Demo Day, built to be accessible and to grow presenters.**\n\n- I created a monthly 1.5-hour all-hands session on what we were building, why we were building it, what had been released and what was on the roadmap.\n\n- Product Managers led the presenting. Business Analysts and Engineers were coached to present their own sections.\n\n- **Asynchronous access.** Recordings and documents were available to everyone, so people across sectors and functions could catch up when it suited them.\n\n- **Live Q&A.** Cross-functional colleagues asked questions and gave feedback in the session.\n\n- **Built-in measurement.** Participants were surveyed after every Demo Day.\n",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "- **Reach:** 90% of employees watched live or via the recording.\n- **Clarity:** colleagues across the organization, including customer success teams, could see what was being built, what was shipping and why.\n- **Feedback loop:** questions and feedback from cross-functional colleagues improved outcomes.\n- **Quality, measured:** post-session satisfaction (internal CSAT) rose from 85 to 95 over a year.\n- **Efficiency:** fewer stakeholder engagement touchpoints, with greater clarity and alignment.\n- **Culture:** one of the practices behind growing the team from 5 to 10 and reducing turnover by 67%.\n- **Capability building:** BAs and Engineers developed presentation skills through coaching.\n",
-          "image": null
-        },
-        {
-          "label": "Learning",
-          "body": "**Presenting is professional development.** Cross-functional team members greatly valued the chance to present and build that skill. Anecdotally, it raised their engagement and buy-in.\n\n**Everyone wants their story told.** Other groups wanted their work represented, so we expanded the agenda to include progress demos from departments beyond Product and Design.\n",
-          "image": null
-        }
-      ]
+      "body": "## Opportunity\n\nNo one could see the whole product picture.\n\nCommunication was costly and misunderstandings were common.\n\nGS1 Canada is a complex organization serving grocery, foodservice, cannabis, general merchandise, healthcare and pharmaceutical, each with its own use cases, problem spaces, and working groups.\n\nWithin product and engineering, multiple siloed products integrated poorly through abstraction layers, both in the stacks and in the organization \n\n**The result:** it was hard for the whole organization to understand what we were building, what was on the roadmap, and why.\n\n## Solution\n\n**A monthly all-hands Demo Day, built to be accessible and to grow presenters.**\n\n- I created a monthly 1.5-hour all-hands session on what we were building, why we were building it, what had been released and what was on the roadmap.\n\n- Product Managers led the presenting. Business Analysts and Engineers were coached to present their own sections.\n\n- **Asynchronous access.** Recordings and documents were available to everyone, so people across sectors and functions could catch up when it suited them.\n\n- **Live Q&A.** Cross-functional colleagues asked questions and gave feedback in the session.\n\n- **Built-in measurement.** Participants were surveyed after every Demo Day.\n\n## Wins\n\n- **Reach:** 90% of employees watched live or via the recording.\n- **Clarity:** colleagues across the organization, including customer success teams, could see what was being built, what was shipping and why.\n- **Feedback loop:** questions and feedback from cross-functional colleagues improved outcomes.\n- **Quality, measured:** post-session satisfaction (internal CSAT) rose from 85 to 95 over a year.\n- **Efficiency:** fewer stakeholder engagement touchpoints, with greater clarity and alignment.\n- **Culture:** one of the practices behind growing the team from 5 to 10 and reducing turnover by 67%.\n- **Capability building:** BAs and Engineers developed presentation skills through coaching.\n\n## Learning\n\n**Presenting is professional development.** Cross-functional team members greatly valued the chance to present and build that skill. Anecdotally, it raised their engagement and buy-in.\n\n**Everyone wants their story told.** Other groups wanted their work represented, so we expanded the agenda to include progress demos from departments beyond Product and Design."
     },
     {
       "id": "we-made-it",
@@ -421,28 +376,7 @@ window.SITE = {
         "Design"
       ],
       "order": 5,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "**Girls were opting out of engineering before they knew what it was.**\n\n- Female enrolment in Ontario engineering schools had stagnated for years, and traditional recruitment tactics weren’t working.\n- A consortium of engineering faculties, backed by Hydro One and Motorola Solutions Foundation, wanted a new approach to outreach: a brand and website that would appeal to high school girls.\n\n> adults were designing for teens they weren’t talking to.\n",
-          "image": null
-        },
-        {
-          "label": "Solution",
-          "body": "**Stop** adults designing for teens that they weren't talking to\n\n**Start** put the target users in the driver’s seat: a paid Youth Think Tank (YTT) of high school girls.\n\n- **A weekly rhythm:** a survey, peer, parent and teacher interviews, and a creative “CoLab” assignment. Those assignments became the site’s content.\n- **Four research themes:** femininity and decision-making, communication, imagery and meaning, and perceptions of engineering.\n- **Findings became a brand** with two personas (Debbie, a young professional engineer, and Zoe, a high school student) and two sites: WEMADEIT.ca for teens, and a community site for teachers, parents and counsellors.\n- **Strategic recommendations** for the consortium: teacher-focused messaging, an influencer-first social strategy, and brand guidelines for non-designers.\n\n",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "- **Research at scale**: 360 surveys and 700+ peer, parent and teacher interviews, including 100 female engineers, 26 engineering students and 7 engineering couples.\n- **Content made by the audience:** 21 user journeys, 10 journey maps of real female engineers, 12 engineering disciplines described, 15 teacher lesson plans, and 80 summer-program posters (40 for teens, 40 for parents).\n- **Brand validated by its audience:** Asked to describe the brand as a person, teens independently described Debbie and Zoe without having seen the guidelines.\n- **Reach and relationships:** 350+ new relationships, including 111 teachers, principals and counsellors; 138 high school students; 77 female engineers; and 12 corporate partners. Three media articles and a Canada AM invitation followed.\n- **Engagement:** ENGBEAUT, a meme the team created, was the most-liked content in limited testing. Facebook reached 2,100 people.\n- **Cultural:** Teens went from research subjects to co-authors, and several said the project changed how they and their friends saw engineering.\n",
-          "image": null
-        },
-        {
-          "label": "Learning",
-          "body": "- Teens engage with ideas that connect to their daily lives, not abstract careers. Content should start from their world.\n- The audience you design for isn’t always the channel that reaches them. Teachers and other influencers mattered more than social media.\n- Co-designing with users produced a brand that resonated with them in a way a consultant-led brand likely wouldn’t have.\n",
-          "image": null
-        }
-      ]
+      "body": "## Opportunity\n\n**Girls were opting out of engineering before they knew what it was.**\n\n- Female enrolment in Ontario engineering schools had stagnated for years, and traditional recruitment tactics weren’t working.\n- A consortium of engineering faculties, backed by Hydro One and Motorola Solutions Foundation, wanted a new approach to outreach: a brand and website that would appeal to high school girls.\n\n> adults were designing for teens they weren’t talking to.\n\n## Solution\n\n**Stop** adults designing for teens that they weren't talking to\n\n**Start** put the target users in the driver’s seat: a paid Youth Think Tank (YTT) of high school girls.\n\n- **A weekly rhythm:** a survey, peer, parent and teacher interviews, and a creative “CoLab” assignment. Those assignments became the site’s content.\n- **Four research themes:** femininity and decision-making, communication, imagery and meaning, and perceptions of engineering.\n- **Findings became a brand** with two personas (Debbie, a young professional engineer, and Zoe, a high school student) and two sites: WEMADEIT.ca for teens, and a community site for teachers, parents and counsellors.\n- **Strategic recommendations** for the consortium: teacher-focused messaging, an influencer-first social strategy, and brand guidelines for non-designers.\n\n## Wins\n\n- **Research at scale**: 360 surveys and 700+ peer, parent and teacher interviews, including 100 female engineers, 26 engineering students and 7 engineering couples.\n- **Content made by the audience:** 21 user journeys, 10 journey maps of real female engineers, 12 engineering disciplines described, 15 teacher lesson plans, and 80 summer-program posters (40 for teens, 40 for parents).\n- **Brand validated by its audience:** Asked to describe the brand as a person, teens independently described Debbie and Zoe without having seen the guidelines.\n- **Reach and relationships:** 350+ new relationships, including 111 teachers, principals and counsellors; 138 high school students; 77 female engineers; and 12 corporate partners. Three media articles and a Canada AM invitation followed.\n- **Engagement:** ENGBEAUT, a meme the team created, was the most-liked content in limited testing. Facebook reached 2,100 people.\n- **Cultural:** Teens went from research subjects to co-authors, and several said the project changed how they and their friends saw engineering.\n\n## Learning\n\n- Teens engage with ideas that connect to their daily lives, not abstract careers. Content should start from their world.\n- The audience you design for isn’t always the channel that reaches them. Teachers and other influencers mattered more than social media.\n- Co-designing with users produced a brand that resonated with them in a way a consultant-led brand likely wouldn’t have."
     },
     {
       "id": "whats-your-news-app",
@@ -455,28 +389,7 @@ window.SITE = {
         "People"
       ],
       "order": 6,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "CBC Kids needed a free app to extend its What’s Your News (WYN) brand, ready for the CBC Kidsummer Festival in July 2012. The constraints were tight:\n\n- A modest budget.\n- A fixed festival date, about ten weeks after kickoff.\n- A preschool audience.\n- No agreed idea for what the app should be.\n\nIt was early in my design and product career, and it was also the first pitch I won as a young entrepreneur.\n\n",
-          "image": null
-        },
-        {
-          "label": "Solution",
-          "body": "**Process first, concept second.** \n\nI won the engagement with a proposal that fixed the process and deliberately left the product open. It covered research, collaborative wireframes, a “point of no return” asset list, prototype testing and app store submission, each with dates.\n\n**Discovery narrowed about 15 ideas to one.** The ideas came from our team and from the WYN team’s own list. We combined\n\n- Research on top preschool apps.\n- A cost analysis of every idea.\n- Workshops with the client.\n\nThe game concepts were the riskiest. They would have taken the most time and budget, and they would have competed with polished titles like Angry Birds and World of Goo.\n\n**The result was the Theme Song Conductor.** The flow:\n1. A screen full of ants, which the kid clears by swiping, with a counter to gamify it.\n2. Gi Ant greets the child and records their name or news, with an “egg timer” to keep clips short, then asks for a photo.\n3. The kid mixes the theme song by tapping characters to mute and unmute tracks. Their own recording and photo trigger as samples.\n4. When the song ends, the ants flood the screen and the app resets.\n\nI owned the concept, the budget and the client relationship. \n",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "- Won the RFP as a young entrepreneur.\n- Delivered a kid-generated, remixable take on the theme song, so each child’s voice became part of the brand.\n- Shipped to the App Store on time and on budget.\n- CBC Kids promoted the app on its home page.\n",
-          "image": null
-        },
-        {
-          "label": "Learning",
-          "body": "- **Budget for after launch.** Real use gives feedback that testing never will. A project needs money set aside to respond to it.\n- **Build in analytics.** The app had no in-app analytics, so I couldn’t show how it performed. I would now agree on success measures with the client before design starts.\n- **Discovery pays off.** Research, costing and client workshops let us choose a concept that fit the budget and the date.\n",
-          "image": null
-        }
-      ]
+      "body": "## Opportunity\n\nCBC Kids needed a free app to extend its What’s Your News (WYN) brand, ready for the CBC Kidsummer Festival in July 2012. The constraints were tight:\n\n- A modest budget.\n- A fixed festival date, about ten weeks after kickoff.\n- A preschool audience.\n- No agreed idea for what the app should be.\n\nIt was early in my design and product career, and it was also the first pitch I won as a young entrepreneur.\n\n## Solution\n\n**Process first, concept second.** \n\nI won the engagement with a proposal that fixed the process and deliberately left the product open. It covered research, collaborative wireframes, a “point of no return” asset list, prototype testing and app store submission, each with dates.\n\n**Discovery narrowed about 15 ideas to one.** The ideas came from our team and from the WYN team’s own list. We combined\n\n- Research on top preschool apps.\n- A cost analysis of every idea.\n- Workshops with the client.\n\nThe game concepts were the riskiest. They would have taken the most time and budget, and they would have competed with polished titles like Angry Birds and World of Goo.\n\n**The result was the Theme Song Conductor.** The flow:\n1. A screen full of ants, which the kid clears by swiping, with a counter to gamify it.\n2. Gi Ant greets the child and records their name or news, with an “egg timer” to keep clips short, then asks for a photo.\n3. The kid mixes the theme song by tapping characters to mute and unmute tracks. Their own recording and photo trigger as samples.\n4. When the song ends, the ants flood the screen and the app resets.\n\nI owned the concept, the budget and the client relationship.\n\n## Wins\n\n- Won the RFP as a young entrepreneur.\n- Delivered a kid-generated, remixable take on the theme song, so each child’s voice became part of the brand.\n- Shipped to the App Store on time and on budget.\n- CBC Kids promoted the app on its home page.\n\n## Learning\n\n- **Budget for after launch.** Real use gives feedback that testing never will. A project needs money set aside to respond to it.\n- **Build in analytics.** The app had no in-app analytics, so I couldn’t show how it performed. I would now agree on success measures with the client before design starts.\n- **Discovery pays off.** Research, costing and client workshops let us choose a concept that fit the budget and the date."
     },
     {
       "id": "ruby-skye-p-i-the-haunted-library",
@@ -492,35 +405,13 @@ window.SITE = {
         "Listen"
       ],
       "order": 7,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "**Season 1 broke ground, won awards, and showed that a series living on a release schedule fades when the schedule ends.**\n\n- Ruby Skye P.I. trail-blazed transmedia web-series in 2010 -  but its web content was tied to the broadcast and became dated.\n- Tweens weren’t on link-sharing social platforms - so teachers, librarians and parents were the way in. A teacher introducing Ruby to a class produced a class-sized bump in viewers that night.\n- As Digital Producer for Season 2, I used those findings to shape how the series would grow.",
-          "image": null
-        },
-        {
-          "label": "Solution",
-          "body": "**Build the web the characters live in. Give teachers a reusable way to bring it into class.**\n\n- **Transmedia world (new in Season 2).** I designed and built all of the sites. The principle was that audiences would experience the same web the characters do, with new URLs revealed as episodes were released. The sites included the O’Deary Library, O’Deary Puzzles and character blogs for Hailey, Diana and The Mint Chip Girls.\n- **Curriculum.** I proposed and wrote the teaching unit from the Season 1 findings: 12 lessons for grades 4-6 Ontario Language Arts and Media Literacy. Each lesson pairs an activity, a teaching objective, discussion, desk work and an episode. A class-wide “Mystery Maintenance” thread tracks suspects and clues. It was designed to be fun, to minimize lesson planning, and to be reused every year.\n- **Generalist role.** I also prepared for the shoot and the release schedule, developed content, and photographed on set.",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "**Shipped the series’ first transmedia layer.** \n\n- Season 1 had none; Season 2 launched with the O’Deary Library, O’Deary Puzzles and several character blogs.\n\n**Turned research into product.** \n\n- Season 1 findings drove both the web world and the curriculum.\n\n**Built for reuse.** \n\n- The curriculum gives teachers a lesson set that works year after year.\n",
-          "image": null
-        },
-        {
-          "label": "Learning",
-          "body": " **Build for longevity.** Evergreen design lets a series keep living.\n\n**Get the contract right!**",
-          "image": null
-        }
-      ]
+      "body": "## Opportunity\n\n**Season 1 broke ground, won awards, and showed that a series living on a release schedule fades when the schedule ends.**\n\n- Ruby Skye P.I. trail-blazed transmedia web-series in 2010 -  but its web content was tied to the broadcast and became dated.\n- Tweens weren’t on link-sharing social platforms - so teachers, librarians and parents were the way in. A teacher introducing Ruby to a class produced a class-sized bump in viewers that night.\n- As Digital Producer for Season 2, I used those findings to shape how the series would grow.\n\n## Solution\n\n**Build the web the characters live in. Give teachers a reusable way to bring it into class.**\n\n- **Transmedia world (new in Season 2).** I designed and built all of the sites. The principle was that audiences would experience the same web the characters do, with new URLs revealed as episodes were released. The sites included the O’Deary Library, O’Deary Puzzles and character blogs for Hailey, Diana and The Mint Chip Girls.\n- **Curriculum.** I proposed and wrote the teaching unit from the Season 1 findings: 12 lessons for grades 4-6 Ontario Language Arts and Media Literacy. Each lesson pairs an activity, a teaching objective, discussion, desk work and an episode. A class-wide “Mystery Maintenance” thread tracks suspects and clues. It was designed to be fun, to minimize lesson planning, and to be reused every year.\n- **Generalist role.** I also prepared for the shoot and the release schedule, developed content, and photographed on set.\n\n## Wins\n\n**Shipped the series’ first transmedia layer.** \n\n- Season 1 had none; Season 2 launched with the O’Deary Library, O’Deary Puzzles and several character blogs.\n\n**Turned research into product.** \n\n- Season 1 findings drove both the web world and the curriculum.\n\n**Built for reuse.** \n\n- The curriculum gives teachers a lesson set that works year after year.\n\n## Learning\n\n**Build for longevity.** Evergreen design lets a series keep living.\n\n**Get the contract right!**"
     },
     {
-      "id": "user-journey-optimization-framework",
-      "title": "User Journey Optimization Framework",
-      "desc": "The all-seeing eye of CX. Zoom in to the touchpoint. Zoom out to the journey.",
+      "id": "user-journey-portfolio-optimization-framework",
+      "title": "User Journey Portfolio Optimization Framework",
+      "desc": "Zoom in to the touchpoint. Zoom out to the journey.",
       "skills": [
-        "Design Research",
         "Design",
         "Business",
         "Build",
@@ -529,31 +420,11 @@ window.SITE = {
         "GTM",
         "Product Marketing",
         "People",
-        "Strategy"
+        "Strategy",
+        "Design Research"
       ],
       "order": 1,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "CX success belongs to everyone. But each department sees its own slice through its own lens, with its own budget and priorities\n\nGS1 Canada serves six sectors, six subscriber types, and dozens of needs and tasks: complexity via 365 distinct user journeys. No one could say which journeys mattered most or how to efficiently and effectively improve them.\n\nMeanwhile:\n\n- Resellers were out-funneling GS1 for people who just needed a barcode.\n- Billing issues generated an outsized percentage of annual support cases. \n- A $$$ attribute campaign led to only n subscribers adopting. \n\n> How do we get on the same page?",
-          "image": null
-        },
-        {
-          "label": "Solution",
-          "body": "**Stop**  mapping journeys one at a time.\n\n**Start** understanding customers and users holistically via a matrix of touchpoints by journey, so the whole portfolio can be seen, filtered, and compared, then drilled into.\n\n### How it works\n*Conventional journey maps are hard to compare and contrast, especially at scale. A matrix lets you see the portfolio as a whole and also break any single journey into fine detail.*\n\n**Structure:** \n\n- Touchpoints *(rows)* are grouped by stage *(i.e., Product Discovery, Sign Up, JTBD, Billing, off-boarding)*.\n- Each row carries: user needs, tasks, and expectations  |  value definition | links to VOC evidence *(recordings, transcripts)* | SWOT | Metrics and KPIs | maintenance costs | policy barriers | internal stakeholders | **health score** *(derived from above)* | a named caretaker\n- The matrix can be filtered by journeys, which are comprised of touch-points.\n\n### **Two uses from one structure.**\n\n1. **Health**. See journey and touchpoint health from a bird’s-eye view, including where patterns are consistent and where they aren’t.\n- **Discovery.** That same analysis feeds research for designing solutions and for identifying and prioritizing the highest-value opportunities.\n\n\n",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "\n\n",
-          "image": null
-        },
-        {
-          "label": "Learning",
-          "body": "**Bring a shared solution, not a mandate.** \nLarge cross-functional work is political work, so design for that from the start. A neutral, customer-centered frame lets each department see its own part without giving up ownership. \n\n**Change the unit of analysis.** \nComparison needs a common structure, so choose the structure before collecting the stories.\n",
-          "image": null
-        }
-      ]
+      "body": "## Opportunity\n\nCX success belongs to everyone. But each department sees its own slice through its own lens, with its own budget and priorities\n\nGS1 Canada serves six sectors, six subscriber types, and dozens of needs and tasks: complexity via 365 distinct user journeys. No one could say which journeys mattered most or how to efficiently and effectively improve them.\n\nMeanwhile:\n\n- Resellers were out-funneling GS1 for people who just needed a barcode.\n- Billing issues generated an outsized percentage of annual support cases. \n- A $$$ attribute campaign led to only n subscribers adopting. \n\n\n\n\n> How do we get on the same page?\n\n## Solution\n\n**Stop**  mapping journeys one at a time.\n\n**Start** understanding customers and users holistically via a matrix of touchpoints by journey, so the whole portfolio can be seen, filtered, and compared, then drilled into.\n\n![Journey Portfolio Matrix Screenshot](/assets/solutions/user-journey-portfolio-optimization-framework/ux-journey-portfolio-management-screenshot.png)\n\n### How it works\n*Conventional journey maps are hard to compare and contrast, especially at scale. A matrix lets you see the portfolio as a whole and also break any single journey into fine detail.*\n\n**Structure:** \n\n- Touchpoints *(rows)* are grouped by stage *(i.e., Product Discovery, Sign Up, JTBD, Billing, off-boarding)*.\n- Each row carries: user needs, tasks, and expectations  |  value definition | links to VOC evidence *(recordings, transcripts)* | SWOT | Metrics and KPIs | maintenance costs | policy barriers | internal stakeholders | **health score** *(derived from above)* | a named caretaker\n- The matrix can be filtered by journeys, which are comprised of touch-points.\n\n### **Two uses from one structure.**\n\n1. **Health**. See journey and touchpoint health from a bird’s-eye view, including where patterns are consistent and where they aren’t.\n- **Discovery.** That same analysis feeds research for designing solutions and for identifying and prioritizing the highest-value opportunities.\n\n## Learning\n\n**Bring a shared solution, not a mandate.** \nLarge cross-functional work is political work, so design for that from the start. A neutral, customer-centered frame lets each department see its own part without giving up ownership. \n\n**Change the unit of analysis.** \nComparison needs a common structure, so choose the structure before collecting the stories."
     },
     {
       "id": "team-excellence-engine",
@@ -569,28 +440,7 @@ window.SITE = {
         "Strategy"
       ],
       "order": 4,
-      "sections": [
-        {
-          "label": "Opportunity",
-          "body": "- Performance conversations ran on impressions. Reviews felt subjective, and nobody shared a definition of “good.” Growth across the team was uneven, and development plans weren’t tied to evidence. The annual review didn’t help: it was high-level lip service, and the process wasn’t built to enforce rigor or accountability.\n- There was also a gap on the business side. The business could say which capabilities it needed from Product and Design, but nothing connected those needs to a plan for building them.\n- I had a second problem as the leader. With a team of ten, I could be blind to the reality of my team’s work on the ground.\n",
-          "image": null
-        },
-        {
-          "label": "Solution",
-          "body": "Define what “good” looks like for each role, anchored in observable evidence, and assess it in the open with the team.\n\n### How it works\n\n- **Six pillars**. Learn, Envision, Plan, Execute, Measure and Influence cover the product lifecycle from understanding users and market through to influencing the organization. Each pillar breaks into scopes. Learn, for example, splits into voice-of-customer, market and product knowledge. [GAP: confirm the pillars were chosen to mirror the capabilities the business asked for.]\n- **Anchored levels**. Every scope has behavioural descriptions at four levels: Not Performing (0), Developing (3), Performing (6) and Outperforming (9). Shading marks in-between scores (+1 or −1), so a score always sits next to a description rather than a bare number.\n- **Evidence built into the sheet**. Each pillar lists the artifacts that count as proof (an interview register, a roadmap, an MBR/QBR). Notes and evidence columns sit beside the score so every score can be substantiated.\n- **One rubric per role**. I folded the framework into the competency ladders, so each role has its own rubric and expectations.\n- **Scored together, in the open**. I led the assessment with the team in our Community of Practice. The rubric was explicit about expectations, and the team was encouraged to argue for a higher score if they had evidence. The scoreboard was visible to departmental leadership.\n- **An input, not a verdict**. The scoreboard’s main job was to drive professional-excellence conversations and growth plans. It was one input to formal performance reviews, which also weighed external factors. High developer turnover on a team, for instance, affects a Product Manager’s ability to deliver on time, on budget and at quality.\n\n",
-          "image": null
-        },
-        {
-          "label": "Wins",
-          "body": "- Team members felt seen and cared for. I used the scoreboard as evidence in formal performance reviews.\n- It gave the team a venue to tell their own story of what they were accomplishing, which I couldn’t have seen from my seat.\n- Retention: [placeholder]\n- Engagement: [placeholder]\n- Internal referrals: [placeholder]\n",
-          "image": null
-        },
-        {
-          "label": "Learning",
-          "body": "- **Define “good” once, per role.** An explicit, level-anchored standard makes growth discussable. Evidence, not impression, settles scores.\n- **Make the assessment a venue, not a verdict.** A leader can’t see all the work. Give people a place to tell their story with evidence, and let them contest a score.\n- **Let the teacher be taught.** Collaborative assessment teaches the assessor too. Engaging people in self- and peer-assessment makes them actors in their own improvement.\n- **Score the person, then adjust for context.** Weigh external factors separately, so the number stays honest and the review stays fair.\n",
-          "image": null
-        }
-      ]
+      "body": "## Opportunity\n\n- Performance conversations ran on impressions. Reviews felt subjective, and nobody shared a definition of “good.” Growth across the team was uneven, and development plans weren’t tied to evidence. The annual review didn’t help: it was high-level lip service, and the process wasn’t built to enforce rigor or accountability.\n- There was also a gap on the business side. The business could say which capabilities it needed from Product and Design, but nothing connected those needs to a plan for building them.\n- I had a second problem as the leader. With a team of ten, I could be blind to the reality of my team’s work on the ground.\n\n## Solution\n\nDefine what “good” looks like for each role, anchored in observable evidence, and assess it in the open with the team.\n\n### How it works\n\n- **Six pillars**. Learn, Envision, Plan, Execute, Measure and Influence cover the product lifecycle from understanding users and market through to influencing the organization. Each pillar breaks into scopes. Learn, for example, splits into voice-of-customer, market and product knowledge. [GAP: confirm the pillars were chosen to mirror the capabilities the business asked for.]\n- **Anchored levels**. Every scope has behavioural descriptions at four levels: Not Performing (0), Developing (3), Performing (6) and Outperforming (9). Shading marks in-between scores (+1 or −1), so a score always sits next to a description rather than a bare number.\n- **Evidence built into the sheet**. Each pillar lists the artifacts that count as proof (an interview register, a roadmap, an MBR/QBR). Notes and evidence columns sit beside the score so every score can be substantiated.\n- **One rubric per role**. I folded the framework into the competency ladders, so each role has its own rubric and expectations.\n- **Scored together, in the open**. I led the assessment with the team in our Community of Practice. The rubric was explicit about expectations, and the team was encouraged to argue for a higher score if they had evidence. The scoreboard was visible to departmental leadership.\n- **An input, not a verdict**. The scoreboard’s main job was to drive professional-excellence conversations and growth plans. It was one input to formal performance reviews, which also weighed external factors. High developer turnover on a team, for instance, affects a Product Manager’s ability to deliver on time, on budget and at quality.\n\n## Wins\n\n- Team members felt seen and cared for. I used the scoreboard as evidence in formal performance reviews.\n- It gave the team a venue to tell their own story of what they were accomplishing, which I couldn’t have seen from my seat.\n- Retention: [placeholder]\n- Engagement: [placeholder]\n- Internal referrals: [placeholder]\n\n## Learning\n\n- **Define “good” once, per role.** An explicit, level-anchored standard makes growth discussable. Evidence, not impression, settles scores.\n- **Make the assessment a venue, not a verdict.** A leader can’t see all the work. Give people a place to tell their story with evidence, and let them contest a score.\n- **Let the teacher be taught.** Collaborative assessment teaches the assessor too. Engaging people in self- and peer-assessment makes them actors in their own improvement.\n- **Score the person, then adjust for context.** Weigh external factors separately, so the number stays honest and the review stays fair."
     }
   ],
   "letters": [

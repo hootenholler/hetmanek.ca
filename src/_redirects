@@ -1,0 +1,10 @@
+# Cloudflare redirects (read at deploy; the local CMS ignores this file).
+# Case Studies were renamed Solutions on 2026-11-12; keeps links to the old addresses working.
+/casestudies/* /solutions/:splat 301
+# Projects moved out of Work into /projects/ on 2026-11-12 (one line each: Work pages stay under /work/).
+/work/unome /projects/unome 301
+/work/hetmanek-ca /projects/hetmanek-ca 301
+/work/opportunity-assessment-engine /projects/opportunity-assessment-engine 301
+/work/pengi-by-beatrix /projects/pengi-by-beatrix 301
+/work/at-the-bedside-podcast /projects/at-the-bedside-podcast 301
+/work/project-eggdrop /projects/project-eggdrop 301

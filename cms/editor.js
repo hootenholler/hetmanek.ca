@@ -14,12 +14,12 @@ import { esc, uniq } from '/js/shared.js';
   const MOD = IS_MAC ? '⌘' : 'Ctrl+';
 
   const TYPES = {
-    work: { label: 'Work', noun: 'Work entry', blurb: 'A project, role or engagement. Gets its own page and a row in the Work table.' },
-    buildlog: { label: 'Build Log post', noun: 'Build Log post', blurb: 'A dated note. Appears on the Build Log, on Home, and on related Work pages.' },
-    casestudies: { label: 'Case Study', noun: 'Case Study', blurb: 'Opportunity, Solution, Wins and Learning, with a short description.' },
+    work: { label: 'Work', noun: 'Work entry', blurb: 'A job or role. Gets its own page and a row in the Work table.' },
+    projects: { label: 'Project', noun: 'Project entry', blurb: 'Something you’re making. Gets its own page and a row in the Projects table.' },
+    buildlog: { label: 'Build Log post', noun: 'Build Log post', blurb: 'A dated note. Appears on the Build Log, on Home, and on related Work and Project pages.' },
+    solutions: { label: 'Solution', noun: 'Solution', blurb: 'A write-up with a short description. Use ## headings for its parts.' },
     letters: { label: 'Letter or Article', noun: 'Letter', blurb: 'Long-form writing with a date, summary and cover image.' }
   };
-  const SECTIONS = ['Opportunity', 'Solution', 'Wins', 'Learning'];
   const STATUSES = ['Alive', 'Active', 'In Dev', 'In Design', 'Done'];
 
   const slugify = (s) => String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
@@ -49,16 +49,19 @@ import { esc, uniq } from '/js/shared.js';
   }
 
   const blank = () => ({
-    work: { id: '', title: '', type: '', status: '', desc: '', skills: [], updated: today(), body: '', gallery: [] },
+    work: { id: '', title: '', desc: '', skills: [], started: '', ended: '', body: '', gallery: [] },
+    projects: { id: '', title: '', status: '', desc: '', skills: [], started: '', ended: '', updated: today(), body: '', gallery: [] },
     buildlog: { id: '', date: today(), engagements: [], skills: [], body: '' },
-    casestudies: { id: '', title: '', desc: '', skills: [], order: Math.max(0, ...content.casestudies.map((c) => c.order || 0)) + 1, sections: SECTIONS.map((label) => ({ label, body: '', image: null })) },
+    solutions: { id: '', title: '', desc: '', skills: [], order: Math.max(0, ...content.solutions.map((c) => c.order || 0)) + 1, body: '' },
     letters: { id: '', title: '', date: today(), summary: '', engagements: [], skills: [], image: null, body: '' }
   })[type];
 
-  const PREFIX = { work: '/work/', casestudies: '/casestudies/', letters: '/letters/' };
+  const PREFIX = { work: '/work/', projects: '/projects/', solutions: '/solutions/', letters: '/letters/' };
+  // Work and Project entries: the two lists that Build Log posts and letters link to ("engagements"), by id.
+  const ENGAGED = ['work', 'projects'];
   const pageUrl = (e) => (PREFIX[type] ? PREFIX[type] + e.id : '/buildlog#' + e.id);
 
-  // key paths like "sections.0.body" or "image.alt"
+  // key paths like "gallery.0.alt" or "image.alt"
   const getPath = (obj, key) => key.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
   const setPath = (obj, key, val) => { const ks = key.split('.'); const last = ks.pop(); ks.reduce((o, k) => o[k], obj)[last] = val; };
 
@@ -157,45 +160,54 @@ import { esc, uniq } from '/js/shared.js';
 
   // ---------- forms ----------
   function formFields() {
-    const allSkills = uniq([].concat(...['work', 'buildlog', 'casestudies', 'letters'].map((k) => [].concat(...content[k].map((x) => x.skills || []))))).map((v) => ({ value: v, label: v }));
-    const workOptions = content.work.map((w) => ({ value: w.id, label: w.title }));
+    const allSkills = uniq([].concat(...['work', 'projects', 'buildlog', 'solutions', 'letters'].map((k) => [].concat(...content[k].map((x) => x.skills || []))))).map((v) => ({ value: v, label: v }));
+    const workOptions = content.work.concat(content.projects).map((w) => ({ value: w.id, label: w.title }));
     const skills = tags('skills', 'Skills', allSkills, { addable: true, help: 'Click to select. Type a new one and press Enter to add it.' });
 
+    const dates = (orderHelp) => '<div class="f-row">' +
+      text('started', 'Started', { type: 'date', help: 'Shown on the page as month and year.' + (orderHelp || '') }) +
+      text('ended', 'Ended', { type: 'date', help: 'Leave empty while it’s ongoing; the page shows “Started – Present”.' }) +
+    '</div>';
     if (type === 'work') return [
       text('title', 'Title', { required: true }), slugField(),
       text('desc', 'Short description', { help: 'One line, shown under the title and in the Work table on Home.' }),
+      dates(' Orders the Work table on Home, newest first.'),
+      skills,
+      markdown('body', 'Page body'),
+      galleryField('gallery', 'Gallery', 'Shown under the body. Three images looks best.')
+    ];
+    if (type === 'projects') return [
+      text('title', 'Title', { required: true }), slugField(),
+      text('desc', 'Short description', { help: 'One line, shown under the title and in the Projects table on Home.' }),
       '<div class="f-row">' +
-        text('status', 'Status', { list: uniq(STATUSES.concat(content.work.map((w) => w.status))), placeholder: 'e.g. In Dev' }) +
-        text('type', 'Type', { list: uniq(content.work.map((w) => w.type)), placeholder: 'e.g. Project' }) +
-        text('updated', 'Last updated', { type: 'date', help: 'The site shows this, or the newest Build Log post about it if that’s later.' }) +
+        text('status', 'Status', { list: uniq(STATUSES.concat(content.projects.map((w) => w.status))), placeholder: 'e.g. In Dev', help: 'Shown in the Projects table on Home.' }) +
+        text('updated', 'Last updated', { type: 'date', help: 'Orders the Projects table on Home (newest first), or the newest Build Log post about it if that’s later.' }) +
       '</div>',
+      dates(),
       skills,
       markdown('body', 'Page body'),
       galleryField('gallery', 'Gallery', 'Shown under the body. Three images looks best.')
     ];
     if (type === 'buildlog') return [
       text('date', 'Date', { type: 'date', required: true }),
-      tags('engagements', 'Engagements', workOptions, { help: 'Which Work entries this post is about. They become hashtags and link the post from those pages.' }),
+      tags('engagements', 'Engagements', workOptions, { help: 'Which Work or Project entries this post is about. They become hashtags and link the post from those pages.' }),
       skills,
       markdown('body', 'Post', { required: true, rows: 12 }),
       checkbox('pinned', 'Pin to the top of Home', 'Only one post can be pinned. Pinning this one unpins the other.'),
       area('excerpt', 'Excerpt (optional)', { help: 'Shown on Home and in tables. Leave empty to use the start of the first paragraph.' })
     ];
-    if (type === 'casestudies') return [
+    if (type === 'solutions') return [
       text('title', 'Title', { required: true }), slugField(),
-      text('desc', 'Short description', { help: 'One line, shown under the title and in the Case Studies table on Home.' }),
-      text('order', 'Order', { type: 'number', help: 'Lower numbers come first in the Case Studies table.' }),
-      skills
-    ].concat(entry.sections.map((s, i) =>
-      '<fieldset class="section-fs"><legend>' + esc(s.label) + '</legend>' +
-        markdown('sections.' + i + '.body', s.label, { rows: 8 }) +
-        imageField('sections.' + i + '.image', 'Image (optional)', 'Shown right-aligned under this section.') +
-      '</fieldset>'));
+      text('desc', 'Short description', { help: 'One line, shown under the title and in the Solutions table on Home.' }),
+      text('order', 'Order', { type: 'number', help: 'Lower numbers come first in the Solutions table.' }),
+      skills,
+      markdown('body', 'Page body', { help: 'Use ## headings for its parts, such as Opportunity, Solution, Wins and Learning.' })
+    ];
     if (type === 'letters') return [
       text('title', 'Title', { required: true }), slugField(),
       text('date', 'Date', { type: 'date', required: true }),
       text('summary', 'Summary', { help: 'One line, shown in the Letters & Articles table on Home.' }),
-      tags('engagements', 'Engagements', workOptions, { help: 'Which Work entries this is about. It’s listed on those pages.' }),
+      tags('engagements', 'Engagements', workOptions, { help: 'Which Work or Project entries this is about. It’s listed on those pages.' }),
       skills,
       imageField('image', 'Cover image', '3:2 landscape looks best.'),
       markdown('body', 'Body', { rows: 18 })
@@ -436,6 +448,8 @@ import { esc, uniq } from '/js/shared.js';
       if (!String(entry.title || '').trim()) errs.push('Add a title.');
       if (!SLUG.test(entry.id || '')) errs.push('The page address can only use lowercase letters, numbers and single hyphens.');
       else if (list.some((x) => x.id === entry.id && x.id !== originalId)) errs.push('Another ' + TYPES[type].noun + ' already uses the address “' + entry.id + '”.');
+      // Engagement links are by id alone, so a Work entry and a Project entry can't share one.
+      else if (ENGAGED.indexOf(type) >= 0 && ENGAGED.some((k) => k !== type && content[k].some((x) => x.id === entry.id))) errs.push('A ' + TYPES[ENGAGED.find((k) => k !== type)].noun + ' already uses the address “' + entry.id + '”.');
     }
     if ((type === 'buildlog' || type === 'letters') && !ISO.test(entry.date || '')) errs.push('Add a date.');
     if (type === 'buildlog' && !String(entry.body || '').trim()) errs.push('Write the post.');
@@ -466,10 +480,10 @@ import { esc, uniq } from '/js/shared.js';
         if (e.pinned) list.forEach((p) => { delete p.pinned; }); else delete e.pinned;
         if (!e.excerpt) delete e.excerpt;
       }
-      if (type === 'casestudies' && e.order === '') delete e.order;
+      if (type === 'solutions' && e.order === '') delete e.order;
 
-      // Renaming a Work entry: keep Build Log posts and letters pointing at it.
-      if (type === 'work' && mode === 'edit' && e.id !== originalId) {
+      // Renaming a Work or Project entry: keep Build Log posts and letters pointing at it.
+      if (ENGAGED.indexOf(type) >= 0 && mode === 'edit' && e.id !== originalId) {
         fresh.buildlog.concat(fresh.letters).forEach((p) => { p.engagements = (p.engagements || []).map((x) => (x === originalId ? e.id : x)); });
       }
 
@@ -478,7 +492,7 @@ import { esc, uniq } from '/js/shared.js';
       if (publish) delete saved.draft; else saved.draft = true;
       const idx = mode === 'edit' ? list.findIndex((x) => x.id === originalId) : -1;
       if (idx >= 0) list[idx] = saved;
-      else if (type === 'work') list.unshift(saved);
+      else if (ENGAGED.indexOf(type) >= 0) list.unshift(saved);
       else list.push(saved);
 
       status.textContent = 'Saving…';
@@ -516,7 +530,7 @@ import { esc, uniq } from '/js/shared.js';
     try {
       const fresh = await fetchContent();
       fresh[type] = fresh[type].filter((x) => x.id !== originalId);
-      if (type === 'work') {
+      if (ENGAGED.indexOf(type) >= 0) {
         fresh.buildlog.concat(fresh.letters).forEach((p) => { p.engagements = (p.engagements || []).filter((x) => x !== originalId); });
       }
       await putContent(fresh);
@@ -546,12 +560,9 @@ import { esc, uniq } from '/js/shared.js';
       entry = clone(found);
       originalId = found.id;
       originalDate = found.date || null;
-      if (type === 'work') { entry.skills = entry.skills || []; entry.gallery = entry.gallery || []; entry.body = entry.body || ''; }
+      if (ENGAGED.indexOf(type) >= 0) { entry.skills = entry.skills || []; entry.gallery = entry.gallery || []; entry.body = entry.body || ''; }
       if (type === 'buildlog') { entry.engagements = entry.engagements || []; entry.skills = entry.skills || []; }
-      if (type === 'casestudies') {
-        entry.skills = entry.skills || [];
-        entry.sections = SECTIONS.map((label) => (entry.sections || []).find((s) => s.label === label) || { label, body: '', image: null });
-      }
+      if (type === 'solutions') { entry.skills = entry.skills || []; entry.body = entry.body || ''; }
       if (type === 'letters') { entry.engagements = entry.engagements || []; entry.skills = entry.skills || []; }
     } else {
       entry = blank();

@@ -1,6 +1,6 @@
 // Local CMS for hetmanek.ca. Run with `npm run cms` (or double-click start-cms.command).
 // Serves the site from /src with an editing bar, plus an editor that saves published entries to src/js/content.js,
-// drafts to cms/drafts.json (the Home introduction has no drafts), and the finished Work, Case Study and Letter pages to src/<type>/<id>.html.
+// drafts to cms/drafts.json (the Home introduction has no drafts), and the finished Work, Project, Solution and Letter pages to src/<type>/<id>.html.
 // Uploads images into src/assets. Nothing in /cms is deployed. Uses only Node's standard library.
 
 import http from 'node:http';
@@ -28,14 +28,14 @@ const MIME = {
 };
 const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
 const CMS_FILES = new Set(['cms.js', 'cms.css', 'editor.js']);
-const ENTRY = /^\/(work|casestudies|letters)\/([^/]+?)(?:\.html)?\/?$/;
+const ENTRY = /^\/(work|projects|solutions|letters)\/([^/]+?)(?:\.html)?\/?$/;
 
 // Added to every site page: the editing bar.
 const INJECT = '<link rel="stylesheet" href="/__cms/cms.css"><script src="/__cms/cms.js" defer></script>';
 const inject = (html) => html.replace('</head>', INJECT + '</head>');
 
 // ---------- content: published entries in src/js/content.js, drafts in cms/drafts.json ----------
-const KEYS = ['work', 'buildlog', 'casestudies', 'letters'];
+const KEYS = ['work', 'projects', 'buildlog', 'solutions', 'letters'];
 const MARKER = 'window.SITE =';
 const MARKER_LINE = /^window\.SITE\s*=/m; // the real assignment, at the start of a line (not a mention in a comment)
 function readContent() {
@@ -53,7 +53,7 @@ function validate(d) {
   const errs = [];
   // The one introduction on Home: an object, not a list, and never a draft.
   if (!d.introduction || typeof d.introduction.body !== 'string') errs.push('introduction must have a text body');
-  for (const key of ['work', 'buildlog', 'casestudies', 'letters']) {
+  for (const key of KEYS) {
     if (!Array.isArray(d[key])) { errs.push(key + ' must be a list'); continue; }
     const seen = new Set();
     d[key].forEach((e, i) => {
@@ -65,9 +65,14 @@ function validate(d) {
       if (seen.has(e.id)) errs.push(where + ': duplicate id "' + e.id + '"');
       seen.add(e.id);
       if (key !== 'buildlog' && !String(e.title || '').trim()) errs.push(where + ': title is required');
-      for (const f of ['date', 'updated']) if (e[f] && !ISO.test(e[f])) errs.push(where + ': ' + f + ' must be YYYY-MM-DD');
+      for (const f of ['date', 'updated', 'started', 'ended']) if (e[f] && !ISO.test(e[f])) errs.push(where + ': ' + f + ' must be YYYY-MM-DD');
       if ((key === 'buildlog' || key === 'letters') && !ISO.test(e.date || '')) errs.push(where + ': date is required');
     });
+  }
+  // Build Log posts and letters point at Work and Project entries by id alone, so no id may be in both lists.
+  if (Array.isArray(d.work) && Array.isArray(d.projects)) {
+    const workIds = new Set(d.work.map((e) => e && e.id));
+    d.projects.forEach((e) => { if (e && workIds.has(e.id)) errs.push('projects: "' + e.id + '" is also a Work entry’s id'); });
   }
   if (d.buildlog && d.buildlog.filter((p) => p.pinned).length > 1) errs.push('Only one Build Log post can be pinned');
   return errs;
@@ -75,13 +80,13 @@ function validate(d) {
 
 // The editor sees one list per type, with drafts marked "draft": true. Everything in drafts.json is a draft,
 // flag or not, so an entry added there by hand can't be published by accident.
-// New Work entries go to the top of the list, so Work drafts sit ahead of the published ones.
+// New Work and Project entries go to the top of their lists, so their drafts sit ahead of the published ones.
 function readAll() {
   const { data } = readContent();
   const drafts = fs.existsSync(DRAFTS) ? JSON.parse(fs.readFileSync(DRAFTS, 'utf8')) : {};
   for (const key of KEYS) {
     const d = (drafts[key] || []).map((e) => Object.assign({}, e, { draft: true }));
-    data[key] = key === 'work' ? d.concat(data[key]) : data[key].concat(d);
+    data[key] = key === 'work' || key === 'projects' ? d.concat(data[key] || []) : (data[key] || []).concat(d);
   }
   return data;
 }
