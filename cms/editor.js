@@ -3,7 +3,7 @@
 // Reads and writes all content, published and draft, through the local server's /__cms/api/content.
 
 import * as MD from '/js/markdown.js';
-import { esc, uniq } from '/js/shared.js';
+import { esc, uniq, workTitle } from '/js/shared.js';
 
 (function () {
   const root = document.getElementById('editor');
@@ -17,7 +17,7 @@ import { esc, uniq } from '/js/shared.js';
     work: { label: 'Work', noun: 'Work entry', blurb: 'A job or role. Gets its own page and a row in the Work table.' },
     projects: { label: 'Project', noun: 'Project entry', blurb: 'Something you’re making. Gets its own page and a row in the Projects table.' },
     buildlog: { label: 'Build Log post', noun: 'Build Log post', blurb: 'A dated note. Appears on the Build Log, on Home, and on related Work and Project pages.' },
-    solutions: { label: 'Solution', noun: 'Solution', blurb: 'A write-up with a short description. Use ## headings for its parts.' },
+    casestudies: { label: 'Case Study', noun: 'Case Study', blurb: 'A write-up with a short description. Use ## headings for its parts.' },
     letters: { label: 'Letter or Article', noun: 'Letter', blurb: 'Long-form writing with a date, summary and cover image.' }
   };
   const STATUSES = ['Alive', 'Active', 'In Dev', 'In Design', 'Done'];
@@ -41,7 +41,7 @@ import { esc, uniq } from '/js/shared.js';
     if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error((d.errors || ['Save failed (' + r.status + ')']).join('\n')); }
   }
   async function upload(file) {
-    const folder = type + '/' + (type === 'buildlog' ? entry.date : entry.id || slugify(entry.title) || 'new');
+    const folder = type + '/' + (type === 'buildlog' ? entry.date : entry.id || slugify(entry[SLUG_SOURCE]) || 'new');
     const r = await fetch('/__cms/api/upload?folder=' + encodeURIComponent(folder) + '&name=' + encodeURIComponent(file.name), { method: 'POST', body: file });
     const d = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error((d.errors || ['Upload failed']).join(' '));
@@ -49,17 +49,19 @@ import { esc, uniq } from '/js/shared.js';
   }
 
   const blank = () => ({
-    work: { id: '', title: '', desc: '', skills: [], started: '', ended: '', body: '', gallery: [] },
+    work: { id: '', role: '', company: '', desc: '', skills: [], started: '', ended: '', body: '', gallery: [] },
     projects: { id: '', title: '', status: '', desc: '', skills: [], started: '', ended: '', updated: today(), body: '', gallery: [] },
     buildlog: { id: '', date: today(), engagements: [], skills: [], body: '' },
-    solutions: { id: '', title: '', desc: '', skills: [], order: Math.max(0, ...content.solutions.map((c) => c.order || 0)) + 1, body: '' },
+    casestudies: { id: '', title: '', desc: '', skills: [], order: Math.max(0, ...content.casestudies.map((c) => c.order || 0)) + 1, body: '' },
     letters: { id: '', title: '', date: today(), summary: '', engagements: [], skills: [], image: null, body: '' }
   })[type];
 
-  const PREFIX = { work: '/work/', projects: '/projects/', solutions: '/solutions/', letters: '/letters/' };
+  // A new entry's page address is made from its title; a Work entry's from its Company (/work/gs1-canada).
+  const SLUG_SOURCE = type === 'work' ? 'company' : 'title';
+  const PREFIX = { work: '/work/', projects: '/projects/', casestudies: '/casestudies/', letters: '/letters/' };
   // Work and Project entries: the two lists that Build Log posts and letters link to ("engagements"), by id.
   const ENGAGED = ['work', 'projects'];
-  const pageUrl = (e) => (PREFIX[type] ? PREFIX[type] + e.id : '/buildlog#' + e.id);
+  const pageUrl = (e) => (PREFIX[type] ? PREFIX[type] + e.id : '/journal#' + e.id);
 
   // key paths like "gallery.0.alt" or "image.alt"
   const getPath = (obj, key) => key.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
@@ -88,7 +90,7 @@ import { esc, uniq } from '/js/shared.js';
     const id = fid(), prefix = PREFIX[type];
     return '<div class="f"><label class="f__label" for="' + id + '">Page address' + req(true) + '</label>' +
       '<div class="slug"><span class="slug__prefix">hetmanek.ca' + prefix + '</span><input class="f__input" id="' + id + '" data-key="id" data-slug value="' + esc(entry.id) + '" required aria-required="true"></div>' +
-      help(mode === 'edit' ? 'Changing this changes the page’s address, and links to the old address will stop working.' : 'Made from the title. Lowercase letters, numbers and hyphens.') + '</div>';
+      help(mode === 'edit' ? 'Changing this changes the page’s address, and links to the old address will stop working.' : 'Made from the ' + SLUG_SOURCE + '. Lowercase letters, numbers and hyphens.') + '</div>';
   }
   function checkbox(key, label, helpText) {
     const id = fid();
@@ -160,18 +162,23 @@ import { esc, uniq } from '/js/shared.js';
 
   // ---------- forms ----------
   function formFields() {
-    const allSkills = uniq([].concat(...['work', 'projects', 'buildlog', 'solutions', 'letters'].map((k) => [].concat(...content[k].map((x) => x.skills || []))))).map((v) => ({ value: v, label: v }));
-    const workOptions = content.work.concat(content.projects).map((w) => ({ value: w.id, label: w.title }));
+    const allSkills = uniq([].concat(...['work', 'projects', 'buildlog', 'casestudies', 'letters'].map((k) => [].concat(...content[k].map((x) => x.skills || []))))).map((v) => ({ value: v, label: v }));
+    const workOptions = content.work.map((w) => ({ value: w.id, label: workTitle(w) }))
+      .concat(content.projects.map((w) => ({ value: w.id, label: w.title })));
     const skills = tags('skills', 'Skills', allSkills, { addable: true, help: 'Click to select. Type a new one and press Enter to add it.' });
 
-    const dates = (orderHelp) => '<div class="f-row">' +
-      text('started', 'Started', { type: 'date', help: 'Shown on the page as month and year.' + (orderHelp || '') }) +
-      text('ended', 'Ended', { type: 'date', help: 'Leave empty while it’s ongoing; the page shows “Started – Present”.' }) +
+    const dates = (endHelp) => '<div class="f-row">' +
+      text('started', 'Started', { type: 'date', help: 'Shown on the page as month and year.' }) +
+      text('ended', 'Ended', { type: 'date', help: 'Leave empty while it’s ongoing; the page shows “Started – Present”.' + (endHelp || '') }) +
     '</div>';
     if (type === 'work') return [
-      text('title', 'Title', { required: true }), slugField(),
-      text('desc', 'Short description', { help: 'One line, shown under the title and in the Work table on Home.' }),
-      dates(' Orders the Work table on Home, newest first.'),
+      '<div class="f-row">' +
+        text('role', 'Role', { placeholder: 'e.g. Senior Director' }) +
+        text('company', 'Company', { required: true }) +
+      '</div>',
+      slugField(),
+      text('desc', 'Short description', { help: 'One line, shown under the heading and in the Work table on Home.' }),
+      dates(' Orders the Work table on Home: ongoing first, then the most recent end.'),
       skills,
       markdown('body', 'Page body'),
       galleryField('gallery', 'Gallery', 'Shown under the body. Three images looks best.')
@@ -196,10 +203,10 @@ import { esc, uniq } from '/js/shared.js';
       checkbox('pinned', 'Pin to the top of Home', 'Only one post can be pinned. Pinning this one unpins the other.'),
       area('excerpt', 'Excerpt (optional)', { help: 'Shown on Home and in tables. Leave empty to use the start of the first paragraph.' })
     ];
-    if (type === 'solutions') return [
+    if (type === 'casestudies') return [
       text('title', 'Title', { required: true }), slugField(),
-      text('desc', 'Short description', { help: 'One line, shown under the title and in the Solutions table on Home.' }),
-      text('order', 'Order', { type: 'number', help: 'Lower numbers come first in the Solutions table.' }),
+      text('desc', 'Short description', { help: 'One line, shown under the title and in the Case Studies table on Home.' }),
+      text('order', 'Order', { type: 'number', help: 'Lower numbers come first in the Case Studies table.' }),
       skills,
       markdown('body', 'Page body', { help: 'Use ## headings for its parts, such as Opportunity, Solution, Wins and Learning.' })
     ];
@@ -277,7 +284,7 @@ import { esc, uniq } from '/js/shared.js';
     if (el.type === 'number') val = el.value === '' ? '' : Number(el.value);
     if (el.hasAttribute('data-slug')) { slugTouched = true; }
     setPath(entry, key, val);
-    if (key === 'title' && mode === 'new' && !slugTouched) {
+    if (key === SLUG_SOURCE && mode === 'new' && !slugTouched) {
       entry.id = slugify(val);
       const slug = root.querySelector('[data-slug]');
       if (slug) slug.value = entry.id;
@@ -445,7 +452,7 @@ import { esc, uniq } from '/js/shared.js';
   function check(list) {
     const errs = [];
     if (type !== 'buildlog') {
-      if (!String(entry.title || '').trim()) errs.push('Add a title.');
+      if (!String(entry[SLUG_SOURCE] || '').trim()) errs.push('Add a ' + SLUG_SOURCE + '.');
       if (!SLUG.test(entry.id || '')) errs.push('The page address can only use lowercase letters, numbers and single hyphens.');
       else if (list.some((x) => x.id === entry.id && x.id !== originalId)) errs.push('Another ' + TYPES[type].noun + ' already uses the address “' + entry.id + '”.');
       // Engagement links are by id alone, so a Work entry and a Project entry can't share one.
@@ -480,7 +487,7 @@ import { esc, uniq } from '/js/shared.js';
         if (e.pinned) list.forEach((p) => { delete p.pinned; }); else delete e.pinned;
         if (!e.excerpt) delete e.excerpt;
       }
-      if (type === 'solutions' && e.order === '') delete e.order;
+      if (type === 'casestudies' && e.order === '') delete e.order;
 
       // Renaming a Work or Project entry: keep Build Log posts and letters pointing at it.
       if (ENGAGED.indexOf(type) >= 0 && mode === 'edit' && e.id !== originalId) {
@@ -522,7 +529,7 @@ import { esc, uniq } from '/js/shared.js';
   }
 
   async function remove() {
-    const name = entry.title || entry.date;
+    const name = (type === 'work' ? workTitle(entry) : entry.title) || entry.date;
     const undo = entry.draft
       ? 'Drafts aren’t kept in git, so this can’t be undone.'
       : 'It’s removed from content.js. Until you commit, you can bring it back by discarding the change in GitHub Desktop.';
@@ -562,7 +569,7 @@ import { esc, uniq } from '/js/shared.js';
       originalDate = found.date || null;
       if (ENGAGED.indexOf(type) >= 0) { entry.skills = entry.skills || []; entry.gallery = entry.gallery || []; entry.body = entry.body || ''; }
       if (type === 'buildlog') { entry.engagements = entry.engagements || []; entry.skills = entry.skills || []; }
-      if (type === 'solutions') { entry.skills = entry.skills || []; entry.body = entry.body || ''; }
+      if (type === 'casestudies') { entry.skills = entry.skills || []; entry.body = entry.body || ''; }
       if (type === 'letters') { entry.engagements = entry.engagements || []; entry.skills = entry.skills || []; }
     } else {
       entry = blank();

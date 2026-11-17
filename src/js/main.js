@@ -7,8 +7,8 @@ const FILTER_ICON = {
   closed: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M4.5 8h7M7 12h2"/></svg>',
   open: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M7 4h2M4.5 8h7M2 12h12"/></svg>'
 };
-export const filterButton = (open, count, panelId, cls) =>
-  '<button type="button" class="filter-btn' + (cls ? ' ' + cls : '') + '" data-action="toggle-filter" aria-expanded="' + open + '" aria-controls="' + panelId + '">' +
+export const filterButton = (open, count, panelId) =>
+  '<button type="button" class="filter-btn" data-action="toggle-filter" aria-expanded="' + open + '" aria-controls="' + panelId + '">' +
     (open ? FILTER_ICON.open : FILTER_ICON.closed) + 'Filter' + (count ? ' (' + count + ')' : '') +
   '</button>';
 

@@ -3,12 +3,13 @@
 // Bodies are Markdown. Dates are YYYY-MM-DD. "draft": true hides an entry on the public site.
 window.SITE = {
   "introduction": {
-    "body": "I listen, learn, design and build. Let this website show you how.\n\nI believe:\n\n- Qualities in, Qualities out\n- Aesthetics is 10% of design. How It Works is 80%.\n- Commons-based peer production and collaborative modalities are under-utilized\n- [Work is love made visible](https://poets.org/poem/work-4)\n- Context is Everything"
+    "body": "I build people, products and practices that spark transformation and sustain momentum. \nLet this website show you how.\n\nI believe:\n\n- ~~Garbage In, Garbage Out~~ Qualities in, Qualities out\n- Aesthetics is 10% of design. How It Works is 80%.\n- Collaboration is hard, and worth it\n- Building Product is building Context"
   },
   "work": [
     {
       "id": "owner-operator-wooden-giant-productions",
-      "title": "Owner / Operator - Wooden Giant Productions",
+      "role": "Owner / Operator",
+      "company": "Wooden Giant Productions",
       "desc": "Entrepreneurial web-development and digital strategy agency",
       "skills": [
         "Business",
@@ -28,8 +29,9 @@ window.SITE = {
       "ended": "2015-03-13"
     },
     {
-      "id": "senior-product-manager-st-joseph-content",
-      "title": "Senior Product Manager - St Joseph Content",
+      "id": "st-joseph-content",
+      "role": "Senior Product Manager",
+      "company": "St Joseph Content",
       "desc": "Product Leadership for \"Create Once, Publish Everywhere\" marketing platform",
       "skills": [
         "People",
@@ -40,14 +42,15 @@ window.SITE = {
         "Learn",
         "Listen"
       ],
-      "body": "St. Joseph Content produced flyers and catalogues for national retailers. Progressed from Senior Business Analyst (2015–2016) to Senior Product Manager (2016–2018).\n\n- Sold and led a complete rebuild of the proprietary ECMS platform, from a client-specific Python monolith into a multi-tenant Node.js microservice SaaS product for national retail clients, designed to increase scalability and client lock-in.\n- Led a team that grew from 6 to 10, building the next-generation product while maintaining legacy applications. The team built and maintained apps, APIs, and cloud infrastructure for content production, management, and distribution ecosystems.\n- Owned the product end to end: market research, roadmap, requirements, UX/UI design, sales collateral, SOWs and SLAs, hiring and retention.\n- As Senior Business Analyst, led the build and onboarding of Shoppers Drug Mart's national digital flyer and offer distribution program, including API integrations with upstream and downstream systems and vendors.\n- Delivered analytic driven recommendations for Canon Canada's canonfeatures.ca, reducing bounce rate by 50% and improving conversions by 200%.",
+      "body": "St. Joseph Content produced flyers and catalogues for national retailers. Progressed from Senior Business Analyst (2015–2016) to Senior Product Manager (2016–2018).\n\n- Sold and led a complete rebuild of the proprietary \"Creae Once, Publish Everywhere\" ECMS platform, from a client-specific Python monolith into a multi-tenant Node.js microservice SaaS product for national retail clients, designed to increase scalability and client lock-in.\n- Led a team that grew from 6 to 10, building the next-generation product while maintaining legacy applications. The team built and maintained apps, APIs, and cloud infrastructure for content production, management, and distribution ecosystems.\n- Owned the product end to end: market research, roadmap, requirements, UX/UI design, sales collateral, SOWs and SLAs, hiring and retention.\n- As Senior Business Analyst, led the build and onboarding of Shoppers Drug Mart's national digital flyer and offer distribution program, including API integrations with upstream and downstream systems and vendors.\n- Delivered analytic driven recommendations for Canon Canada's canonfeatures.ca, reducing bounce rate by 50% and improving conversions by 200%.",
       "gallery": [],
       "started": "2015-03-31",
       "ended": "2018-08-31"
     },
     {
       "id": "schema-app",
-      "title": "Manager of Product and Design - Schema App",
+      "role": "Manager of Product and Design",
+      "company": "Schema App",
       "desc": "Product and Design Leadership for a startup building AI performance-improving Content Knowledge Graphs",
       "skills": [
         "AI",
@@ -65,8 +68,9 @@ window.SITE = {
     },
     {
       "id": "senior-director-gs1-canada",
-      "title": "Senior Director - GS1 Canada",
-      "desc": "Product and UX leadership at non-profit behind the standards and data pools that run Canadian grocery, foodservice, healthcare, pharmacy, cannabis, and general merchandise supply chains.",
+      "role": "Senior Director of Product and UX",
+      "company": "GS1 Canada",
+      "desc": "Platform behind the standards and data pools that run Canadian grocery, foodservice, healthcare, pharmacy, cannabis, and general merchandise supply chains.",
       "skills": [
         "Design",
         "Build",
@@ -83,7 +87,8 @@ window.SITE = {
     },
     {
       "id": "my-story-island",
-      "title": "Digital Producer / Performer - My Story Island, Taipei",
+      "role": "Digital Producer / Performer",
+      "company": "My Story Island, Taipei",
       "desc": "Build and sell theatrical interactive animated educational content",
       "skills": [
         "Design",
@@ -99,8 +104,9 @@ window.SITE = {
     },
     {
       "id": "tune-your-ride",
-      "title": "Tune Your Ride",
-      "desc": "Stationary Bicycle Powered Event Services",
+      "role": "Owner / Operator",
+      "company": "Tune Your Ride",
+      "desc": "Bicycle-Powered Event Services",
       "skills": [
         "People",
         "Listen",
@@ -108,7 +114,7 @@ window.SITE = {
         "Design",
         "Build"
       ],
-      "body": "",
+      "body": "Operating a production and rental company providing bicycle-powered event services, including:\n\n- **Pedal-powered stage and sound engineering** Our team sets up and runs a stage with a PA that is powered by stationary bicycles. Volunteers from the audience or your organization provide the energy that we manage through our unique green system.\n- **Event curation, including artist management**. Our experience includes 5 years of curating and running the Toronto Bicycle Music Festival (a mobile bicycle-powered concert series that takes place in 3 parks over one day), 2 bicycle-powered tours of Eastern Ontario, and 2 City of Toronto’s LiveGreen Festival Community Stages.\n- **Mobile performances.** A bike trailer stage. The music is powered by a car battery which is charged with pedal power. For sound coverage of a wider area, we added a second bike with a stage or speakers linked wireless to the performance.\n- **Educational Seminars**\n- **Cellphone Charging Stations**\n\n![A field full of people dancing in a park to a band powered by stationary bicycles](/assets/work/tune-your-ride/strumbellas-banner.jpeg)\n\nTune Your Ride’s stationary bicycle-powered events and mobile stages helped tell a story of Toronto as an environmentally-conscious, bicycle-friendly and cooperative community. While energy and transportation are central issues in society that are often coded in negative language, our services created ‘Aha!’ moments by showing (not telling) that green approaches are not only possible, but fun! With our pedal powered set-up, shows literally cannot happen without audience participation. Their direct involvement activates the listener and powerfully bridges the gap between the stage and audience, idea and action.\n\nTune Your Ride was founded in 2014, building on the success and popularity of the Toronto Bicycle Music Festival: a mobile concert spanning 3 Toronto city parks in one day, with mobile music performances leading group bike rides between venues. TBMF won a City of Toronto Livegreen award.\n\nTune Your Ride also powered and managed bicycle-powered stages at Arts & Craft’s Field Trip, Livegreen Toronto Festival, Open Streets Toronto, the Guelph Jazz Festival and in parks along the shore of Lake Ontario between Brockville and Toronto.",
       "gallery": [],
       "started": "2014-01-01",
       "ended": "2020-11-12"
@@ -151,71 +157,21 @@ window.SITE = {
     {
       "id": "opportunity-assessment-engine",
       "title": "Opportunity Assessment Engine",
-      "status": "In Dev",
-      "desc": "Is opportunity x worth doing? How much? In which ways?",
+      "status": "Active",
+      "desc": "Separate what you can do from what a stranger can verify. The difference is a work plan.",
       "skills": [
         "AI",
         "Design",
         "Build",
-        "Learn"
+        "Learn",
+        "Design Research",
+        "GTM",
+        "Product Marketing"
       ],
-      "updated": "2026-10-19",
-      "body": "",
-      "gallery": []
-    },
-    {
-      "id": "pengi-by-beatrix",
-      "title": "Pengi by Beatrix",
-      "status": "Alive",
-      "desc": "Next level lemonade stand. A fashion business for my kids.",
-      "skills": [
-        "Design",
-        "Build",
-        "Strategy",
-        "GTM"
-      ],
-      "updated": "2026-10-19",
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n\n## What it is\n\nNeque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-      "gallery": [
-        {
-          "src": "",
-          "alt": "Image 1"
-        },
-        {
-          "src": "",
-          "alt": "Image 2"
-        },
-        {
-          "src": "",
-          "alt": "Image 3"
-        }
-      ]
-    },
-    {
-      "id": "at-the-bedside-podcast",
-      "title": "At the Bedside Podcast",
-      "status": "Active",
-      "desc": "Automate social media marketing",
-      "skills": [
-        "Design",
-        "Build"
-      ],
-      "updated": "2026-08-07",
-      "body": "",
-      "gallery": []
-    },
-    {
-      "id": "project-eggdrop",
-      "title": "Project Eggdrop",
-      "status": "Done",
-      "desc": "App to teaching kids new media literacies",
-      "skills": [
-        "Design",
-        "Design Research"
-      ],
-      "updated": "2009-04-02",
-      "body": "",
-      "gallery": []
+      "updated": "2026-11-17",
+      "body": "![Shows the difference between a resume and search results](/assets/projects/career-opportunity-assessment-engine/resume-vs-search-result.png)\n\n## The tension\n\nI was starting a new chapter. I wanted to make good things with cool people. I wanted engagement, fulfillment and money, in balance. \n\nThe search had four tensions:\n\n- **Fit I couldn’t show.** My experience and talent matched the roles I wanted, but a stranger reading a cold application probably couldn’t see it. I needed a way to see the gaps so I could decide which proof to build first.\n- **Too many options.** There are countless opportunities. How do I find fit, and how does fit find me?\n- **Not every opportunity is a job.** Personal projects compete for the same hours as professional ones (e.g., automating social media production for my wife’s podcast, or a small fashion business with my kids). Without a common measure, a personal project wins on enthusiasm and a job wins on urgency. Neither is a good reason.\n- **Pressure and gut feel.** Career decisions are made under pressure, especially when money tips the scales, and I’m susceptible. Conditions drive my behaviour more than grit. I don’t rise to the occasion so much as fall to the highest level of my preparation.\n\nI needed a tool to provide structure and set those conditions, and I wanted it to be a piece of public proof in its own right.\n\n## The idea\n\n**Score opportunities** on what I can do and want to do, and separately on what a stranger can verify. **Rank the gaps** across all of them, **build the proof** that closes the most important ones first, and **apply myself** where I’m both willing and winnable.\n\n\n## How it works\nI am a product. So I started by building a positioning document that defines how my skills and profile meet market needs. \n\nThen, in collaboration with Claude, I built skills, templates, and folders that run this assessment flow:\n\n\n1. **Submit.** Paste a posting or proposal into the engine.\n2. **Gut feel.** Record [Pursue], [Stretch] or [Decline] before seeing any score, so the score can’t anchor me.\n3. **Gates:** location, compensation floor, harm. Each returns Pass, Fail or Unknown, because an assumed pass is not a pass.\n4. **Willingness.** Do I want this? Three pillars (Compensation, Experience, Culture), with weights that shift as financial runway shortens.\n5. **Winnability part 1:Fit.** Can I do this? Each need in the posting maps to a row in my problem-capability matrix, valued by how strong the proof is.\n6. **Winnability part 2: Visible fit.** Can a stranger verify it? On a cold application, proof that isn’t public drops a level. A warm introduction restores it.\n7. **Proof backlog.** Across every assessment, the engine ranks which capability’s proof would unlock the most roles I want if it were public.\n8. **Project Proposals use the same rubric.** Fractional work, consulting and my own ideas arrive in one fixed shape: opportunity definition, outcomes, time and cost, positioning alignment. They pass the same gates and pillars as a job, so the two are comparable. A proposal can also be reshaped before I commit.\n9. **Gaps named as gaps.** When a need matches nothing in my matrix, I decide whether it’s a missing row or a real capability gap. For example, Leading Engineering at the executive level went down as a real gap.\n\n## What I decided against:\n\n- **One score.** A single number hides whether the problem is “I don’t want it”, “I can’t do it” or “I can’t prove it”. Each needs a different response.\n- **A single winnability number.** My first fix discounted private proof on cold applications. That made every cold posting score alike and hid real differences in match. Reporting Fit and Visible fit side by side kept both signals.\n- **A separate rubric for personal projects.** Two rubrics would mean two scales and no way to weigh a project against a job.\n- **A fourth pillar for family and art.** The podcast proposal mattered because of what it did for my family, which no pillar captured. I widened Culture instead, and will promote it to a pillar if it keeps coming up.\n- **Waiting for win/loss data.** With no live search, there were no outcomes to learn from. I calibrated on my own judgment first and built the outcomes log so data accumulates.\n- **Blending my data into the framework.** The rubric, skills and templates are the framework, designed to be forked on GitHub. My positioning, matrix, compensation floor and assessments are the instance, and stay private.\n\n## What Happened\n\n- **The engine confirmed what I suspected, and sized it.** On six cold job postings, Fit runs 4.25 to 4.53 out of 5 and Visible fit 2.75 to 3.07. On the one warm introduction, Visible fit (3.78) is higher than Fit (3.53).\n- **Gut feel runs ahead of proof.**. Where my gut and the engine differed, it was always the same way: I said Pursue, the engine said Stretch.\n- **It produced a priority order.** At first, 13 of my 14 capability rows had no public proof. The backlog ranks them by how often the roles I want ask for them.\n- **I acted on it.** After the first five assessments I paused applying and put my attention into building proof: this site, these case studies and personal projects. The engine didn’t change my mind. It validated the approach and told me where to start. \n- **Fit started finding me.** Recruiters began getting in touch, and I returned to assessing.\n- **A personal project exposed a missing value.** The podcast proposal scored in the band the rubric leaves to me, even though I clearly wanted to do it. The score was right and my stated values were incomplete, so I changed the definition of Culture.\n- **The rubric changed three times in its first three days**, each change logged with its reason.\n- **What it can’t show yet.** Every outcome is still open, so nothing here shows the scores predict results, and the framework isn’t on GitHub yet.\n\n\n## Learning\n\n- **Conditions over grit.** If a decision will be made under pressure, design it before the pressure arrives.\n- **Measure what’s true and what’s visible apart.** Capability nobody can verify doesn’t count with strangers. Score the two separately and the difference becomes a ranked to-do list.\n- **A tool can earn its keep by confirming a hunch.** Validation with a number and a priority order is what turns a belief into a plan.\n- **What I’d do differently.** I’d tie the project targets to the pace of the search instead of the calendar, and measure whether the engine told me what to work on next, not how many postings it scored. This project sits in a broader portfolio of life activity, and its priority changed. It stays open and will evolve as the search goes on.",
+      "gallery": [],
+      "started": "2026-09-28"
     }
   ],
   "buildlog": [
@@ -235,7 +191,6 @@ window.SITE = {
     {
       "id": "2026-10-19",
       "date": "2026-10-19",
-      "pinned": true,
       "engagements": [
         "hetmanek-ca"
       ],
@@ -244,7 +199,7 @@ window.SITE = {
         "GTM"
       ],
       "excerpt": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD:",
-      "body": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD (definition of done):\n\n- No placeholder content\n- Work pages for all roles in my resume\n- 4 case studies\n- 5 build logs   -- **done**\n- 1 Article or Letter -- **done**"
+      "body": "This site is in public beta build mode. If you’re here, it’s due to referral or chance. Welcome! I am working towards the following DoD (definition of done):\n\n- No placeholder content -- **done**\n- Work pages for all roles in my resume -- **done**\n- 4 case studies -- **done**\n- 5 build logs   -- **done**\n- 1 Article or Letter -- **done**"
     },
     {
       "id": "2026-10-23",
@@ -314,7 +269,9 @@ window.SITE = {
     {
       "id": "2026-11-04",
       "date": "2026-11-04",
-      "engagements": [],
+      "engagements": [
+        "hetmanek-ca"
+      ],
       "skills": [
         "Build",
         "Design"
@@ -332,7 +289,7 @@ window.SITE = {
       "excerpt": "For the purpose of this site, “Case Studies” is wrong - they’re actually “Solutions”."
     }
   ],
-  "solutions": [
+  "casestudies": [
     {
       "id": "positioning-engine",
       "title": "Positioning Engine",
@@ -424,11 +381,11 @@ window.SITE = {
         "Design Research"
       ],
       "order": 1,
-      "body": "## Opportunity\n\nCX success belongs to everyone. But each department sees its own slice through its own lens, with its own budget and priorities\n\nGS1 Canada serves six sectors, six subscriber types, and dozens of needs and tasks: complexity via 365 distinct user journeys. No one could say which journeys mattered most or how to efficiently and effectively improve them.\n\nMeanwhile:\n\n- Resellers were out-funneling GS1 for people who just needed a barcode.\n- Billing issues generated an outsized percentage of annual support cases. \n- A $$$ attribute campaign led to only n subscribers adopting. \n\n\n\n\n> How do we get on the same page?\n\n## Solution\n\n**Stop**  mapping journeys one at a time.\n\n**Start** understanding customers and users holistically via a matrix of touchpoints by journey, so the whole portfolio can be seen, filtered, and compared, then drilled into.\n\n![Journey Portfolio Matrix Screenshot](/assets/solutions/user-journey-portfolio-optimization-framework/ux-journey-portfolio-management-screenshot.png)\n\n### How it works\n*Conventional journey maps are hard to compare and contrast, especially at scale. A matrix lets you see the portfolio as a whole and also break any single journey into fine detail.*\n\n**Structure:** \n\n- Touchpoints *(rows)* are grouped by stage *(i.e., Product Discovery, Sign Up, JTBD, Billing, off-boarding)*.\n- Each row carries: user needs, tasks, and expectations  |  value definition | links to VOC evidence *(recordings, transcripts)* | SWOT | Metrics and KPIs | maintenance costs | policy barriers | internal stakeholders | **health score** *(derived from above)* | a named caretaker\n- The matrix can be filtered by journeys, which are comprised of touch-points.\n\n### **Two uses from one structure.**\n\n1. **Health**. See journey and touchpoint health from a bird’s-eye view, including where patterns are consistent and where they aren’t.\n- **Discovery.** That same analysis feeds research for designing solutions and for identifying and prioritizing the highest-value opportunities.\n\n## Learning\n\n**Bring a shared solution, not a mandate.** \nLarge cross-functional work is political work, so design for that from the start. A neutral, customer-centered frame lets each department see its own part without giving up ownership. \n\n**Change the unit of analysis.** \nComparison needs a common structure, so choose the structure before collecting the stories."
+      "body": "## Opportunity\n\nCX success belongs to everyone. But each department sees its own slice through its own lens, with its own budget and priorities\n\nGS1 Canada serves six sectors, six subscriber types, and dozens of needs and tasks: complexity via 365 distinct user journeys. No one could say which journeys mattered most or how to efficiently and effectively improve them.\n\nMeanwhile:\n\n- Resellers were out-funneling GS1 for people who just needed a barcode.\n- Billing issues generated an outsized percentage of annual support cases. \n- A $$$ attribute campaign led to only n subscribers adopting. \n\n\n\n\n> How do we get on the same page?\n\n## Solution\n\n**Stop**  mapping journeys one at a time.\n\n**Start** understanding customers and users holistically via a matrix of touchpoints by journey, so the whole portfolio can be seen, filtered, and compared, then drilled into.\n\n![Journey Portfolio Matrix Screenshot](/assets/casestudies/user-journey-portfolio-optimization-framework/ux-journey-portfolio-management-screenshot.png)\n\n### How it works\n*Conventional journey maps are hard to compare and contrast, especially at scale. A matrix lets you see the portfolio as a whole and also break any single journey into fine detail.*\n\n**Structure:** \n\n- Touchpoints *(rows)* are grouped by stage *(i.e., Product Discovery, Sign Up, JTBD, Billing, off-boarding)*.\n- Each row carries: user needs, tasks, and expectations  |  value definition | links to VOC evidence *(recordings, transcripts)* | SWOT | Metrics and KPIs | maintenance costs | policy barriers | internal stakeholders | **health score** *(derived from above)* | a named caretaker\n- The matrix can be filtered by journeys, which are comprised of touch-points.\n\n### **Two uses from one structure.**\n\n1. **Health**. See journey and touchpoint health from a bird’s-eye view, including where patterns are consistent and where they aren’t.\n- **Discovery.** That same analysis feeds research for designing solutions and for identifying and prioritizing the highest-value opportunities.\n\n## Learning\n\n**Bring a shared solution, not a mandate.** \nLarge cross-functional work is political work, so design for that from the start. A neutral, customer-centered frame lets each department see its own part without giving up ownership. \n\n**Change the unit of analysis.** \nComparison needs a common structure, so choose the structure before collecting the stories."
     },
     {
       "id": "team-excellence-engine",
-      "title": "~~Performance Management~~ Team Excellence Engine",
+      "title": "Team Excellence Engine.   ~~Performance Management~~",
       "desc": "Define “good” once, per role, with evidence, and performance management becomes a team sport.",
       "skills": [
         "Build",
@@ -457,7 +414,8 @@ window.SITE = {
         "src": "",
         "alt": ""
       },
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n\n> Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.\n\nNeque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.\n\n## A section heading\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n\n> Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.\n\nNeque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.\n\n## A section heading\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+      "engagements": []
     },
     {
       "id": "reinvigorate-culture-with-deeper-collaborative-ethos",

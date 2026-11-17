@@ -1,6 +1,6 @@
 // Local CMS for hetmanek.ca. Run with `npm run cms` (or double-click start-cms.command).
 // Serves the site from /src with an editing bar, plus an editor that saves published entries to src/js/content.js,
-// drafts to cms/drafts.json (the Home introduction has no drafts), and the finished Work, Project, Solution and Letter pages to src/<type>/<id>.html.
+// drafts to cms/drafts.json (the Home introduction has no drafts), and the finished Work, Project, Case Study and Letter pages to src/<type>/<id>.html.
 // Uploads images into src/assets. Nothing in /cms is deployed. Uses only Node's standard library.
 
 import http from 'node:http';
@@ -28,14 +28,14 @@ const MIME = {
 };
 const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
 const CMS_FILES = new Set(['cms.js', 'cms.css', 'editor.js']);
-const ENTRY = /^\/(work|projects|solutions|letters)\/([^/]+?)(?:\.html)?\/?$/;
+const ENTRY = /^\/(work|projects|casestudies|letters)\/([^/]+?)(?:\.html)?\/?$/;
 
 // Added to every site page: the editing bar.
 const INJECT = '<link rel="stylesheet" href="/__cms/cms.css"><script src="/__cms/cms.js" defer></script>';
 const inject = (html) => html.replace('</head>', INJECT + '</head>');
 
 // ---------- content: published entries in src/js/content.js, drafts in cms/drafts.json ----------
-const KEYS = ['work', 'projects', 'buildlog', 'solutions', 'letters'];
+const KEYS = ['work', 'projects', 'buildlog', 'casestudies', 'letters'];
 const MARKER = 'window.SITE =';
 const MARKER_LINE = /^window\.SITE\s*=/m; // the real assignment, at the start of a line (not a mention in a comment)
 function readContent() {
@@ -57,14 +57,17 @@ function validate(d) {
     if (!Array.isArray(d[key])) { errs.push(key + ' must be a list'); continue; }
     const seen = new Set();
     d[key].forEach((e, i) => {
-      const where = key + ' #' + (i + 1) + (e && e.title ? ' (' + e.title + ')' : '');
+      const name = e && (key === 'work' ? e.company : e.title);
+      const where = key + ' #' + (i + 1) + (name ? ' (' + name + ')' : '');
       if (!e || typeof e !== 'object') return errs.push(where + ' is not an entry');
       // "index" is refused because src/<type>/index.html would be served as the folder itself.
       const idOk = key === 'buildlog' ? /^\d{4}-\d{2}-\d{2}(-\d+)?$/.test(e.id) : SLUG.test(e.id) && e.id !== 'index';
       if (!idOk) errs.push(where + ': invalid id "' + e.id + '"');
       if (seen.has(e.id)) errs.push(where + ': duplicate id "' + e.id + '"');
       seen.add(e.id);
-      if (key !== 'buildlog' && !String(e.title || '').trim()) errs.push(where + ': title is required');
+      // Work entries are named by Company (and Role), not a title.
+      if (key === 'work' && !String(e.company || '').trim()) errs.push(where + ': company is required');
+      else if (key !== 'buildlog' && key !== 'work' && !String(e.title || '').trim()) errs.push(where + ': title is required');
       for (const f of ['date', 'updated', 'started', 'ended']) if (e[f] && !ISO.test(e[f])) errs.push(where + ': ' + f + ' must be YYYY-MM-DD');
       if ((key === 'buildlog' || key === 'letters') && !ISO.test(e.date || '')) errs.push(where + ': date is required');
     });

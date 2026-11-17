@@ -18,10 +18,19 @@ export const date = {
   month: (iso) => { const t = parts(iso); return MONTHS[t.m].slice(0, 3) + ' ' + t.y; } // Oct 2026
 };
 
+// A Work entry stores Role and Company, not a title; its title is the two together, "Senior Director - GS1 Canada",
+// or whichever one is filled in. Rejected: storing a title as well (two places to keep in step).
+export const workTitle = (w) => [w.role, w.company].filter(Boolean).join(' - ');
+
 // ---- derived content. Returns new objects; the content passed in is left as it was.
 export function derive(site) {
+  // Work: most recent End date first. No End date means ongoing, so it counts as newest of all ("9999").
+  // Equal ends fall back to newest Started; then content order (sort is stable).
+  const end = (w) => w.ended || '9999';
+  const work = site.work.map((w) => Object.assign({}, w, { title: workTitle(w) }))
+    .sort((a, b) => end(b).localeCompare(end(a)) || (b.started || '').localeCompare(a.started || ''));
   // Build Log posts and letters name Work and Project entries alike by id ("engagements"); ids are unique across both.
-  const titles = Object.fromEntries(site.work.concat(site.projects).map((w) => [w.id, w.title]));
+  const titles = Object.fromEntries(work.concat(site.projects).map((w) => [w.id, w.title]));
 
   // Newest first; id = YYYY-MM-DD with -2, -3 suffixes for same-day posts (oldest keeps the bare date).
   // The CMS always writes an id; this covers posts written by hand.
@@ -37,8 +46,6 @@ export function derive(site) {
     engagementTitles: (post.engagements || []).map((id) => titles[id]).filter(Boolean)
   }));
 
-  // Work: newest Started first; entries without one go last, and ties keep their content order (sort is stable).
-  const work = site.work.slice().sort((a, b) => (b.started || '').localeCompare(a.started || ''));
   // Projects: Last Update = the later of `updated` and the newest Build Log post referencing the project;
   // newest first, entries without one last.
   const projects = site.projects.map((w) => {
@@ -51,7 +58,7 @@ export function derive(site) {
     projects,
     engagementById: Object.fromEntries(work.concat(projects).map((w) => [w.id, w])),
     posts,
-    solutions: site.solutions.slice().sort((a, b) => (a.order || 0) - (b.order || 0)),
+    casestudies: site.casestudies.slice().sort((a, b) => (a.order || 0) - (b.order || 0)),
     letters: site.letters.slice().sort((a, b) => (a.order != null && b.order != null ? a.order - b.order : b.date.localeCompare(a.date)))
   };
 }
@@ -66,13 +73,13 @@ const truncate = (text, n) => {
 // A written excerpt is used whole; it may hold Markdown (links, bold), so it's reduced to plain text like the body.
 export const excerptOf = (post, n) => (post.excerpt ? toText(post.excerpt) : truncate(firstParagraph(post.body), n || 120));
 
-// Work, Project, Solution and Letter pages are files the CMS writes: /work/<id> is served from src/work/<id>.html.
+// Work, Project, Case Study and Letter pages are files the CMS writes: /work/<id> is served from src/work/<id>.html.
 export const url = {
   work: (id) => '/work/' + encodeURIComponent(id),
   project: (id) => '/projects/' + encodeURIComponent(id),
-  solution: (id) => '/solutions/' + encodeURIComponent(id),
+  caseStudy: (id) => '/casestudies/' + encodeURIComponent(id),
   letter: (id) => '/letters/' + encodeURIComponent(id),
-  post: (id) => '/buildlog#' + encodeURIComponent(id)
+  post: (id) => '/journal#' + encodeURIComponent(id)
 };
 
 // ---- shared markup
