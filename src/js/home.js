@@ -1,11 +1,11 @@
-// Home: the introduction, then tabs (Work, Projects, Solutions, Build Log, Letters & Articles) with filters.
+// Home: the introduction, then tabs (Work, Projects, Case Studies, Journal, Letters & Articles) with filters.
 
 import * as MD from './markdown.js';
-import { esc, uniq, date, derive, excerptOf, url, skillTags, draftTag } from './shared.js';
+import { esc, uniq, date, derive, excerptOf, url, draftTag } from './shared.js';
 import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.js';
 
 (function () {
-  const { work, projects, engagementById, posts, solutions, letters } = derive(window.SITE);
+  const { work, projects, engagementById, posts, casestudies, letters } = derive(window.SITE);
 
   // ---------- introduction (Markdown, edited in the CMS) ----------
   document.getElementById('intro').innerHTML = MD.render(window.SITE.introduction.body);
@@ -14,16 +14,18 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
   const TABS = [
     { id: 'work', label: 'Work' },
     { id: 'projects', label: 'Projects' },
-    { id: 'solutions', label: 'Solutions' },
-    { id: 'log', label: 'Build Log' },
-    { id: 'articles', label: 'Letters & Articles' }
+    { id: 'casestudies', label: 'Case Studies' },
+    { id: 'log', label: 'Journal' }
+    // Letters & Articles is hidden until there's enough to fill it (2026-11-17). Its view (views.articles) and
+    // the letter pages stay. To bring it back: restore this line, the '/letters/' entry in FROM, and letters in SKILLS.
+    // { id: 'articles', label: 'Letters & Articles' }
   ];
-  const SKILLS = uniq([].concat(...work.map((i) => i.skills), ...projects.map((i) => i.skills), ...solutions.map((i) => i.skills), ...posts.map((i) => i.skills), ...letters.map((i) => i.skills)));
+  const SKILLS = uniq([].concat(...work.map((i) => i.skills), ...projects.map((i) => i.skills), ...casestudies.map((i) => i.skills), ...posts.map((i) => i.skills)));
   const STATUSES = uniq(projects.map((i) => i.status));
 
   // Returning from a content page opens that page's tab; Back restores the tab saved in history.
   // Otherwise no tab is selected until the visitor picks one; the table appears then.
-  const FROM = [['/work/', 'work'], ['/projects/', 'projects'], ['/solutions/', 'solutions'], ['/buildlog', 'log'], ['/letters/', 'articles']];
+  const FROM = [['/work/', 'work'], ['/projects/', 'projects'], ['/casestudies/', 'casestudies'], ['/journal', 'log']];
   const tabFromReferrer = () => {
     let ref;
     try { ref = new URL(document.referrer); } catch (e) { return null; }
@@ -31,7 +33,9 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     const hit = FROM.find((f) => ref.pathname.indexOf(f[0]) === 0);
     return hit ? hit[1] : null;
   };
-  const state = { tab: (history.state && history.state.tab) || tabFromReferrer(), open: false, skills: [], statuses: [] };
+  // A tab saved in history may no longer be shown (Letters & Articles), so only a listed tab is restored.
+  const saved = history.state && history.state.tab;
+  const state = { tab: (TABS.some((t) => t.id === saved) ? saved : null) || tabFromReferrer(), open: false, skills: [], statuses: [] };
   const root = document.getElementById('browse');
 
   const skillMatch = (item) => state.skills.length === 0 || (item.skills || []).some((s) => state.skills.indexOf(s) >= 0);
@@ -45,62 +49,73 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     '</div></div>';
   const cards = (rows) => '<div class="only-mobile">' + rows.join('') + (rows.length ? '' : empty) + '</div>';
 
-  // The Work and Projects tabs: the same table, in the order derive() gives. Status shows (and filters) on Projects only.
-  const engagements = (items, href, label, cls, withStatus) => {
-    const status = (i) => (withStatus ? '<div role="cell" class="cell-mono">' + esc(i.status || '—') + '</div>' : '');
-    const rows = items.filter((i) => skillMatch(i) &&
-      (!withStatus || state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0));
-    return table(cls, label, ['ENGAGEMENT', 'DESCRIPTION', 'SKILLS'].concat(withStatus ? ['STATUS'] : []), rows.map((i) =>
-      '<div class="table__row" role="row">' +
-        '<div role="cell"><a class="cell-title" href="' + href(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
-        '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
-        '<div role="cell">' + skillTags(i.skills) + '</div>' +
-        status(i) +
-      '</div>')) +
-    cards(rows.map((i) =>
-      '<div class="card">' +
-        '<div class="card__top"><span><a class="card__title" href="' + href(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span>' + (withStatus ? '<span class="card__mono">' + esc(i.status || '—') + '</span>' : '') + '</div>' +
-        '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
-        skillTags(i.skills) +
-      '</div>'));
-  };
-
   const views = {
-    work: () => engagements(work, url.work, 'Work', 'table--work', false),
-    projects: () => engagements(projects, url.project, 'Projects', 'table--projects', true),
-    solutions() {
-      const rows = solutions.filter(skillMatch);
-      return table('table--solutions table--narrow', 'Solutions', ['TITLE', 'DESCRIPTION', 'SKILLS'], rows.map((i) =>
+    // Work: Role (the link) then Company, Dates last. On mobile, Company sits under the Role.
+    // An entry with no Role links from its Company instead, so every row has a link.
+    work() {
+      const rows = work.filter(skillMatch);
+      // "Sep 2018 – Oct 2025", as on the Work page: no end date means it's ongoing; no start date shows a dash.
+      const dates = (i) => (i.started ? date.month(i.started) + ' – ' + (i.ended ? date.month(i.ended) : 'Present') : '—');
+      const link = (i, cls) => '<a class="' + cls + '" href="' + url.work(i.id) + '">' + MD.strike(i.role || i.company || '—') + '</a>' + draftTag(i);
+      return table('table--work', 'Work', ['ROLE', 'COMPANY', 'DESCRIPTION', 'DATES'], rows.map((i) =>
         '<div class="table__row" role="row">' +
-          '<div role="cell"><a class="cell-title" href="' + url.solution(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
+          '<div role="cell">' + link(i, 'cell-title') + '</div>' +
+          '<div role="cell" class="cell-text">' + MD.strike(i.company || '—') + '</div>' +
           '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
-          '<div role="cell">' + skillTags(i.skills) + '</div>' +
+          '<div role="cell" class="cell-mono cell-mono--muted">' + dates(i) + '</div>' +
         '</div>')) +
       cards(rows.map((i) =>
         '<div class="card">' +
-          '<span><a class="card__title" href="' + url.solution(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span>' +
+          '<span>' + link(i, 'card__title') + '</span>' +
+          (i.role && i.company ? '<div class="card__sub">' + MD.strike(i.company) + '</div>' : '') +
           '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
-          skillTags(i.skills) +
+          '<div class="card__mono card__mono--muted">' + dates(i) + '</div>' +
+        '</div>'));
+    },
+    // Projects: in the order derive() gives; Status shows and filters here only.
+    projects() {
+      const rows = projects.filter((i) => skillMatch(i) && (state.statuses.length === 0 || state.statuses.indexOf(i.status) >= 0));
+      return table('table--projects', 'Projects', ['ENGAGEMENT', 'DESCRIPTION', 'STATUS'], rows.map((i) =>
+        '<div class="table__row" role="row">' +
+          '<div role="cell"><a class="cell-title" href="' + url.project(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
+          '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
+          '<div role="cell" class="cell-mono">' + esc(i.status || '—') + '</div>' +
+        '</div>')) +
+      cards(rows.map((i) =>
+        '<div class="card">' +
+          '<div class="card__top"><span><a class="card__title" href="' + url.project(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span><span class="card__mono">' + esc(i.status || '—') + '</span></div>' +
+          '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
+        '</div>'));
+    },
+    casestudies() {
+      const rows = casestudies.filter(skillMatch);
+      return table('table--casestudies table--narrow', 'Case Studies', ['TITLE', 'DESCRIPTION'], rows.map((i) =>
+        '<div class="table__row" role="row">' +
+          '<div role="cell"><a class="cell-title" href="' + url.caseStudy(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</div>' +
+          '<div role="cell" class="cell-text">' + MD.strike(i.desc || '—') + '</div>' +
+        '</div>')) +
+      cards(rows.map((i) =>
+        '<div class="card">' +
+          '<span><a class="card__title" href="' + url.caseStudy(i.id) + '">' + MD.strike(i.title) + '</a>' + draftTag(i) + '</span>' +
+          '<div class="card__text">' + MD.strike(i.desc || '—') + '</div>' +
         '</div>'));
     },
     log() {
-      // The pinned post first, then newest first, the same order as the Build Log page.
+      // The pinned post first, then newest first, the same order as the Journal page.
       const rows = posts.filter((p) => p.pinned).concat(posts.filter((p) => !p.pinned)).filter(skillMatch);
       const pin = (p) => (p.pinned ? PIN_ICON + '<span class="visually-hidden">Pinned: </span>' : '');
-      const more = (p) => ' <a class="read-more" href="' + url.post(p.id) + '" aria-label="Read the Build Log post from ' + date.full(p.date) + '">read more →</a>';
-      return table('table--log', 'Build Log', ['DATE', 'EXCERPT', 'ENGAGEMENT', 'SKILLS'], rows.map((p) =>
+      const more = (p) => ' <a class="read-more" href="' + url.post(p.id) + '" aria-label="Read the Journal post from ' + date.full(p.date) + '">read more →</a>';
+      return table('table--log', 'Journal', ['DATE', 'EXCERPT', 'ENGAGEMENT'], rows.map((p) =>
         '<div class="table__row" role="row">' +
           '<div role="cell" class="cell-date"><a href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</div>' +
           '<div role="cell" class="cell-text">' + pin(p) + MD.strike(excerptOf(p)) + more(p) + '</div>' +
           '<div role="cell" class="cell-text">' + MD.strike(engagementNames(p.engagements)) + '</div>' +
-          '<div role="cell">' + skillTags(p.skills) + '</div>' +
         '</div>')) +
       cards(rows.map((p) =>
         '<div class="card">' +
           '<span><a class="card__date-link" href="' + url.post(p.id) + '">' + date.short(p.date) + '</a>' + draftTag(p) + '</span>' +
           '<div class="card__text">' + pin(p) + MD.strike(excerptOf(p)) + more(p) + '</div>' +
           '<div class="card__sub">' + MD.strike(engagementNames(p.engagements)) + '</div>' +
-          skillTags(p.skills) +
         '</div>'));
     },
     articles() {

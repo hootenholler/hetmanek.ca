@@ -1,5 +1,5 @@
 // Build Log: the pinned post, then posts newest first, 3 at a time (more load as the reader nears the bottom),
-// Skills + Engagements filters, and /buildlog#<id> deep links.
+// Skills + Engagements filters, and /journal#<id> deep links.
 
 import * as MD from './markdown.js';
 import { esc, uniq, date, derive, draftTag, hashtag } from './shared.js';
@@ -28,7 +28,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     rerender(controls,
       '<div class="log-actions">' +
         '<a class="btn-outline" href="/">← Home</a>' +
-        filterButton(state.open, count, 'log-filters', 'filter-btn--earth') +
+        filterButton(state.open, count, 'log-filters') +
       '</div>' +
       (!state.open && selected.length
         ? '<div class="chips">' + selected.map((s) =>
@@ -49,7 +49,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     postsEl.innerHTML = shown.length
       ? shown.slice(0, state.visible).map((p) =>
           '<article class="post" id="' + esc(p.id) + '">' +
-            '<div>' + (p.pinned ? PIN_ICON + '<span class="visually-hidden">Pinned: </span>' : '') + '<a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/buildlog#' + esc(p.id) + '">' + date.long(p.date) + '</a>' + draftTag(p) + '</div>' +
+            '<div>' + (p.pinned ? PIN_ICON + '<span class="visually-hidden">Pinned: </span>' : '') + '<a class="post__date" href="#' + esc(p.id) + '" title="www.hetmanek.ca/journal#' + esc(p.id) + '">' + date.long(p.date) + '</a>' + draftTag(p) + '</div>' +
             '<div class="prose post__body">' + MD.render(p.body) + '</div>' +
             '<ul class="skill-tags" aria-label="Tags">' + p.engagementTitles.concat(p.skills || []).map((t) => '<li>' + esc(hashtag(t)) + '</li>').join('') + '</ul>' +
           '</article>'
@@ -77,7 +77,7 @@ import { PIN_ICON, filterButton, filterPanel, toggleIn, rerender } from './main.
     }
   }
 
-  // /buildlog#<id> loads far enough to include the post (clearing filters that hide it), then scrolls to it.
+  // /journal#<id> loads far enough to include the post (clearing filters that hide it), then scrolls to it.
   function goToHash() {
     let id = '';
     try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
